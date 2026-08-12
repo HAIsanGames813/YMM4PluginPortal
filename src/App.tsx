@@ -728,7 +728,7 @@ export default function App() {
       <footer className="mt-12 py-6 bg-white dark:bg-zinc-900 border-t-2 border-zinc-900 dark:border-zinc-100 text-center text-xs text-zinc-500 font-mono">
         <div className="max-w-7xl mx-auto px-4 flex flex-col items-center justify-center gap-2">
           <div className="flex items-center gap-2">
-            <img src="./icon.png" alt="YMM4 Plugin Portal Logo" className="w-5 h-5 object-contain" />
+            <img src="./ymm4pluginportal.png" alt="YMM4 Plugin Portal Logo" className="w-5 h-5 object-contain" />
             <span>YMM4 Plugin Portal — ゆっくりMovieMaker4 プラグイン統合情報</span>
           </div>
           <div className="text-[10px] text-zinc-400">Data provided by manjubox.net APIs &amp; GitHub Repositories</div>
