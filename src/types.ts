@@ -1,5 +1,6 @@
 export type ThemeMode = 'light' | 'dark' | 'system';
 export type PageSize = 5 | 10 | 20 | 50 | 100 | 'all';
+export type BatchDownloadMode = 'zip' | 'individual';
 
 export interface PluginLink {
   name: string;
@@ -20,6 +21,7 @@ export interface YMM4Plugin {
   version?: string;
   updatedAt?: string;
   publishedAt?: string;
+  createdAt?: string;
   isEnabled?: boolean;
   license?: string;
   tags?: string[];
@@ -74,4 +76,5 @@ export interface FilterState {
   sortOrder: 'asc' | 'desc';
   pageSize: PageSize;
   currentPage: number;
+  batchDownloadMode: BatchDownloadMode;
 }

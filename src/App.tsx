@@ -7,9 +7,10 @@ import { VersionModal } from './components/VersionModal';
 import { PluginDetailModal } from './components/PluginDetailModal';
 import { BatchDownloadBar } from './components/BatchDownloadBar';
 import { BatchDownloadModal } from './components/BatchDownloadModal';
+import { PaginationControls } from './components/PaginationControls';
 import { YMM4Plugin, ThemeMode, FilterState, PageSize } from './types';
 import { getStoredTheme, applyTheme } from './utils/theme';
-import { RefreshCw, AlertCircle, Package, Info, ChevronLeft, ChevronRight, SlidersHorizontal } from 'lucide-react';
+import { RefreshCw, AlertCircle, Package, Info, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, SlidersHorizontal } from 'lucide-react';
 
 function parseGithubRepo(urlStr: string): { user: string; repo: string } | null {
   if (!urlStr || typeof urlStr !== 'string') return null;
@@ -227,7 +228,8 @@ export default function App() {
     sortBy: 'publishedAt',
     sortOrder: 'desc',
     pageSize: 20,
-    currentPage: 1
+    currentPage: 1,
+    batchDownloadMode: 'zip'
   });
 
   // Selected Plugins for Batch Download
@@ -465,7 +467,8 @@ export default function App() {
       sortBy: 'publishedAt',
       sortOrder: 'desc',
       pageSize: 20,
-      currentPage: 1
+      currentPage: 1,
+      batchDownloadMode: 'zip'
     });
   };
 
@@ -546,34 +549,14 @@ export default function App() {
               </div>
 
               {filterState.pageSize !== 'all' && totalPages > 1 && (
-                <div className="flex items-center gap-1 ml-auto">
-                  <button
-                    disabled={currentPageSafe <= 1}
-                    onClick={() =>
-                      setFilterState((prev) => ({
-                        ...prev,
-                        currentPage: Math.max(1, prev.currentPage - 1)
-                      }))
+                <div className="ml-auto">
+                  <PaginationControls
+                    currentPage={currentPageSafe}
+                    totalPages={totalPages}
+                    onPageChange={(page) =>
+                      setFilterState((prev) => ({ ...prev, currentPage: page }))
                     }
-                    className="p-1.5 border border-zinc-900 dark:border-zinc-200 bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-900 hover:text-white dark:hover:bg-zinc-100 dark:hover:text-zinc-900 disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                  </button>
-                  <div className="px-2 font-extrabold text-zinc-900 dark:text-zinc-100 min-w-[3rem] text-center">
-                    {currentPageSafe} / {totalPages}
-                  </div>
-                  <button
-                    disabled={currentPageSafe >= totalPages}
-                    onClick={() =>
-                      setFilterState((prev) => ({
-                        ...prev,
-                        currentPage: Math.min(totalPages, prev.currentPage + 1)
-                      }))
-                    }
-                    className="p-1.5 border border-zinc-900 dark:border-zinc-200 bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-900 hover:text-white dark:hover:bg-zinc-100 dark:hover:text-zinc-900 disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
-                  >
-                    <ChevronRight className="w-4 h-4" />
-                  </button>
+                  />
                 </div>
               )}
             </div>
@@ -641,44 +624,18 @@ export default function App() {
 
               {/* Bottom Pagination Bar */}
               {filterState.pageSize !== 'all' && totalPages > 1 && (
-                <div className="p-4 bg-white dark:bg-zinc-900 border-2 border-zinc-900 dark:border-zinc-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono">
-                  <div className="text-zinc-600 dark:text-zinc-400">
+                <div className="p-4 bg-white dark:bg-zinc-900 border-2 border-zinc-900 dark:border-zinc-100 flex flex-col md:flex-row items-center justify-between gap-3 text-xs">
+                  <div className="text-zinc-600 dark:text-zinc-400 font-bold">
                     全 {filteredPlugins.length} 件中 { (currentPageSafe - 1) * (filterState.pageSize as number) + 1 } 〜 { Math.min(currentPageSafe * (filterState.pageSize as number), filteredPlugins.length) } 件目を表示
                   </div>
 
-                  <div className="flex items-center gap-1">
-                    <button
-                      disabled={currentPageSafe <= 1}
-                      onClick={() =>
-                        setFilterState((prev) => ({
-                          ...prev,
-                          currentPage: Math.max(1, prev.currentPage - 1)
-                        }))
-                      }
-                      className="px-3 py-1.5 border border-zinc-900 dark:border-zinc-200 bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-900 hover:text-white dark:hover:bg-zinc-100 dark:hover:text-zinc-900 disabled:opacity-30 disabled:pointer-events-none cursor-pointer font-bold flex items-center gap-1"
-                    >
-                      <ChevronLeft className="w-4 h-4" />
-                      <span>前へ</span>
-                    </button>
-
-                    <div className="px-3 font-extrabold text-zinc-900 dark:text-zinc-100">
-                      {currentPageSafe} / {totalPages} ページ
-                    </div>
-
-                    <button
-                      disabled={currentPageSafe >= totalPages}
-                      onClick={() =>
-                        setFilterState((prev) => ({
-                          ...prev,
-                          currentPage: Math.min(totalPages, prev.currentPage + 1)
-                        }))
-                      }
-                      className="px-3 py-1.5 border border-zinc-900 dark:border-zinc-200 bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-900 hover:text-white dark:hover:bg-zinc-100 dark:hover:text-zinc-900 disabled:opacity-30 disabled:pointer-events-none cursor-pointer font-bold flex items-center gap-1"
-                    >
-                      <span>次へ</span>
-                      <ChevronRight className="w-4 h-4" />
-                    </button>
-                  </div>
+                  <PaginationControls
+                    currentPage={currentPageSafe}
+                    totalPages={totalPages}
+                    onPageChange={(page) =>
+                      setFilterState((prev) => ({ ...prev, currentPage: page }))
+                    }
+                  />
                 </div>
               )}
             </>
@@ -719,17 +676,18 @@ export default function App() {
       {isBatchModalOpen && (
         <BatchDownloadModal
           selectedPlugins={selectedPluginsList}
+          batchDownloadMode={filterState.batchDownloadMode}
           onClose={() => setIsBatchModalOpen(false)}
           onClearSelection={handleClearSelection}
         />
       )}
 
       {/* Footer */}
-      <footer className="mt-12 py-6 bg-white dark:bg-zinc-900 border-t-2 border-zinc-900 dark:border-zinc-100 text-center text-xs text-zinc-500 font-mono">
+      <footer className="mt-12 py-6 bg-white dark:bg-zinc-900 border-t-2 border-zinc-900 dark:border-zinc-100 text-center text-xs text-zinc-500">
         <div className="max-w-7xl mx-auto px-4 flex flex-col items-center justify-center gap-2">
           <div className="flex items-center gap-2">
-            <img src="./ymm4pluginportal.png" alt="YMM4 Plugin Portal Logo" className="w-5 h-5 object-contain" />
-            <span>YMM4 Plugin Portal — ゆっくりMovieMaker4 プラグイン統合情報</span>
+            <img src="./ymm4pluginportal.png" alt="YMM4プラグインポータルサイト Logo" className="w-5 h-5 object-contain" />
+            <span>YMM4プラグインポータルサイト</span>
           </div>
           <div className="text-[10px] text-zinc-400">Data provided by manjubox.net APIs &amp; GitHub Repositories</div>
         </div>

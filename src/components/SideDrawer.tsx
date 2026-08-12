@@ -12,7 +12,8 @@ import {
   Globe,
   Package,
   Layers,
-  ListFilter
+  ListFilter,
+  Download
 } from 'lucide-react';
 import { FilterState, PageSize } from '../types';
 
@@ -104,17 +105,6 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({
       {/* Scrollable Form Content */}
       <div className="flex-1 overflow-y-auto p-4 space-y-6">
         
-        {/* Banner Notice (Moved from Main App) */}
-        <div className="p-3 bg-zinc-100 dark:bg-zinc-800 border-l-4 border-zinc-900 dark:border-zinc-100 space-y-2">
-          <div className="font-bold text-sm text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
-            <Package className="w-4 h-4 shrink-0" />
-            <span className="leading-tight">YMM4 プラグイン<br/>統合ディレクトリ</span>
-          </div>
-          <p className="text-[10px] text-zinc-600 dark:text-zinc-400">
-            ManjuBox公式データ・GitHub公開プラグインの最新情報を取得しています。
-          </p>
-        </div>
-
         {/* Quick Batch Actions */}
         <div className="p-3 bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 space-y-2">
           <div className="text-xs font-bold uppercase text-zinc-600 dark:text-zinc-400">
@@ -354,6 +344,27 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({
               </button>
             ))}
           </div>
+        </div>
+
+        {/* Batch Download Behavior Selection */}
+        <div className="space-y-2 border-t border-zinc-200 dark:border-zinc-800 pt-4">
+          <label className="text-[11px] font-bold text-zinc-700 dark:text-zinc-300 uppercase flex items-center gap-1.5">
+            <Download className="w-3 h-3" />
+            <span>一括ダウンロード時の動作</span>
+          </label>
+          <p className="text-[10px] text-zinc-500 dark:text-zinc-400 leading-tight">
+            zipでymmeやzipを一括ダウンロードするかymmeやzipのリポジトリ個別dlするか
+          </p>
+          <select
+            value={filterState.batchDownloadMode || 'zip'}
+            onChange={(e) =>
+              onFilterChange({ batchDownloadMode: e.target.value as 'zip' | 'individual' })
+            }
+            className="w-full p-2 bg-zinc-50 dark:bg-zinc-800 border border-zinc-900 dark:border-zinc-200 text-xs font-mono font-bold cursor-pointer"
+          >
+            <option value="zip">圧縮ファイルでまとめてダウンロード</option>
+            <option value="individual">個別にダウンロード</option>
+          </select>
         </div>
 
       </div>

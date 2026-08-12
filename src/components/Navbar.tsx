@@ -37,15 +37,12 @@ export const Navbar: React.FC<NavbarProps> = ({
           />
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="font-extrabold text-lg sm:text-xl tracking-tight uppercase font-mono">
-                YMM4 Plugin Portal
+              <h1 className="font-black text-lg sm:text-xl tracking-tight uppercase">
+                YMM4プラグインポータルサイト
               </h1>
-              <span className="text-xs font-mono bg-zinc-200 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 px-2 py-0.5 border border-zinc-400 dark:border-zinc-700">
-                {totalCount} 件
-              </span>
             </div>
-            <p className="text-xs text-zinc-600 dark:text-zinc-400 font-mono hidden sm:block">
-              ゆっくりMovieMaker4 プラグイン統合検索・一括ダウンロード
+            <p className="text-xs text-zinc-600 dark:text-zinc-400">
+              ゆっくりMovieMaker4のプラグインポータル
             </p>
           </div>
         </div>

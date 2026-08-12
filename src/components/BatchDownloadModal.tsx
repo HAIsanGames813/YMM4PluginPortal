@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
-import { X, Download, ExternalLink, Github, Globe, CheckCircle2, AlertCircle, FileText } from 'lucide-react';
-import { YMM4Plugin } from '../types';
+import { X, Download, ExternalLink, Github, Globe, CheckCircle2, AlertCircle, FileText, Archive } from 'lucide-react';
+import JSZip from 'jszip';
+import { YMM4Plugin, BatchDownloadMode } from '../types';
 
 interface BatchDownloadModalProps {
   selectedPlugins: YMM4Plugin[];
+  batchDownloadMode?: BatchDownloadMode;
   onClose: () => void;
   onClearSelection: () => void;
 }
 
 export const BatchDownloadModal: React.FC<BatchDownloadModalProps> = ({
   selectedPlugins,
+  batchDownloadMode = 'zip',
   onClose,
   onClearSelection
 }) => {
@@ -36,50 +39,150 @@ export const BatchDownloadModal: React.FC<BatchDownloadModalProps> = ({
     document.body.removeChild(a);
   };
 
+  // Helper to fetch file as ArrayBuffer with CORS fallback
+  const fetchFileBuffer = async (url: string): Promise<ArrayBuffer | null> => {
+    try {
+      const res = await fetch(url);
+      if (res.ok) return await res.arrayBuffer();
+    } catch (e) {
+      // Direct fetch failed
+    }
+    try {
+      const proxyRes = await fetch(`https://corsproxy.io/?${encodeURIComponent(url)}`);
+      if (proxyRes.ok) return await proxyRes.arrayBuffer();
+    } catch (e) {
+      // CORS proxy 1 failed
+    }
+    try {
+      const proxyRes2 = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`);
+      if (proxyRes2.ok) return await proxyRes2.arrayBuffer();
+    } catch (e) {
+      // CORS proxy 2 failed
+    }
+    return null;
+  };
+
   // Execute Batch Action
   const handleStartBatch = async () => {
     setIsProcessing(true);
     setCompleted(false);
     setDownloadLogs([]);
 
-    addLog(`一括処理を開始します (${selectedPlugins.length} 件)...`);
+    if (batchDownloadMode === 'zip') {
+      // === Mode 1: Bundle all files into a single ZIP archive ===
+      addLog(`[ZIP一括処理] アーカイブ作成を開始します (${selectedPlugins.length} 件)...`);
+      const zip = new JSZip();
 
-    // 1. Process GitHub Plugins
-    if (githubPlugins.length > 0) {
-      addLog(`--- GitHubプラグイン (${githubPlugins.length} 件) の直接ダウンロードを開始 ---`);
-      for (let i = 0; i < githubPlugins.length; i++) {
-        const p = githubPlugins[i];
-        
-        let downloadUrl = p.extraGhData?.browser_download_url || p.url;
-        if (!downloadUrl && p.githubUser && p.githubRepo) {
-          downloadUrl = `https://github.com/${p.githubUser}/${p.githubRepo}/releases/latest`;
+      // Create manifest file inside zip
+      const manifestLines = [
+        `=== YMM4プラグインポータルサイト - 選択プラグイン一括ダウンロード情報 ===`,
+        `作成日時: ${new Date().toLocaleString('ja-JP')}`,
+        `対象数: ${selectedPlugins.length} 件`,
+        ``,
+        ...selectedPlugins.map((p, i) => `[${i + 1}] ${p.name}
+  作者: ${p.author}
+  カテゴリー: ${p.type}
+  配布URL: ${p.url || (p.links && p.links[0]?.url) || 'なし'}
+  説明: ${p.description}`)
+      ].join('\n');
+
+      zip.file('プラグイン一覧_README.txt', manifestLines);
+
+      // Process GitHub plugins for direct zip bundling
+      if (githubPlugins.length > 0) {
+        addLog(`--- GitHubプラグイン (${githubPlugins.length} 件) のファイル取得中 ---`);
+        for (let i = 0; i < githubPlugins.length; i++) {
+          const p = githubPlugins[i];
+          let downloadUrl = p.extraGhData?.browser_download_url || p.url;
+          if (!downloadUrl && p.githubUser && p.githubRepo) {
+            downloadUrl = `https://github.com/${p.githubUser}/${p.githubRepo}/releases/latest`;
+          }
+
+          addLog(`取得中 [${i + 1}/${githubPlugins.length}]: ${p.name}`);
+
+          if (downloadUrl) {
+            const buffer = await fetchFileBuffer(downloadUrl);
+            const sanitizeName = p.name.replace(/[\/\\:\*\?"<>\|]/g, '_');
+            
+            if (buffer && buffer.byteLength > 0) {
+              const ext = p.extraGhData?.file_name ? p.extraGhData.file_name.split('.').pop() : 'ymme';
+              zip.file(`${sanitizeName}.${ext}`, buffer);
+              addLog(`  └ 完了: ${sanitizeName}.${ext}`);
+            } else {
+              // Fallback: create .url shortcut file inside zip
+              const urlShortcut = `[InternetShortcut]\nURL=${downloadUrl}\n`;
+              zip.file(`配布元リンク/${sanitizeName}.url`, urlShortcut);
+              addLog(`  └ 直DL不可のためショートカットを保存: 配布元リンク/${sanitizeName}.url`);
+            }
+          }
+          await new Promise((r) => setTimeout(r, 300));
         }
-
-        addLog(`ダウンロード中 [${i + 1}/${githubPlugins.length}]: ${p.name}`);
-        
-        if (downloadUrl) {
-          triggerDownload(downloadUrl, `${p.name}.ymme`);
-        }
-
-        // Small delay to prevent browser popup block
-        await new Promise((r) => setTimeout(r, 600));
       }
-    }
 
-    // 2. Process External Plugins
-    if (externalPlugins.length > 0) {
-      addLog(`--- 外部サイトプラグイン (${externalPlugins.length} 件) のWebページを開きます ---`);
-      for (let i = 0; i < externalPlugins.length; i++) {
-        const p = externalPlugins[i];
-        const targetUrl = p.url || (p.links && p.links[0]?.url) || '';
+      // Process External plugins
+      if (externalPlugins.length > 0) {
+        addLog(`--- 外部サイトプラグイン (${externalPlugins.length} 件) のショートカット追加中 ---`);
+        for (let i = 0; i < externalPlugins.length; i++) {
+          const p = externalPlugins[i];
+          const targetUrl = p.url || (p.links && p.links[0]?.url) || '';
+          const sanitizeName = p.name.replace(/[\/\\:\*\?"<>\|]/g, '_');
 
-        if (targetUrl) {
-          addLog(`配布ページオープン [${i + 1}/${externalPlugins.length}]: ${p.name}`);
-          window.open(targetUrl, '_blank', 'noopener,noreferrer');
-        } else {
-          addLog(`警告: ${p.name} の有効なURLが見つかりません。`);
+          if (targetUrl) {
+            const urlShortcut = `[InternetShortcut]\nURL=${targetUrl}\n`;
+            zip.file(`外部サイトリンク/${sanitizeName}.url`, urlShortcut);
+            addLog(`ショートカット追加: 外部サイトリンク/${sanitizeName}.url`);
+
+            // Also open in new browser tab for convenience
+            window.open(targetUrl, '_blank', 'noopener,noreferrer');
+          }
+          await new Promise((r) => setTimeout(r, 200));
         }
-        await new Promise((r) => setTimeout(r, 400));
+      }
+
+      addLog('ZIP圧縮ファイルを生成しています...');
+      const zipBlob = await zip.generateAsync({ type: 'blob' });
+      const bundleUrl = URL.createObjectURL(zipBlob);
+      const zipFileName = `ymm4_plugins_bundle_${new Date().toISOString().slice(0, 10)}.zip`;
+      
+      triggerDownload(bundleUrl, zipFileName);
+      URL.revokeObjectURL(bundleUrl);
+      addLog(`ダウンロード完了: ${zipFileName}`);
+
+    } else {
+      // === Mode 2: Individual download ===
+      addLog(`[個別処理] 一括処理を開始します (${selectedPlugins.length} 件)...`);
+
+      if (githubPlugins.length > 0) {
+        addLog(`--- GitHubプラグイン (${githubPlugins.length} 件) の個別ダウンロードを開始 ---`);
+        for (let i = 0; i < githubPlugins.length; i++) {
+          const p = githubPlugins[i];
+          let downloadUrl = p.extraGhData?.browser_download_url || p.url;
+          if (!downloadUrl && p.githubUser && p.githubRepo) {
+            downloadUrl = `https://github.com/${p.githubUser}/${p.githubRepo}/releases/latest`;
+          }
+
+          addLog(`個別DL [${i + 1}/${githubPlugins.length}]: ${p.name}`);
+          if (downloadUrl) {
+            triggerDownload(downloadUrl, `${p.name}.ymme`);
+          }
+          await new Promise((r) => setTimeout(r, 600));
+        }
+      }
+
+      if (externalPlugins.length > 0) {
+        addLog(`--- 外部サイトプラグイン (${externalPlugins.length} 件) の配布ページを開きます ---`);
+        for (let i = 0; i < externalPlugins.length; i++) {
+          const p = externalPlugins[i];
+          const targetUrl = p.url || (p.links && p.links[0]?.url) || '';
+
+          if (targetUrl) {
+            addLog(`配布ページオープン [${i + 1}/${externalPlugins.length}]: ${p.name}`);
+            window.open(targetUrl, '_blank', 'noopener,noreferrer');
+          } else {
+            addLog(`警告: ${p.name} の有効なURLが見つかりません。`);
+          }
+          await new Promise((r) => setTimeout(r, 400));
+        }
       }
     }
 
@@ -91,7 +194,7 @@ export const BatchDownloadModal: React.FC<BatchDownloadModalProps> = ({
   // Download Manifest text file
   const handleExportList = () => {
     const lines = [
-      `=== YMM4 Plugin Portal - 選択プラグインリスト ===`,
+      `=== YMM4プラグインポータルサイト - 選択プラグインリスト ===`,
       `出力日時: ${new Date().toLocaleString('ja-JP')}`,
       `合計: ${selectedPlugins.length} 件`,
       ``,
@@ -120,7 +223,7 @@ export const BatchDownloadModal: React.FC<BatchDownloadModalProps> = ({
         {/* Header */}
         <div className="flex items-center justify-between p-4 bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 border-b border-zinc-900 dark:border-zinc-100">
           <div className="flex items-center gap-2">
-            <Download className="w-5 h-5" />
+            <Archive className="w-5 h-5" />
             <h2 className="font-bold text-sm sm:text-base uppercase tracking-tight">
               一括ダウンロード & 配布サイト処理
             </h2>
@@ -140,8 +243,11 @@ export const BatchDownloadModal: React.FC<BatchDownloadModalProps> = ({
           
           {/* Breakdown summary */}
           <div className="p-3 bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 space-y-2 text-xs">
-            <div className="font-bold text-zinc-900 dark:text-zinc-100">
-              選択されたプラグイン: 合計 {selectedPlugins.length} 件
+            <div className="font-bold text-zinc-900 dark:text-zinc-100 flex items-center justify-between">
+              <span>選択されたプラグイン: 合計 {selectedPlugins.length} 件</span>
+              <span className="text-[11px] px-2 py-0.5 bg-zinc-200 dark:bg-zinc-700 font-bold border border-zinc-400 dark:border-zinc-600">
+                方式: {batchDownloadMode === 'zip' ? '圧縮ZIPまとめてDL' : '個別DL'}
+              </span>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 border-t border-zinc-200 dark:border-zinc-700">
@@ -151,7 +257,9 @@ export const BatchDownloadModal: React.FC<BatchDownloadModalProps> = ({
                   <span>GitHub プラグイン ({githubPlugins.length} 件)</span>
                 </div>
                 <p className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  アセットファイル (.ymme / .zip) をブラウザ経由で直接一括ダウンロードします。
+                  {batchDownloadMode === 'zip'
+                    ? 'ファイルをまとめ、単一のZIP圧縮ファイルでダウンロードします。'
+                    : 'アセットファイル (.ymme / .zip) を順次個別にダウンロードします。'}
                 </p>
               </div>
 
@@ -161,7 +269,9 @@ export const BatchDownloadModal: React.FC<BatchDownloadModalProps> = ({
                   <span>外部サイトプラグイン ({externalPlugins.length} 件)</span>
                 </div>
                 <p className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  配布元 (BOOTH, GetUploader 等) のWebサイトを新しいタブで自動表示します。
+                  {batchDownloadMode === 'zip'
+                    ? '配布元URLへのショートカットをZIP内に格納し、Webページも開きます。'
+                    : '配布元 (BOOTH, GetUploader 等) のWebサイトを新しいタブで自動表示します。'}
                 </p>
               </div>
             </div>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://haisangames813.github.io/YMM4PluginPortal/sitemap.xml

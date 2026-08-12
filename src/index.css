@@ -6,10 +6,12 @@
   /* Strict Corner Radius Prohibition: Enforce sharp 90-degree corners everywhere */
   *, ::before, ::after {
     border-radius: 0px !important;
+    font-family: 'M PLUS 1p', sans-serif !important;
   }
 
   body {
-    @apply bg-zinc-100 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 font-sans antialiased selection:bg-zinc-900 selection:text-white dark:selection:bg-zinc-100 dark:selection:text-zinc-900;
+    font-family: 'M PLUS 1p', sans-serif !important;
+    @apply bg-zinc-100 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 antialiased selection:bg-zinc-900 selection:text-white dark:selection:bg-zinc-100 dark:selection:text-zinc-900;
   }
 }
 
