@@ -1,26 +1,98 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
 
 interface MarkdownContentProps {
   content: string;
   className?: string;
+  baseUrl?: string;
+  githubRepoInfo?: { user: string; repo: string };
 }
 
-export const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = '' }) => {
+export const MarkdownContent: React.FC<MarkdownContentProps> = ({
+  content,
+  className = '',
+  baseUrl,
+  githubRepoInfo
+}) => {
   return (
     <div className={`markdown-body ${className}`}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
+        rehypePlugins={[rehypeRaw]}
         components={{
-          a: ({ node, ...props }) => (
-            <a
-              {...props}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-zinc-900 dark:text-zinc-100 font-bold underline hover:opacity-80 transition-opacity break-all"
-            />
-          ),
+          img: ({ node, src, alt, width, height, ...props }) => {
+            if (!src) return null;
+            let initialSrc = src;
+
+            // GitHub blob URL -> raw URL conversion
+            if (initialSrc.includes('github.com/') && initialSrc.includes('/blob/')) {
+              initialSrc = initialSrc.replace('github.com/', 'raw.githubusercontent.com/').replace('/blob/', '/');
+            }
+
+            // Relative path conversion
+            if (!initialSrc.startsWith('http://') && !initialSrc.startsWith('https://') && !initialSrc.startsWith('data:')) {
+              const cleanPath = initialSrc.replace(/^\.\//, '').replace(/^\//, '');
+              initialSrc = baseUrl ? `${baseUrl}${cleanPath}` : initialSrc;
+            }
+
+            const [imgSrc, setImgSrc] = useState(initialSrc);
+            const [hasError, setHasError] = useState(false);
+
+            const handleError = () => {
+              if (hasError) return;
+              // Fallback strategies for GitHub raw image URLs
+              if (githubRepoInfo && imgSrc.includes('githubusercontent.com') && imgSrc.includes('/HEAD/')) {
+                setImgSrc(imgSrc.replace('/HEAD/', '/main/'));
+              } else if (githubRepoInfo && imgSrc.includes('/main/')) {
+                setImgSrc(imgSrc.replace('/main/', '/master/'));
+              } else {
+                setHasError(true);
+              }
+            };
+
+            if (hasError) {
+              return (
+                <span className="inline-block px-2 py-1 bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 text-[11px] text-zinc-500 font-mono my-1">
+                  🖼️ [画像: {alt || '読込不可'}]
+                </span>
+              );
+            }
+
+            return (
+              <img
+                {...props}
+                src={imgSrc}
+                alt={alt || ''}
+                onError={handleError}
+                loading="lazy"
+                referrerPolicy="no-referrer"
+                className="max-w-full h-auto rounded-xs border border-zinc-200 dark:border-zinc-700 my-2 shadow-xs block"
+              />
+            );
+          },
+          a: ({ node, href, children, ...props }) => {
+            if (!href) return null;
+            let finalHref = href;
+            if (!href.startsWith('http://') && !href.startsWith('https://') && !href.startsWith('#') && !href.startsWith('mailto:')) {
+              const cleanPath = href.replace(/^\.\//, '').replace(/^\//, '');
+              finalHref = githubRepoInfo
+                ? `https://github.com/${githubRepoInfo.user}/${githubRepoInfo.repo}/blob/HEAD/${cleanPath}`
+                : href;
+            }
+            return (
+              <a
+                {...props}
+                href={finalHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-zinc-900 dark:text-zinc-100 font-bold underline hover:opacity-80 transition-opacity break-all"
+              >
+                {children}
+              </a>
+            );
+          },
           h1: ({ node, ...props }) => (
             <h1 {...props} className="text-sm font-extrabold mt-3 mb-1 border-b-2 border-zinc-300 dark:border-zinc-700 pb-1 text-zinc-900 dark:text-zinc-100 uppercase" />
           ),
@@ -90,3 +162,4 @@ export const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, class
     </div>
   );
 };
+

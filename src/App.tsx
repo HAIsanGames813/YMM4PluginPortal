@@ -10,19 +10,8 @@ import { BatchDownloadModal } from './components/BatchDownloadModal';
 import { PaginationControls } from './components/PaginationControls';
 import { YMM4Plugin, ThemeMode, FilterState, PageSize } from './types';
 import { getStoredTheme, applyTheme } from './utils/theme';
+import { parseGithubRepo } from './utils/github';
 import { RefreshCw, AlertCircle, Package, Info, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, SlidersHorizontal } from 'lucide-react';
-
-function parseGithubRepo(urlStr: string): { user: string; repo: string } | null {
-  if (!urlStr || typeof urlStr !== 'string') return null;
-  const match = urlStr.match(/github\.com\/([^\/]+)\/([^\/#\?]+)/i);
-  if (match) {
-    const user = match[1];
-    let repo = match[2];
-    if (repo.endsWith('.git')) repo = repo.slice(0, -4);
-    return { user, repo };
-  }
-  return null;
-}
 
 async function fetchDirectYmm4Plugins(): Promise<YMM4Plugin[]> {
   const fetchWithProxy = async (url: string) => {

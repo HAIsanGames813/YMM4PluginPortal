@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { X, ExternalLink, Github, Globe, User, Tag, Layers, Download, GitBranch, Calendar, Shield, AlertOctagon, Package } from 'lucide-react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { X, ExternalLink, Github, Globe, User, Tag, Layers, Download, GitBranch, Calendar, Shield, AlertOctagon, Package, ChevronDown, ChevronUp, Loader2 } from 'lucide-react';
 import { YMM4Plugin } from '../types';
 import { MarkdownContent } from './MarkdownContent';
 import { getSiteNameFromUrl } from '../utils/site';
+import { parseGithubRepo, fetchGithubReadme } from '../utils/github';
 
 interface PluginDetailModalProps {
   plugin: YMM4Plugin | null;
@@ -73,6 +74,53 @@ export const PluginDetailModal: React.FC<PluginDetailModalProps> = ({
   if (!plugin) return null;
 
   const hasLinks = Array.isArray(plugin.links) && plugin.links.length > 0;
+
+  const ghInfo = useMemo(() => {
+    if (!plugin) return null;
+    if (plugin.githubUser && plugin.githubRepo) {
+      return { user: plugin.githubUser, repo: plugin.githubRepo };
+    }
+    if (plugin.url) {
+      const parsed = parseGithubRepo(plugin.url);
+      if (parsed) return parsed;
+    }
+    if (Array.isArray(plugin.links)) {
+      for (const l of plugin.links) {
+        const parsed = parseGithubRepo(l.url);
+        if (parsed) return parsed;
+      }
+    }
+    return null;
+  }, [plugin]);
+
+  const [isReadmeOpen, setIsReadmeOpen] = useState(false);
+  const [readmeContent, setReadmeContent] = useState<string | null>(null);
+  const [isLoadingReadme, setIsLoadingReadme] = useState(false);
+  const [readmeError, setReadmeError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setIsReadmeOpen(false);
+    setReadmeContent(null);
+    setIsLoadingReadme(false);
+    setReadmeError(null);
+  }, [plugin.id]);
+
+  const handleToggleReadme = async () => {
+    const nextOpen = !isReadmeOpen;
+    setIsReadmeOpen(nextOpen);
+
+    if (nextOpen && !readmeContent && !isLoadingReadme && ghInfo) {
+      setIsLoadingReadme(true);
+      setReadmeError(null);
+      const text = await fetchGithubReadme(ghInfo.user, ghInfo.repo);
+      if (text) {
+        setReadmeContent(text);
+      } else {
+        setReadmeError('README.md の取得に失敗したか、ファイルが存在しません。');
+      }
+      setIsLoadingReadme(false);
+    }
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs">
@@ -160,6 +208,55 @@ export const PluginDetailModal: React.FC<PluginDetailModalProps> = ({
                 '概要説明が登録されていません。'
               )}
             </div>
+
+            {/* GitHub README Accordion */}
+            {ghInfo && (
+              <div className="mt-3 border border-zinc-300 dark:border-zinc-700 rounded-xs overflow-hidden">
+                <button
+                  type="button"
+                  onClick={handleToggleReadme}
+                  className="w-full p-2.5 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 flex items-center justify-between text-left font-mono text-xs font-bold text-zinc-900 dark:text-zinc-100 transition-colors cursor-pointer"
+                >
+                  <div className="flex items-center gap-2">
+                    <Github className="w-4 h-4 text-zinc-900 dark:text-zinc-100 shrink-0" />
+                    <span>GitHub README.md ({ghInfo.user}/{ghInfo.repo})</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-zinc-600 dark:text-zinc-400">
+                    <span className="text-[11px]">
+                      {isReadmeOpen ? '折りたたむ' : '表示する'}
+                    </span>
+                    {isReadmeOpen ? (
+                      <ChevronUp className="w-4 h-4 text-zinc-900 dark:text-zinc-100 shrink-0" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4 text-zinc-900 dark:text-zinc-100 shrink-0" />
+                    )}
+                  </div>
+                </button>
+
+                {isReadmeOpen && (
+                  <div className="p-4 bg-white dark:bg-zinc-900 border-t border-zinc-300 dark:border-zinc-700 max-h-[500px] overflow-y-auto">
+                    {isLoadingReadme ? (
+                      <div className="flex items-center justify-center gap-2 py-8 text-xs font-mono text-zinc-500">
+                        <Loader2 className="w-4 h-4 animate-spin text-zinc-700 dark:text-zinc-300" />
+                        <span>GitHubから README.md を取得中...</span>
+                      </div>
+                    ) : readmeError ? (
+                      <div className="p-3 text-xs font-mono text-zinc-500 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700">
+                        {readmeError}
+                      </div>
+                    ) : readmeContent ? (
+                      <MarkdownContent
+                        content={readmeContent}
+                        baseUrl={`https://raw.githubusercontent.com/${ghInfo.user}/${ghInfo.repo}/HEAD/`}
+                        githubRepoInfo={ghInfo}
+                      />
+                    ) : (
+                      <div className="text-xs text-zinc-500">README が見つかりませんでした。</div>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Tags */}
@@ -183,64 +280,54 @@ export const PluginDetailModal: React.FC<PluginDetailModalProps> = ({
           )}
 
           {/* External Links & URLs Section */}
-          <div className="space-y-3 border-t border-zinc-200 dark:border-zinc-800 pt-4">
+          <div className="space-y-2 border-t border-zinc-200 dark:border-zinc-800 pt-4">
             
             <h3 className="text-xs font-bold uppercase text-zinc-500 dark:text-zinc-400 tracking-wider flex items-center gap-1">
               <ExternalLink className="w-3.5 h-3.5" />
-              <span>関連リンク一覧</span>
+              <span>関連リンク</span>
             </h3>
 
-            <div className="space-y-1.5">
-              {(() => {
-                const allLinks: { url: string; name?: string }[] = [];
-                if (plugin.url) {
-                  allLinks.push({ url: plugin.url, name: '' });
-                }
-                if (hasLinks) {
-                  plugin.links!.forEach((link) => {
-                    if (link.url !== plugin.url) {
-                      allLinks.push(link);
-                    }
-                  });
-                }
-
-                if (allLinks.length === 0) {
-                  return <div className="text-xs text-zinc-500">関連リンクはありません</div>;
-                }
-
-                return allLinks.map((link, idx) => {
-                  const displayIcon = <SiteIcon url={link.url} className="w-4 h-4 mt-0.5 shrink-0" />;
-                  const displayName = getSiteNameFromUrl(link.url, link.name);
-
-                  return (
-                    <a
-                      key={idx}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`flex items-start justify-between p-3 border transition-colors group ${
-                        idx === 0
-                          ? 'bg-zinc-100 dark:bg-zinc-800 border-zinc-300 dark:border-zinc-700 hover:border-zinc-900 dark:hover:border-zinc-100'
-                          : 'bg-zinc-50 dark:bg-zinc-800/60 border-zinc-200 dark:border-zinc-700 hover:border-zinc-900 dark:hover:border-zinc-100'
-                      }`}
-                    >
-                      <div className="flex items-start gap-2.5 min-w-0">
-                        {displayIcon}
-                        <div className="min-w-0 flex flex-col gap-0.5">
-                          <span className="font-bold text-zinc-900 dark:text-zinc-100 group-hover:underline text-xs">
-                            {displayName}
-                          </span>
-                          <span className="text-[11px] font-mono text-zinc-600 dark:text-zinc-400 break-all leading-relaxed">
-                            {link.url}
-                          </span>
-                        </div>
-                      </div>
-                      <ExternalLink className="w-4 h-4 shrink-0 text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 ml-2 mt-0.5" />
-                    </a>
-                  );
+            {(() => {
+              const allLinks: { url: string; name?: string }[] = [];
+              if (plugin.url) {
+                allLinks.push({ url: plugin.url, name: '' });
+              }
+              if (hasLinks) {
+                plugin.links!.forEach((link) => {
+                  if (link.url !== plugin.url && !allLinks.some(l => l.url === link.url)) {
+                    allLinks.push(link);
+                  }
                 });
-              })()}
-            </div>
+              }
+
+              if (allLinks.length === 0) {
+                return <div className="text-xs text-zinc-500">関連リンクはありません</div>;
+              }
+
+              return (
+                <div className="flex flex-wrap gap-2">
+                  {allLinks.map((link, idx) => {
+                    const displayIcon = <SiteIcon url={link.url} className="w-4 h-4 shrink-0" />;
+                    const displayName = getSiteNameFromUrl(link.url, link.name);
+
+                    return (
+                      <a
+                        key={idx}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title={link.url}
+                        className="inline-flex items-center gap-2 px-3 py-2 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 border border-zinc-300 dark:border-zinc-700 font-mono text-xs font-bold transition-all group rounded-xs shadow-2xs hover:border-zinc-900 dark:hover:border-zinc-100 cursor-pointer"
+                      >
+                        {displayIcon}
+                        <span className="truncate max-w-[180px] sm:max-w-[240px]">{displayName}</span>
+                        <ExternalLink className="w-3.5 h-3.5 shrink-0 text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100" />
+                      </a>
+                    );
+                  })}
+                </div>
+              );
+            })()}
           </div>
 
         </div>
@@ -297,3 +384,4 @@ export const PluginDetailModal: React.FC<PluginDetailModalProps> = ({
     </div>
   );
 };
+
