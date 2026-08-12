@@ -41,9 +41,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                 YMM4プラグインポータルサイト
               </h1>
             </div>
-            <p className="text-xs text-zinc-600 dark:text-zinc-400">
-              ゆっくりMovieMaker4のプラグインポータル
-            </p>
           </div>
         </div>
 
