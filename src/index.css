@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  /* Strict Corner Radius Prohibition: Enforce sharp 90-degree corners everywhere */
+  *, ::before, ::after {
+    border-radius: 0px !important;
+  }
+
+  body {
+    @apply bg-zinc-100 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 font-sans antialiased selection:bg-zinc-900 selection:text-white dark:selection:bg-zinc-100 dark:selection:text-zinc-900;
+  }
+}
+
+/* Custom scrollbar in monochromatic gray/black */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a1a1aa;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #3f3f46;
+}
+
+/* Sharp focus outlines for input controls */
+input:focus, select:focus, button:focus {
+  outline: 2px solid currentColor;
+  outline-offset: 1px;
+}

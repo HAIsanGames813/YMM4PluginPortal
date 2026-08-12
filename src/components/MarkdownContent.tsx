@@ -1,0 +1,92 @@
+import React from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+
+interface MarkdownContentProps {
+  content: string;
+  className?: string;
+}
+
+export const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = '' }) => {
+  return (
+    <div className={`markdown-body ${className}`}>
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        components={{
+          a: ({ node, ...props }) => (
+            <a
+              {...props}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-900 dark:text-zinc-100 font-bold underline hover:opacity-80 transition-opacity break-all"
+            />
+          ),
+          h1: ({ node, ...props }) => (
+            <h1 {...props} className="text-sm font-extrabold mt-3 mb-1 border-b-2 border-zinc-300 dark:border-zinc-700 pb-1 text-zinc-900 dark:text-zinc-100 uppercase" />
+          ),
+          h2: ({ node, ...props }) => (
+            <h2 {...props} className="text-xs font-extrabold mt-3 mb-1 text-zinc-900 dark:text-zinc-100 border-b border-zinc-200 dark:border-zinc-800 pb-0.5" />
+          ),
+          h3: ({ node, ...props }) => (
+            <h3 {...props} className="text-xs font-bold mt-2 mb-0.5 text-zinc-900 dark:text-zinc-100" />
+          ),
+          h4: ({ node, ...props }) => (
+            <h4 {...props} className="text-[11px] font-bold mt-1.5 mb-0.5 text-zinc-800 dark:text-zinc-200" />
+          ),
+          p: ({ node, ...props }) => (
+            <p {...props} className="mb-2 last:mb-0 text-zinc-800 dark:text-zinc-200 leading-relaxed break-words" />
+          ),
+          ul: ({ node, ...props }) => (
+            <ul {...props} className="list-disc list-inside my-1.5 space-y-1 pl-1 text-zinc-800 dark:text-zinc-200" />
+          ),
+          ol: ({ node, ...props }) => (
+            <ol {...props} className="list-decimal list-inside my-1.5 space-y-1 pl-1 text-zinc-800 dark:text-zinc-200" />
+          ),
+          li: ({ node, ...props }) => (
+            <li {...props} className="leading-relaxed inline-block w-full sm:inline text-zinc-800 dark:text-zinc-200" />
+          ),
+          hr: ({ node, ...props }) => (
+            <hr {...props} className="my-3 border-t-2 border-zinc-300 dark:border-zinc-700" />
+          ),
+          code: ({ node, className, children, ...props }: any) => {
+            const isInline = !String(children).includes('\n') && !className;
+            return isInline ? (
+              <code
+                {...props}
+                className="px-1.5 py-0.5 bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 text-[11px] font-mono rounded-xs font-bold"
+              >
+                {children}
+              </code>
+            ) : (
+              <code
+                {...props}
+                className="block p-3 my-2 bg-zinc-900 text-zinc-100 dark:bg-zinc-950 dark:text-zinc-100 text-[11px] font-mono overflow-x-auto rounded-xs border border-zinc-700 leading-normal"
+              >
+                {children}
+              </code>
+            );
+          },
+          blockquote: ({ node, ...props }) => (
+            <blockquote
+              {...props}
+              className="border-l-4 border-zinc-400 dark:border-zinc-500 pl-3 my-2 text-zinc-600 dark:text-zinc-400 italic bg-zinc-100/50 dark:bg-zinc-800/50 py-1"
+            />
+          ),
+          table: ({ node, ...props }) => (
+            <div className="overflow-x-auto my-2 border border-zinc-300 dark:border-zinc-700">
+              <table {...props} className="min-w-full text-xs font-mono" />
+            </div>
+          ),
+          th: ({ node, ...props }) => (
+            <th {...props} className="border border-zinc-300 dark:border-zinc-700 bg-zinc-200 dark:bg-zinc-800 p-1.5 font-bold text-left text-zinc-900 dark:text-zinc-100" />
+          ),
+          td: ({ node, ...props }) => (
+            <td {...props} className="border border-zinc-300 dark:border-zinc-700 p-1.5 text-zinc-800 dark:text-zinc-200" />
+          ),
+        }}
+      >
+        {content}
+      </ReactMarkdown>
+    </div>
+  );
+};

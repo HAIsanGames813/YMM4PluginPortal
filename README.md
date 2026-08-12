@@ -1,11 +1,24 @@
-<div align="center">
+# YMM4 プラグイン統合ポータル (YMM4 Plugin Portal)
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+ゆっくりMovieMaker4（YMM4）の公式・サードパーティ製プラグインを検索・一括ダウンロードできる統合WEBディレクトリシステムです。
 
-  <h1>Built with AI Studio</h2>
+## 特徴
+- **統合検索 & カテゴリー絞り込み**: 複数カテゴリー（映像エフェクト、図形、音声、スクリプト等）やキーワードでのリアルタイム絞り込み
+- **一括ダウンロード**: チェックを入れた複数プラグインのファイルを zip にまとめて一括ダウンロード
+- **GitHubリリース連携**: GitHub公開プラグインのバージョンタグ一覧取得・個別バージョン選択ダウンロード
+- **配布終了ステータス対応**: 配布終了プラグインのバッジ表示とステータス別フィルタリング
+- **公開日・更新日順ソート**: デフォルトで公開日降順ソート
+- **レスポンシブ & 3WAYテーマ**: ライト/ダーク/システム自動モード対応
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+## 開発・実行方法
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+```bash
+# 依存関係のインストール
+npm install
 
-</div>
+# 開発サーバー起動
+npm run dev
+
+# ビルド
+npm run build
+```

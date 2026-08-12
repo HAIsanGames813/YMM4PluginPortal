@@ -1,0 +1,6 @@
+{
+  "name": "YMM4 Plugin Portal",
+  "description": "ゆっくりMovieMaker4 (YMM4) のプラグイン検索・バージョン選択・一括ダウンロードポータル",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
