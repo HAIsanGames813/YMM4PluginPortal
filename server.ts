@@ -477,21 +477,49 @@ async function startServer() {
   // API Route: Get latest YMM4 version from manjubox RSS
     // API Route: Get latest YMM4 version from manjubox RSS with multiple proxies/fallbacks
     // API Route: Get latest YMM4 version from official GitHub Releases (ManjuSummoner/YukkuriMovieMaker4)
+    // API Route: Get latest YMM4 version from official GitHub Tags / Releases (prioritizing tags as requested)
   app.get('/api/ymm4/latest-version', async (req, res) => {
     try {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 6000);
-      const response = await fetch('https://api.github.com/repos/manju-summoner/YukkuriMovieMaker4/releases', {
+
+      // 1. Try tags first as requested ("https://api.github.com/repos/manju-summoner/YukkuriMovieMaker4/tags")
+      const tagsRes = await fetch('https://api.github.com/repos/manju-summoner/YukkuriMovieMaker4/tags', {
         headers: {
           'User-Agent': 'YMM4-Plugin-Portal',
           'Accept': 'application/vnd.github+json'
         },
         signal: controller.signal
       }).catch(() => null);
+
+      if (tagsRes && tagsRes.ok) {
+        const tags = await tagsRes.json();
+        if (Array.isArray(tags) && tags.length > 0) {
+          const tagName = tags[0].name;
+          if (tagName) {
+            let ver = tagName.trim();
+            if (!ver.toLowerCase().startsWith('v')) ver = 'v' + ver;
+            return res.json({
+              success: true,
+              version: ver,
+              title: tagName,
+              html_url: `https://github.com/manju-summoner/YukkuriMovieMaker4/releases/tag/${tagName}`
+            });
+          }
+        }
+      }
       clearTimeout(timeout);
 
-      if (response && response.ok) {
-        const releases = await response.json();
+      // 2. Fallback to releases if tags fail
+      const relRes = await fetch('https://api.github.com/repos/manju-summoner/YukkuriMovieMaker4/releases', {
+        headers: {
+          'User-Agent': 'YMM4-Plugin-Portal',
+          'Accept': 'application/vnd.github+json'
+        }
+      }).catch(() => null);
+
+      if (relRes && relRes.ok) {
+        const releases = await relRes.json();
         if (Array.isArray(releases) && releases.length > 0) {
           const latest = releases[0];
           const tagName = latest.tag_name || latest.name;
@@ -509,26 +537,9 @@ async function startServer() {
         }
       }
 
-      // Fallback to tags if releases API doesn't return anything
-      const tagsRes = await fetch('https://api.github.com/repos/manju-summoner/YukkuriMovieMaker4/tags', {
-        headers: { 'User-Agent': 'YMM4-Plugin-Portal' }
-      }).catch(() => null);
-
-      if (tagsRes && tagsRes.ok) {
-        const tags = await tagsRes.json();
-        if (Array.isArray(tags) && tags.length > 0) {
-          const tagName = tags[0].name;
-          if (tagName) {
-            let ver = tagName.trim();
-            if (!ver.toLowerCase().startsWith('v')) ver = 'v' + ver;
-            return res.json({ success: true, version: ver, title: tagName });
-          }
-        }
-      }
-
       res.json({ success: false, version: '不明' });
     } catch (err: any) {
-      console.error('Error fetching GitHub YMM4 releases:', err);
+      console.error('Error fetching GitHub YMM4 tags/releases:', err);
       res.json({ success: false, version: '不明', error: err.message });
     }
   });
