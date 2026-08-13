@@ -1,4 +1,5 @@
 import React from 'react';
+import { SITE_VERSION } from '../config/version';
 import {
   X,
   Filter,
@@ -557,7 +558,7 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({
           <div className="flex items-center justify-between text-zinc-600 dark:text-zinc-400">
             <span>サイトバージョン:</span>
             <span className="font-bold text-zinc-800 dark:text-zinc-200">
-              v1.1.5
+              {SITE_VERSION}
             </span>
           </div>
         </div>

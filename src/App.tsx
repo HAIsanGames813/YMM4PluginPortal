@@ -13,6 +13,7 @@ import { YMM4Plugin, ThemeMode, FilterState, PageSize } from './types';
 import { getStoredTheme, applyTheme } from './utils/theme';
 import { parseGithubRepo } from './utils/github';
 import { fetchExternalPlugins } from './utils/externalSearch';
+import { SITE_VERSION } from './config/version';
 import { getSiteNameFromUrl } from './utils/site';
 import { RefreshCw, AlertCircle, Package, Info, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, SlidersHorizontal } from 'lucide-react';
 
@@ -784,7 +785,7 @@ export default function App() {
                   />
                 </div>
               )}
-              <InfoModal isOpen={isInfoModalOpen} onClose={() => setIsInfoModalOpen(false)} siteVersion="v1.1.5" ymm4Version={ymm4Version} />
+              <InfoModal isOpen={isInfoModalOpen} onClose={() => setIsInfoModalOpen(false)} siteVersion={SITE_VERSION} ymm4Version={ymm4Version} />
     </>
           )}
 
