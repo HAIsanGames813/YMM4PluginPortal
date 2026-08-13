@@ -26,6 +26,32 @@ async function startServer() {
     }
   });
 
+  // API Route: Proxy file download to bypass CORS and rate limits
+  app.get('/api/ymm4/proxy-file', async (req, res) => {
+    const targetUrl = req.query.url as string;
+    if (!targetUrl) {
+      return res.status(400).send('Missing url parameter');
+    }
+    try {
+      const response = await fetch(targetUrl, {
+        headers: {
+          'User-Agent': 'YMM4-Plugin-Portal-Server',
+          'Accept': 'application/octet-stream, */*'
+        }
+      });
+      if (!response.ok) {
+        return res.status(response.status).send(`Failed to fetch: ${response.statusText}`);
+      }
+      const arrayBuffer = await response.arrayBuffer();
+      const buffer = Buffer.from(arrayBuffer);
+      res.setHeader('Content-Type', response.headers.get('content-type') || 'application/octet-stream');
+      res.send(buffer);
+    } catch (err: any) {
+      console.error('Proxy download error:', err);
+      res.status(500).send(err.message || 'Proxy error');
+    }
+  });
+
   // Helper to extract GitHub user and repo from a URL string
   function parseGithubRepo(urlStr: string): { user: string; repo: string } | null {
     if (!urlStr || typeof urlStr !== 'string') return null;

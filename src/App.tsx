@@ -15,7 +15,7 @@ import { parseGithubRepo } from './utils/github';
 import { fetchExternalPlugins } from './utils/externalSearch';
 import { SITE_VERSION } from './config/version';
 import { getSiteNameFromUrl } from './utils/site';
-import { RefreshCw, AlertCircle, Package, Info, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, SlidersHorizontal } from 'lucide-react';
+import { RefreshCw, AlertCircle, Package, Info, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, SlidersHorizontal, ExternalLink } from 'lucide-react';
 
 async function fetchDirectYmm4Plugins(): Promise<YMM4Plugin[]> {
   const fetchWithProxy = async (url: string) => {
@@ -835,7 +835,15 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 flex flex-col items-center justify-center gap-2">
           <div className="flex items-center gap-2">
             <img src="./ymm4pluginportal.png" alt="YMM4プラグインポータルサイト Logo" className="w-5 h-5 object-contain" />
-            <span>YMM4プラグインポータルサイト</span>
+            <a
+              href="https://github.com/HAIsanGames813/YMM4PluginPortal"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 font-bold text-zinc-900 dark:text-zinc-100 hover:underline hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+            >
+              <span>YMM4プラグインポータルサイト</span>
+              <ExternalLink className="w-3.5 h-3.5 text-zinc-400" />
+            </a>
           </div>
           <button
             onClick={() => setIsInfoModalOpen(true)}

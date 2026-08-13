@@ -39,25 +39,19 @@ export const BatchDownloadModal: React.FC<BatchDownloadModalProps> = ({
     document.body.removeChild(a);
   };
 
-  // Helper to fetch file as ArrayBuffer with CORS fallback
+  // Helper to fetch file as ArrayBuffer using server-side proxy to bypass CORS and API limits
   const fetchFileBuffer = async (url: string): Promise<ArrayBuffer | null> => {
+    try {
+      const res = await fetch(`/api/ymm4/proxy-file?url=${encodeURIComponent(url)}`);
+      if (res.ok) return await res.arrayBuffer();
+    } catch (e) {
+      // Server proxy failed
+    }
     try {
       const res = await fetch(url);
       if (res.ok) return await res.arrayBuffer();
     } catch (e) {
       // Direct fetch failed
-    }
-    try {
-      const proxyRes = await fetch(`https://corsproxy.io/?${encodeURIComponent(url)}`);
-      if (proxyRes.ok) return await proxyRes.arrayBuffer();
-    } catch (e) {
-      // CORS proxy 1 failed
-    }
-    try {
-      const proxyRes2 = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`);
-      if (proxyRes2.ok) return await proxyRes2.arrayBuffer();
-    } catch (e) {
-      // CORS proxy 2 failed
     }
     return null;
   };
