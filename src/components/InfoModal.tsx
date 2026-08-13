@@ -22,30 +22,19 @@ export const InfoModal: React.FC<InfoModalProps> = ({
   useEffect(() => {
     if (isOpen) {
       setLoading(true);
-      fetch('/README.md')
+      fetch('/api/readme')
         .then(res => {
           if (res.ok) return res.text();
-          throw new Error('Failed to fetch local README');
+          throw new Error('Failed to fetch README from server');
         })
         .then(text => {
           setReadmeContent(text);
           setLoading(false);
         })
-        .catch(() => {
-          // Fallback to GitHub raw README if local fetch fails
-          fetch('https://raw.githubusercontent.com/saisaisaiyoshiyoshiyoshi/ymm4-plugin-portal/main/README.md')
-            .then(res => {
-              if (res.ok) return res.text();
-              throw new Error('Failed to fetch GitHub README');
-            })
-            .then(text => {
-              setReadmeContent(text);
-              setLoading(false);
-            })
-            .catch(() => {
-              setReadmeContent('# 読み込みエラー\n\nREADME.mdの取得に失敗しました。');
-              setLoading(false);
-            });
+        .catch(err => {
+          console.error(err);
+          setReadmeContent('# 読み込みエラー\n\nREADME.mdの取得に失敗しました。');
+          setLoading(false);
         });
     }
   }, [isOpen]);

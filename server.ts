@@ -2,12 +2,29 @@ import express from 'express';
 import path from 'path';
 import { createServer as createViteServer } from 'vite';
 import yaml from 'yaml';
+import fs from 'fs';
 
 async function startServer() {
   const app = express();
   const PORT = 3000;
 
   app.use(express.json());
+
+  // API Route: Get README.md content
+  app.get('/api/readme', (req, res) => {
+    try {
+      const readmePath = path.join(process.cwd(), 'README.md');
+      if (fs.existsSync(readmePath)) {
+        const content = fs.readFileSync(readmePath, 'utf-8');
+        res.type('text/markdown').send(content);
+      } else {
+        res.status(404).send('# 読み込みエラー\n\nREADME.mdが見つかりませんでした。');
+      }
+    } catch (err) {
+      console.error('Error reading README.md:', err);
+      res.status(500).send('# 読み込みエラー\n\nREADME.mdの読み込みに失敗しました。');
+    }
+  });
 
   // Helper to extract GitHub user and repo from a URL string
   function parseGithubRepo(urlStr: string): { user: string; repo: string } | null {
