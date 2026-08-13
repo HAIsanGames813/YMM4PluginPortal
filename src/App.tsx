@@ -357,17 +357,8 @@ export default function App() {
 
       // 4. Background fetch for unlisted external plugins (GitHub Search & BOOTH)
       if (basePlugins.length > 0) {
-        fetchExternalPlugins(basePlugins).then((extPlugins) => {
-          if (extPlugins.length > 0) {
-            setPlugins((prev) => {
-              const existingIds = new Set(prev.map((p) => p.id));
-              const newExt = extPlugins.filter((p) => !existingIds.has(p.id));
-              return [...prev, ...newExt];
-            });
-          }
-        }).catch((err) => {
-          console.warn('Failed to fetch external plugins:', err);
-        });
+        // External plugins are now baked into plugins-data.json at build time
+        // so we don't need to fetch them client-side anymore!
       }
     } catch (err: any) {
       console.error('Error in loadPlugins:', err);

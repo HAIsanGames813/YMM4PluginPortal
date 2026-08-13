@@ -32,6 +32,7 @@
     "@types/jszip": "^3.4.1",
     "@types/node": "^22.14.0",
     "autoprefixer": "^10.4.21",
+    "cheerio": "^1.2.0",
     "esbuild": "^0.25.0",
     "tailwindcss": "^4.1.14",
     "tsx": "^4.21.0",

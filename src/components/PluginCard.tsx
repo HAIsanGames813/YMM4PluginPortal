@@ -17,37 +17,11 @@ import { YMM4Plugin } from '../types';
 import { getSiteNameFromUrl } from '../utils/site';
 
 const BoothPriceTag: React.FC<{ plugin: YMM4Plugin }> = ({ plugin }) => {
-  const [price, setPrice] = React.useState<string | null>(plugin.price || null);
-  
-  React.useEffect(() => {
-    // If we already have the price (e.g. from external auto-fetch), don't fetch
-    if (price) return;
-    
-    // Check if it's a BOOTH URL
-    let boothUrl = '';
-    if (plugin.url && plugin.url.includes('booth.pm')) boothUrl = plugin.url;
-    else {
-      const link = plugin.links?.find(l => l.url.includes('booth.pm'));
-      if (link) boothUrl = link.url;
-    }
-    
-    if (boothUrl) {
-      fetch(`/api/ymm4/booth-detail?url=${encodeURIComponent(boothUrl)}`)
-        .then(res => res.json())
-        .then(data => {
-          if (data && data.success && data.price) {
-            setPrice(data.price);
-          }
-        })
-        .catch(err => console.warn('Failed to fetch BOOTH price', err));
-    }
-  }, [plugin, price]);
-
-  if (!price) return null;
+  if (!plugin.price) return null;
 
   return (
     <span className="text-[10px] font-mono px-2 py-0.5 bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 border border-zinc-300 dark:border-zinc-700 font-bold ml-auto">
-      価格: {price}
+      価格: {plugin.price}
     </span>
   );
 };
