@@ -5,6 +5,7 @@ import {
   SlidersHorizontal,
   CheckSquare,
   Square,
+  Check,
   RotateCcw,
   Search,
   ArrowUpDown,
@@ -13,7 +14,8 @@ import {
   Package,
   Layers,
   ListFilter,
-  Download
+  Download,
+  ShoppingBag
 } from 'lucide-react';
 import { FilterState, PageSize } from '../types';
 
@@ -23,8 +25,12 @@ interface SideDrawerProps {
   filterState: FilterState;
   onFilterChange: (newFilters: Partial<FilterState>) => void;
   availableTypes: { name: string; count: number }[];
+  availableHosts: { name: string; count: number }[];
   matchedCount: number;
   totalCount: number;
+  githubExternalCount?: number;
+  boothExternalCount?: number;
+  ymm4Version?: string;
   onResetFilters: () => void;
   isAllVisibleSelected: boolean;
   onSelectAllVisible: () => void;
@@ -36,8 +42,12 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({
   filterState,
   onFilterChange,
   availableTypes,
+  availableHosts,
   matchedCount,
   totalCount,
+  githubExternalCount = 0,
+  boothExternalCount = 0,
+  ymm4Version = '取得中...',
   onResetFilters,
   isAllVisibleSelected,
   onSelectAllVisible
@@ -84,6 +94,30 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({
   const isAllCategoriesSelected =
     availableTypes.length > 0 &&
     availableTypes.every((t) => filterState.selectedTypes.includes(t.name));
+
+  // --- Host Filtering Logic ---
+  const handleToggleHost = (hostName: string) => {
+    let current = [...(filterState.selectedHosts || [])];
+    if (current.includes(hostName)) {
+      current = current.filter((h) => h !== hostName);
+    } else {
+      current.push(hostName);
+    }
+    onFilterChange({ selectedHosts: current, currentPage: 1 });
+  };
+
+  const handleSelectAllHosts = () => {
+    const allNames = availableHosts.map((h) => h.name);
+    onFilterChange({ selectedHosts: allNames, currentPage: 1 });
+  };
+
+  const handleClearAllHosts = () => {
+    onFilterChange({ selectedHosts: [], currentPage: 1 });
+  };
+
+  const isAllHostsSelected =
+    availableHosts.length > 0 &&
+    availableHosts.every((h) => (filterState.selectedHosts || []).includes(h.name));
 
   // Sidebar Content JSX
   const sidebarContent = (
@@ -256,44 +290,166 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({
 
         {/* Host Filter Toggle */}
         <div className="space-y-2 border-t border-zinc-200 dark:border-zinc-800 pt-4">
+          <div className="flex items-center justify-between">
+            <label className="text-[11px] font-bold text-zinc-700 dark:text-zinc-300 uppercase flex items-center gap-1.5">
+              <Globe className="w-3 h-3" />
+              <span>配布ホスト</span>
+            </label>
+            <div className="flex items-center gap-2 text-[10px]">
+              <button
+                onClick={
+                  isAllHostsSelected
+                    ? handleClearAllHosts
+                    : handleSelectAllHosts
+                }
+                className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 underline font-bold cursor-pointer"
+              >
+                {isAllHostsSelected ? '全解除' : '全選択'}
+              </button>
+            </div>
+          </div>
+          
+          <div className="space-y-1 max-h-48 overflow-y-auto pr-1 border border-zinc-300 dark:border-zinc-700 p-2 bg-zinc-50 dark:bg-zinc-800/50">
+            {availableHosts.length === 0 ? (
+              <div className="text-xs text-zinc-500 py-2">ホストがありません</div>
+            ) : (
+              availableHosts.map((hostObj) => {
+                const isChecked = (filterState.selectedHosts || []).includes(hostObj.name);
+                return (
+                  <label
+                    key={hostObj.name}
+                    onClick={() => handleToggleHost(hostObj.name)}
+                    className={`flex items-center justify-between p-1 text-[11px] font-mono cursor-pointer transition-colors border ${
+                      isChecked
+                        ? 'bg-zinc-200 dark:bg-zinc-700 border-zinc-400 dark:border-zinc-600 font-bold'
+                        : 'hover:bg-zinc-100 dark:hover:bg-zinc-800 border-transparent'
+                    }`}
+                  >
+                    <div className="flex items-center gap-1.5 overflow-hidden">
+                      {isChecked ? (
+                        <CheckSquare className="w-3.5 h-3.5 text-zinc-900 dark:text-zinc-100 shrink-0" />
+                      ) : (
+                        <Square className="w-3.5 h-3.5 text-zinc-400 dark:text-zinc-500 shrink-0" />
+                      )}
+                      <span className="truncate">{hostObj.name}</span>
+                    </div>
+                    <span className="text-[10px] text-zinc-500 dark:text-zinc-400 px-1 py-0.5 border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 shrink-0 ml-1">
+                      {hostObj.count}
+                    </span>
+                  </label>
+                );
+              })
+            )}
+          </div>
+        </div>
+
+        {/* External Source Filter Toggles (Manjubox unlisted) */}
+        <div className="space-y-2 border-t border-zinc-200 dark:border-zinc-800 pt-4">
           <label className="text-[11px] font-bold text-zinc-700 dark:text-zinc-300 uppercase flex items-center gap-1.5">
             <Globe className="w-3 h-3" />
-            <span>配布ホスト</span>
+            <span>Manjubox未掲載 (自動取得)</span>
           </label>
-          <div className="grid grid-cols-3 gap-1 bg-zinc-100 dark:bg-zinc-800 p-1 border border-zinc-300 dark:border-zinc-700 text-[10px] font-mono">
-            <button
-              onClick={() => onFilterChange({ hostFilter: 'all', currentPage: 1 })}
-              className={`py-1.5 px-1 text-center transition-colors cursor-pointer ${
-                filterState.hostFilter === 'all'
-                  ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 font-bold'
-                  : 'hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300'
-              }`}
-            >
-              ALL
-            </button>
-            <button
-              onClick={() => onFilterChange({ hostFilter: 'github', currentPage: 1 })}
-              className={`py-1.5 px-1 flex items-center justify-center gap-1 transition-colors cursor-pointer ${
-                filterState.hostFilter === 'github'
-                  ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 font-bold'
-                  : 'hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300'
-              }`}
-            >
-              <Github className="w-2.5 h-2.5" />
-              <span>GitHub</span>
-            </button>
-            <button
-              onClick={() => onFilterChange({ hostFilter: 'external', currentPage: 1 })}
-              className={`py-1.5 px-1 flex items-center justify-center gap-1 transition-colors cursor-pointer ${
-                filterState.hostFilter === 'external'
-                  ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 font-bold'
-                  : 'hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300'
-              }`}
-            >
-              <Globe className="w-2.5 h-2.5" />
-              <span>外部</span>
-            </button>
+          
+          <div className="space-y-2">
+            {/* Github自動取得 3-state control */}
+            <div className="p-2 border border-zinc-200 dark:border-zinc-800 bg-zinc-50/80 dark:bg-zinc-900/60 space-y-1.5">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5 text-[11px] font-bold text-zinc-800 dark:text-zinc-200">
+                  <Github className="w-3.5 h-3.5 text-zinc-700 dark:text-zinc-300 shrink-0" />
+                  <span>Github自動取得</span>
+                </div>
+                <span className="text-[10px] px-1.5 py-0.2 border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 font-mono font-bold text-zinc-600 dark:text-zinc-400">
+                  {githubExternalCount}件
+                </span>
+              </div>
+              <div className="grid grid-cols-3 gap-1 bg-zinc-200 dark:bg-zinc-800 p-0.5 text-[10px] font-mono font-bold">
+                <button
+                  type="button"
+                  onClick={() => onFilterChange({ githubExternalMode: 'show', currentPage: 1 })}
+                  className={`py-1 text-center transition-colors cursor-pointer ${
+                    filterState.githubExternalMode === 'show'
+                      ? 'bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 shadow-xs'
+                      : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'
+                  }`}
+                >
+                  表示
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onFilterChange({ githubExternalMode: 'only', currentPage: 1 })}
+                  className={`py-1 text-center transition-colors cursor-pointer ${
+                    filterState.githubExternalMode === 'only'
+                      ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 font-bold shadow-xs'
+                      : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'
+                  }`}
+                >
+                  のみ表示
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onFilterChange({ githubExternalMode: 'hide', currentPage: 1 })}
+                  className={`py-1 text-center transition-colors cursor-pointer ${
+                    filterState.githubExternalMode === 'hide'
+                      ? 'bg-zinc-700 text-white dark:bg-zinc-700 dark:text-zinc-200 font-bold shadow-xs'
+                      : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'
+                  }`}
+                >
+                  非表示
+                </button>
+              </div>
+            </div>
+
+            {/* Booth自動取得 3-state control */}
+            <div className="p-2 border border-zinc-200 dark:border-zinc-800 bg-zinc-50/80 dark:bg-zinc-900/60 space-y-1.5">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5 text-[11px] font-bold text-zinc-800 dark:text-zinc-200">
+                  <ShoppingBag className="w-3.5 h-3.5 shrink-0" />
+                  <span>Booth自動取得</span>
+                </div>
+                <span className="text-[10px] px-1.5 py-0.2 border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 font-mono font-bold text-zinc-600 dark:text-zinc-400">
+                  {boothExternalCount}件
+                </span>
+              </div>
+              <div className="grid grid-cols-3 gap-1 bg-zinc-200 dark:bg-zinc-800 p-0.5 text-[10px] font-mono font-bold">
+                <button
+                  type="button"
+                  onClick={() => onFilterChange({ boothExternalMode: 'show', currentPage: 1 })}
+                  className={`py-1 text-center transition-colors cursor-pointer ${
+                    filterState.boothExternalMode === 'show'
+                      ? 'bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 shadow-xs'
+                      : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'
+                  }`}
+                >
+                  表示
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onFilterChange({ boothExternalMode: 'only', currentPage: 1 })}
+                  className={`py-1 text-center transition-colors cursor-pointer ${
+                    filterState.boothExternalMode === 'only'
+                      ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 font-bold shadow-xs'
+                      : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'
+                  }`}
+                >
+                  のみ表示
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onFilterChange({ boothExternalMode: 'hide', currentPage: 1 })}
+                  className={`py-1 text-center transition-colors cursor-pointer ${
+                    filterState.boothExternalMode === 'hide'
+                      ? 'bg-zinc-700 text-white dark:bg-zinc-700 dark:text-zinc-200 font-bold shadow-xs'
+                      : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'
+                  }`}
+                >
+                  非表示
+                </button>
+              </div>
+            </div>
           </div>
+          <p className="text-[10px] text-zinc-500 dark:text-zinc-400 leading-tight">
+            ※それぞれ「表示」「のみ表示」「非表示」を切替可能です。
+          </p>
         </div>
 
         {/* Sort Dropdown & Order */}
@@ -388,6 +544,22 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({
           >
             完了
           </button>
+        </div>
+
+        {/* Version Information Section */}
+        <div className="mt-2 pt-2 border-t border-zinc-300 dark:border-zinc-700/80 text-[10px] font-mono space-y-1">
+          <div className="flex items-center justify-between text-zinc-600 dark:text-zinc-400">
+            <span>YMM4 最新:</span>
+            <span className="font-bold text-zinc-900 dark:text-zinc-100 bg-zinc-200 dark:bg-zinc-700/60 px-1.5 py-0.5 border border-zinc-300 dark:border-zinc-600">
+              {ymm4Version}
+            </span>
+          </div>
+          <div className="flex items-center justify-between text-zinc-600 dark:text-zinc-400">
+            <span>サイトバージョン:</span>
+            <span className="font-bold text-zinc-800 dark:text-zinc-200">
+              v1.1.0
+            </span>
+          </div>
         </div>
       </div>
     </div>

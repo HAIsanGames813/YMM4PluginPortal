@@ -16,6 +16,42 @@ import {
 import { YMM4Plugin } from '../types';
 import { getSiteNameFromUrl } from '../utils/site';
 
+const BoothPriceTag: React.FC<{ plugin: YMM4Plugin }> = ({ plugin }) => {
+  const [price, setPrice] = React.useState<string | null>(plugin.price || null);
+  
+  React.useEffect(() => {
+    // If we already have the price (e.g. from external auto-fetch), don't fetch
+    if (price) return;
+    
+    // Check if it's a BOOTH URL
+    let boothUrl = '';
+    if (plugin.url && plugin.url.includes('booth.pm')) boothUrl = plugin.url;
+    else {
+      const link = plugin.links?.find(l => l.url.includes('booth.pm'));
+      if (link) boothUrl = link.url;
+    }
+    
+    if (boothUrl) {
+      fetch(`/api/ymm4/booth-detail?url=${encodeURIComponent(boothUrl)}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.success && data.price) {
+            setPrice(data.price);
+          }
+        })
+        .catch(err => console.warn('Failed to fetch BOOTH price', err));
+    }
+  }, [plugin, price]);
+
+  if (!price) return null;
+
+  return (
+    <span className="text-[10px] font-mono px-2 py-0.5 bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 border border-zinc-300 dark:border-zinc-700 font-bold ml-auto">
+      価格: {price}
+    </span>
+  );
+};
+
 interface PluginCardProps {
   plugin: YMM4Plugin;
   isSelected: boolean;
@@ -75,13 +111,24 @@ export const PluginCard: React.FC<PluginCardProps> = React.memo(({
             </span>
           </button>
 
-          {/* Badges: Discontinued, Type & Host */}
+          {/* Badges: Discontinued, External Source, Type & Host */}
           <div className="flex flex-wrap items-center justify-end gap-1.5">
             {/* Discontinued Badge */}
             {plugin.isEnabled === false && (
               <span className="text-[10px] font-mono px-2 py-0.5 bg-red-100 dark:bg-red-950/80 text-red-800 dark:text-red-300 font-bold border border-red-300 dark:border-red-800 flex items-center gap-1">
                 <AlertOctagon className="w-3 h-3" />
                 <span>配布終了</span>
+              </span>
+            )}
+
+            {/* External Source Badge */}
+            {plugin.isExternalSource && (
+              <span
+                className="text-[10px] font-mono px-2 py-0.5 bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-bold border border-zinc-300 dark:border-zinc-700 flex items-center gap-1"
+                title="manjubox.net API未掲載の外部自動検知プラグインです"
+              >
+                <Globe className="w-3 h-3 text-zinc-600 dark:text-zinc-400" />
+                <span>外部</span>
               </span>
             )}
 
@@ -111,6 +158,9 @@ export const PluginCard: React.FC<PluginCardProps> = React.memo(({
                 <span>{getSiteNameFromUrl(plugin.url || (plugin.links && plugin.links[0]?.url) || '')}</span>
               </span>
             )}
+            
+            {/* Display BOOTH Price if it's a BOOTH URL */}
+            <BoothPriceTag plugin={plugin} />
           </div>
         </div>
 

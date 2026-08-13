@@ -106,7 +106,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <Menu className="w-4 h-4" />
             <span>メニュー</span>
             {isFiltered && (
-              <span className="w-2 h-2 rounded-full bg-amber-400 dark:bg-amber-500 animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-zinc-800 dark:bg-zinc-200 animate-pulse" />
             )}
           </button>
 

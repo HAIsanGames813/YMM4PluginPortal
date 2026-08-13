@@ -25,6 +25,9 @@ export interface YMM4Plugin {
   isEnabled?: boolean;
   license?: string;
   tags?: string[];
+  price?: string;
+  isExternalSource?: boolean;
+  sourceName?: string;
   extraGhData?: {
     user: string;
     repo: string;
@@ -67,9 +70,12 @@ export interface GithubDetailData {
   releases: GithubRelease[];
 }
 
+export type AutoFetchDisplayMode = 'show' | 'only' | 'hide';
+
 export interface FilterState {
   searchQuery: string;
   selectedTypes: string[]; // multi-select categories
+  selectedHosts?: string[]; // multi-select hosts
   hostFilter: 'all' | 'github' | 'external';
   statusFilter: 'all' | 'enabled' | 'disabled';
   sortBy: 'updatedAt' | 'publishedAt' | 'name' | 'author' | 'type';
@@ -77,4 +83,6 @@ export interface FilterState {
   pageSize: PageSize;
   currentPage: number;
   batchDownloadMode: BatchDownloadMode;
+  githubExternalMode: AutoFetchDisplayMode;
+  boothExternalMode: AutoFetchDisplayMode;
 }

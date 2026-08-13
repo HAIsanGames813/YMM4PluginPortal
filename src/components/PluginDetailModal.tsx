@@ -4,6 +4,7 @@ import { YMM4Plugin } from '../types';
 import { MarkdownContent } from './MarkdownContent';
 import { getSiteNameFromUrl } from '../utils/site';
 import { parseGithubRepo, fetchGithubReadme } from '../utils/github';
+import { fetchBoothDetails } from '../utils/booth';
 
 interface PluginDetailModalProps {
   plugin: YMM4Plugin | null;
@@ -93,17 +94,47 @@ export const PluginDetailModal: React.FC<PluginDetailModalProps> = ({
     return null;
   }, [plugin]);
 
+  const boothUrl = useMemo(() => {
+    if (!plugin) return null;
+    if (plugin.url && plugin.url.includes('booth.pm')) return plugin.url;
+    if (Array.isArray(plugin.links)) {
+      const found = plugin.links.find((l) => l.url.includes('booth.pm'));
+      if (found) return found.url;
+    }
+    return null;
+  }, [plugin]);
+
   const [isReadmeOpen, setIsReadmeOpen] = useState(false);
   const [readmeContent, setReadmeContent] = useState<string | null>(null);
   const [isLoadingReadme, setIsLoadingReadme] = useState(false);
   const [readmeError, setReadmeError] = useState<string | null>(null);
+
+  const [isBoothDescOpen, setIsBoothDescOpen] = useState(false);
+  const [boothData, setBoothData] = useState<{ author?: string; price?: string; description?: string; images?: string[] } | null>(null);
+  const [isLoadingBooth, setIsLoadingBooth] = useState(false);
+  const [boothError, setBoothError] = useState<string | null>(null);
 
   useEffect(() => {
     setIsReadmeOpen(false);
     setReadmeContent(null);
     setIsLoadingReadme(false);
     setReadmeError(null);
-  }, [plugin.id]);
+
+    setIsBoothDescOpen(false);
+    setBoothData(null);
+    setIsLoadingBooth(false);
+    setBoothError(null);
+
+    if (boothUrl) {
+      setIsLoadingBooth(true);
+      fetchBoothDetails(boothUrl).then((details) => {
+        if (details) {
+          setBoothData(details);
+        }
+        setIsLoadingBooth(false);
+      });
+    }
+  }, [plugin.id, boothUrl]);
 
   const handleToggleReadme = async () => {
     const nextOpen = !isReadmeOpen;
@@ -121,6 +152,25 @@ export const PluginDetailModal: React.FC<PluginDetailModalProps> = ({
       setIsLoadingReadme(false);
     }
   };
+
+  const handleToggleBoothDesc = async () => {
+    const nextOpen = !isBoothDescOpen;
+    setIsBoothDescOpen(nextOpen);
+
+    if (nextOpen && !boothData && !isLoadingBooth && boothUrl) {
+      setIsLoadingBooth(true);
+      setBoothError(null);
+      const details = await fetchBoothDetails(boothUrl);
+      if (details && (details.description || details.author)) {
+        setBoothData(details);
+      } else {
+        setBoothError('BOOTHからの製品説明の取得に失敗したか、説明文が見つかりませんでした。');
+      }
+      setIsLoadingBooth(false);
+    }
+  };
+
+  const displayedAuthor = boothData?.author || plugin.author;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs">
@@ -162,9 +212,16 @@ export const PluginDetailModal: React.FC<PluginDetailModalProps> = ({
                 </div>
               )}
 
+              {plugin.isExternalSource && (
+                <div className="flex items-center gap-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-bold px-2 py-0.5 border border-zinc-300 dark:border-zinc-700">
+                  <Globe className="w-3.5 h-3.5 text-zinc-600 dark:text-zinc-400" />
+                  <span>外部</span>
+                </div>
+              )}
+
               <div className="flex items-center gap-1.5">
                 <User className="w-4 h-4 text-zinc-500" />
-                <span className="font-bold text-zinc-900 dark:text-zinc-100">{plugin.author}</span>
+                <span className="font-bold text-zinc-900 dark:text-zinc-100">{displayedAuthor}</span>
               </div>
 
               {plugin.version && (
@@ -252,6 +309,62 @@ export const PluginDetailModal: React.FC<PluginDetailModalProps> = ({
                       />
                     ) : (
                       <div className="text-xs text-zinc-500">README が見つかりませんでした。</div>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* BOOTH Description Accordion */}
+            {boothUrl && (
+              <div className="mt-3 border border-zinc-300 dark:border-zinc-700 rounded-xs overflow-hidden">
+                <button
+                  type="button"
+                  onClick={handleToggleBoothDesc}
+                  className="w-full p-2.5 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 flex items-center justify-between text-left font-mono text-xs font-bold text-zinc-900 dark:text-zinc-100 transition-colors cursor-pointer"
+                >
+                  <div className="flex items-center gap-2">
+                    <Package className="w-4 h-4 text-zinc-900 dark:text-zinc-100 shrink-0" />
+                    <span>BOOTH 製品説明文 (booth.pm)</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-zinc-600 dark:text-zinc-400">
+                    <span className="text-[11px]">
+                      {isBoothDescOpen ? '折りたたむ' : '表示する (マークダウン)'}
+                    </span>
+                    {isBoothDescOpen ? (
+                      <ChevronUp className="w-4 h-4 text-zinc-900 dark:text-zinc-100 shrink-0" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4 text-zinc-900 dark:text-zinc-100 shrink-0" />
+                    )}
+                  </div>
+                </button>
+
+                {isBoothDescOpen && (
+                  <div className="p-4 bg-white dark:bg-zinc-900 border-t border-zinc-300 dark:border-zinc-700 max-h-[500px] overflow-y-auto space-y-3">
+                    {isLoadingBooth ? (
+                      <div className="flex items-center justify-center gap-2 py-8 text-xs font-mono text-zinc-500">
+                        <Loader2 className="w-4 h-4 animate-spin text-zinc-700 dark:text-zinc-300" />
+                        <span>BOOTHから製品説明を取得中...</span>
+                      </div>
+                    ) : boothError ? (
+                      <div className="p-3 text-xs font-mono text-zinc-500 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700">
+                        {boothError}
+                      </div>
+                    ) : boothData ? (
+                      <div className="space-y-3">
+                        {boothData.price && (
+                          <div className="text-xs font-mono font-bold text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 px-2.5 py-1 border border-zinc-300 dark:border-zinc-700 inline-block">
+                            価格: {boothData.price}
+                          </div>
+                        )}
+                        {boothData.description ? (
+                          <MarkdownContent content={boothData.description} />
+                        ) : (
+                          <div className="text-xs text-zinc-500">BOOTHの説明文が見つかりませんでした。</div>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="text-xs text-zinc-500">製品説明が見つかりませんでした。</div>
                     )}
                   </div>
                 )}

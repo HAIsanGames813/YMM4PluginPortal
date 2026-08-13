@@ -43,6 +43,8 @@ export function getSiteNameFromUrl(urlStr: string, rawName?: string): string {
     siteName = 'Dropbox';
   } else if (domain.includes('youtube.com') || domain.includes('youtu.be')) {
     siteName = 'YouTube';
+  } else if (domain.includes('ymm4-info.net')) {
+    siteName = 'YMM4情報サイト';
   } else if (domain.includes('manjubox.net')) {
     siteName = 'まんじゅう屋 (manjubox.net)';
   } else if (domain.includes('qiita.com')) {

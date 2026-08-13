@@ -211,6 +211,478 @@ async function startServer() {
     }
   });
 
+  // API Route: Fetch external plugins from GitHub and BOOTH unlisted in manjubox
+  app.get('/api/external-plugins', async (req, res) => {
+    try {
+      // 1. First fetch manjubox plugins list to build deduplication sets
+      const ymlRes = await fetch('https://manjubox.net/ymm4plugins.yml').catch(() => null);
+      let ymlText = '';
+      if (ymlRes && ymlRes.ok) {
+        ymlText = await ymlRes.text();
+      }
+      let existingRaw: any = null;
+      try {
+        existingRaw = yaml.parse(ymlText);
+      } catch (e) {
+        // ignore
+      }
+
+      const existingGithubKeys = new Set<string>();
+      const existingBoothIds = new Set<string>();
+      const existingUrls = new Set<string>();
+
+      const registerUrl = (rawUrl: string) => {
+        if (!rawUrl || typeof rawUrl !== 'string') return;
+        const clean = rawUrl.split('?')[0].split('#')[0].toLowerCase().replace(/\/$/, '');
+        existingUrls.add(clean);
+
+        const gh = parseGithubRepo(rawUrl);
+        if (gh) {
+          existingGithubKeys.add(`${gh.user.toLowerCase()}/${gh.repo.toLowerCase()}`);
+        }
+
+        const boothMatch = rawUrl.match(/booth\.pm\/(?:[a-z]{2}\/)?items\/(\d+)/i) || rawUrl.match(/\/items\/(\d+)/i);
+        if (boothMatch) {
+          existingBoothIds.add(boothMatch[1]);
+        }
+      };
+
+      let rawPluginsList: any[] = [];
+      if (Array.isArray(existingRaw)) rawPluginsList = existingRaw;
+      else if (existingRaw && typeof existingRaw === 'object') {
+        rawPluginsList = Array.isArray(existingRaw.plugins) ? existingRaw.plugins : Object.values(existingRaw);
+      }
+
+      for (const p of rawPluginsList) {
+        if (p.url) registerUrl(p.url);
+        if (Array.isArray(p.links)) {
+          for (const l of p.links) {
+            registerUrl(typeof l === 'string' ? l : l.url || l.href);
+          }
+        }
+      }
+
+      // Helper to map GitHub topics to YMM4 Plugin categories
+      const mapTopicsToCategory = (topics: string[] = []): string => {
+        if (!topics || topics.length === 0) return 'その他';
+        const lower = topics.map((t) => t.toLowerCase().trim());
+        const categories: string[] = [];
+
+        for (const topic of lower) {
+          if (topic === 'ymm4-audio-effect') categories.push('音声エフェクト');
+          else if (topic === 'ymm4-video-effect' || topic === 'ymm4-effect') categories.push('映像エフェクト');
+          else if (topic === 'ymm4-transition') categories.push('トランジション');
+          else if (topic === 'ymm4-shape') categories.push('図形');
+          else if (topic === 'ymm4-tachie') categories.push('立ち絵');
+          else if (topic === 'ymm4-video-source') categories.push('動画アイテム');
+          else if (topic === 'ymm4-image-source') categories.push('画像アイテム');
+          else if (topic === 'ymm4-audio-source' || topic === 'ymm4-voice') categories.push('音声');
+          else if (topic === 'ymm4-video-writer' || topic === 'ymm4-video-exporter' || topic === 'ymm4-exporter') categories.push('映像出力');
+          else if (topic === 'ymm4-text-completion') categories.push('テキスト');
+          else if (topic === 'ymm4-importer') categories.push('インポーター');
+        }
+
+        const unique = Array.from(new Set(categories));
+        return unique.length > 0 ? unique.join('、') : 'その他';
+      };
+
+      const externalPlugins: any[] = [];
+
+      // 2. Search GitHub strictly by TOPICS (topic:ymm4-plugin, topic:ymm-plugin, topic:ymm4plugin)
+      try {
+        const ghSearchQueries = [
+          'q=topic:ymm4-plugin+OR+topic:ymm-plugin+OR+topic:ymm4plugin+sort:updated-desc'
+        ];
+
+        for (const q of ghSearchQueries) {
+          const ghRes = await fetch(`https://api.github.com/search/repositories?${q}&per_page=50`, {
+            headers: { 'User-Agent': 'YMM4-Plugin-Portal' }
+          });
+          if (ghRes.ok) {
+            const data = await ghRes.json();
+            if (data && Array.isArray(data.items)) {
+              for (const item of data.items) {
+                if (!item.owner || !item.name) continue;
+
+                // Exclude manju-summoner (饅頭遣い)
+                const ownerLogin = item.owner.login.toLowerCase();
+                if (ownerLogin === 'manju-summoner') continue;
+
+                const key = `${ownerLogin}/${item.name.toLowerCase()}`;
+                const htmlUrl = (item.html_url || `https://github.com/${item.owner.login}/${item.name}`).toLowerCase();
+
+                if (existingGithubKeys.has(key) || existingUrls.has(htmlUrl)) continue;
+
+                // Strict topic verification: repository MUST have ymm plugin topics
+                const itemTopics: string[] = Array.isArray(item.topics) ? item.topics : [];
+                const hasYmmTopic = itemTopics.some((t) =>
+                  t.toLowerCase().startsWith('ymm') || t.toLowerCase().includes('ymm4')
+                );
+                if (!hasYmmTopic) continue;
+
+                existingGithubKeys.add(key);
+                existingUrls.add(htmlUrl);
+
+                const pluginType = mapTopicsToCategory(itemTopics);
+
+                externalPlugins.push({
+                  id: `ext-gh-${item.id || `${item.owner.login}-${item.name}`}`,
+                  name: item.name,
+                  author: item.owner.login,
+                  type: pluginType,
+                  description: item.description || 'GitHubで公開されているYMM4関連プラグインです。',
+                  url: item.html_url,
+                  links: [{ name: 'GitHub Repo', url: item.html_url }],
+                  isGithub: true,
+                  githubUser: item.owner.login,
+                  githubRepo: item.name,
+                  version: item.default_branch || 'main',
+                  updatedAt: item.updated_at || '',
+                  publishedAt: item.created_at || '',
+                  isEnabled: true,
+                  license: item.license?.spdx_id || item.license?.name || '',
+                  tags: itemTopics.length > 0 ? itemTopics : ['ymm4-plugin', 'GitHub', '外部検索'],
+                  isExternalSource: true,
+                  sourceName: 'GitHub'
+                });
+              }
+            }
+          }
+        }
+      } catch (err) {
+        console.warn('Backend GitHub external search error:', err);
+      }
+
+      // 3. Search BOOTH strictly by TAGS (tags[]=YMM4Plugin, tags[]=ymm-plugin, tags[]=ymm4-plugin)
+      try {
+        const boothUrls = [
+          'https://booth.pm/ja/items?tags%5B%5D=YMM4Plugin',
+          'https://booth.pm/ja/items?tags%5B%5D=ymm-plugin',
+          'https://booth.pm/ja/items?tags%5B%5D=ymm4-plugin'
+        ];
+
+        for (const boothUrl of boothUrls) {
+          const bRes = await fetch(boothUrl, {
+            headers: {
+              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+              'Accept-Language': 'ja,en-US;q=0.9,en;q=0.8'
+            }
+          }).catch(() => null);
+
+          if (!bRes || !bRes.ok) continue;
+
+          const html = await bRes.text();
+
+          // Regex parse BOOTH items by card chunks
+          const cardChunks = html.split(/<li[^>]*class=["'][^"']*item-card/i).slice(1);
+          for (const cardChunk of cardChunks) {
+            const cardHtml = cardChunk.substring(0, cardChunk.indexOf('</li>'));
+
+            const idMatch = cardHtml.match(/data-product-id=["'](\d+)["']/i) || cardHtml.match(/\/items\/(\d+)/i);
+            if (!idMatch) continue;
+            const itemId = idMatch[1];
+
+            if (existingBoothIds.has(itemId)) continue;
+
+            const hrefMatch = cardHtml.match(/href=["']([^"']*(?:booth\.pm)?\/(?:[a-z]{2}\/)?items\/\d+[^"']*)["']/i);
+            let fullUrl = hrefMatch ? hrefMatch[1] : `https://booth.pm/ja/items/${itemId}`;
+            if (!fullUrl.startsWith('http')) {
+              fullUrl = `https://booth.pm${fullUrl.startsWith('/') ? '' : '/'}${fullUrl}`;
+            }
+
+            // Extract Shop Name / Store Name (店舗名)
+            let author = '';
+            const shopDivMatch = cardHtml.match(/class=["'][^"']*(?:item-card__shop-name|shop-name-text|shop-name)[^"']*["'][^>]*>([\s\S]*?)<\/div>/i)
+              || cardHtml.match(/class=["'][^"']*(?:item-card__shop-name-anchor|shop-info)[^"']*["'][^>]*>([\s\S]*?)<\/a>/i);
+            const dataBrandMatch = cardHtml.match(/data-product-brand=["']([^"']+)["']/i);
+
+            if (shopDivMatch) {
+              author = shopDivMatch[1].replace(/<[^>]+>/g, '').trim();
+            } else if (dataBrandMatch) {
+              author = dataBrandMatch[1].trim();
+            }
+
+            // Subdomain fallback
+            if (!author || author === 'BOOTHショップ') {
+              const subMatch = fullUrl.match(/https?:\/\/([a-zA-Z0-9_-]+)\.booth\.pm/i);
+              if (subMatch && subMatch[1] !== 'booth' && subMatch[1] !== 'ja' && subMatch[1] !== 'www') {
+                author = subMatch[1];
+              }
+            }
+            if (!author) author = 'BOOTHショップ';
+
+            // Exclude manju-summoner / 饅頭遣い
+            if (author.toLowerCase().includes('manju-summoner') || author.includes('饅頭遣い')) {
+              continue;
+            }
+
+            // Extract Title (製品名)
+            let title = '';
+            const titleAnchor = cardHtml.match(/class=["'][^"']*item-card__title[^"']*["'][^>]*>([\s\S]*?)<\/(?:div|h\d|span|a)>/i);
+            const dataNameMatch = cardHtml.match(/data-product-name=["']([^"']+)["']/i);
+            if (titleAnchor) {
+              title = titleAnchor[1].replace(/<[^>]+>/g, '').trim();
+            } else if (dataNameMatch) {
+              title = dataNameMatch[1].trim();
+            }
+
+            let price = '';
+            const priceMatch = cardHtml.match(/data-product-price=["']([^"']+)["']/i)
+              || cardHtml.match(/class=["'][^"']*(?:price|item-card__price)[^"']*["'][^>]*>([\s\S]*?)<\/(?:div|span)>/i);
+            if (priceMatch) {
+              price = priceMatch[1].replace(/<[^>]+>/g, '').trim();
+              if (/^\d+$/.test(price)) price = `¥ ${price}`;
+            }
+
+            const cleanUrl = fullUrl.split('?')[0].toLowerCase().replace(/\/$/, '');
+            if (existingUrls.has(cleanUrl)) continue;
+
+            existingBoothIds.add(itemId);
+            existingUrls.add(cleanUrl);
+
+            externalPlugins.push({
+              id: `ext-booth-${itemId}`,
+              name: title || `BOOTHアイテム #${itemId}`,
+              author,
+              type: 'Booth自動取得',
+              description: `BOOTHで「YMM4Plugin」等のタグで出品されている作品です。${price ? ` (価格: ${price})` : ''}`,
+              price: price || undefined,
+              url: fullUrl,
+              links: [{ name: 'BOOTH 商品ページ', url: fullUrl }],
+              isGithub: false,
+              githubUser: null,
+              githubRepo: null,
+              isEnabled: true,
+              tags: ['YMM4Plugin', 'BOOTH', '外部検索'],
+              isExternalSource: true,
+              sourceName: 'BOOTH'
+            });
+          }
+        }
+      } catch (err) {
+        console.warn('Backend BOOTH external search error:', err);
+      }
+
+      res.json({
+        success: true,
+        count: externalPlugins.length,
+        plugins: externalPlugins
+      });
+    } catch (err: any) {
+      console.error('Error in /api/external-plugins:', err);
+      res.status(500).json({ success: false, error: err.message, plugins: [] });
+    }
+  });
+
+  // API Route: Get latest YMM4 version from manjubox RSS
+  app.get('/api/ymm4/latest-version', async (req, res) => {
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 6000);
+
+      const response = await fetch('https://manjubox.net/rss.xml', {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Accept': 'application/rss+xml, application/xml, text/xml, */*'
+        },
+        signal: controller.signal
+      }).catch(() => null);
+      clearTimeout(timeout);
+
+      if (response && response.ok) {
+        const xmlText = await response.text();
+        // Parse items inside RSS
+        const itemMatches = xmlText.match(/<item[\s\S]*?<\/item>/gi);
+        if (itemMatches) {
+          for (const itemXml of itemMatches) {
+            const titleMatch = itemXml.match(/<title>([\s\S]*?)<\/title>/i);
+            if (titleMatch) {
+              const title = titleMatch[1].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/gi, '$1').trim();
+              const vMatch = title.match(/v?4\.\d+(?:\.\d+)?(?:\.\d+)?/i);
+              if (vMatch) {
+                let ver = vMatch[0];
+                if (!ver.toLowerCase().startsWith('v')) ver = 'v' + ver;
+                return res.json({ success: true, version: ver, title });
+              }
+            }
+          }
+        }
+
+        // Fallback match across full RSS xml
+        const fullMatch = xmlText.match(/v?4\.\d+\.\d+(?:\.\d+)?/i);
+        if (fullMatch) {
+          let ver = fullMatch[0];
+          if (!ver.toLowerCase().startsWith('v')) ver = 'v' + ver;
+          return res.json({ success: true, version: ver });
+        }
+      }
+
+      res.json({ success: false, version: '不明' });
+    } catch (err: any) {
+      console.error('Error fetching manjubox RSS:', err);
+      res.json({ success: false, version: '不明', error: err.message });
+    }
+  });
+
+  // API Route: BOOTH Item Details (Seller, Title, Price, Description, Images)
+  app.get('/api/ymm4/booth-detail', async (req, res) => {
+    const urlParam = req.query.url as string;
+    if (!urlParam || !urlParam.includes('booth.pm')) {
+      return res.status(400).json({ success: false, error: 'Invalid BOOTH URL' });
+    }
+
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 8000);
+
+      const response = await fetch(urlParam, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Accept-Language': 'ja,en-US;q=0.9,en;q=0.8'
+        },
+        signal: controller.signal
+      }).catch(() => null);
+      clearTimeout(timeout);
+
+      if (!response || !response.ok) {
+        return res.status(500).json({ success: false, error: 'Failed to fetch BOOTH page' });
+      }
+
+      const html = await response.text();
+
+      // Extract Title and Shop Name / Author (店舗名) using og:title / title tag or DOM elements
+      let author = '';
+      let title = '';
+
+      const ogTitleMatch = html.match(/<meta\s+property=["']og:title["']\s+content=["']([^"']+)["']/i);
+      const titleTagMatch = html.match(/<title>([\s\S]*?)<\/title>/i);
+      const rawTitleStr = ogTitleMatch ? ogTitleMatch[1] : (titleTagMatch ? titleTagMatch[1] : '');
+
+      if (rawTitleStr) {
+        let clean = rawTitleStr.replace(/<[^>]+>/g, '').trim();
+        clean = clean.replace(/\s*-\s*BOOTHショップ$/, '').replace(/\s*-\s*BOOTH$/, '').trim();
+        const parts = clean.split(' - ');
+        if (parts.length >= 2) {
+          author = parts[parts.length - 1].trim();
+          title = parts.slice(0, parts.length - 1).join(' - ').trim();
+        } else {
+          title = clean;
+        }
+      }
+
+      // Fallback Shop Name / Author (店舗名)
+      if (!author || author === 'BOOTH' || author === 'BOOTHショップ') {
+        const shopMatch = html.match(/class=["'][^"']*(?:shop-name|shop-name-text|merchant-name|item-card__author|item-card__shop-name)[^"']*["'][^>]*>([\s\S]*?)<\/(?:div|span|a|p)>/i)
+          || html.match(/<meta\s+property=["']og:site_name["']\s+content=["']([^"']+)["']/i)
+          || html.match(/data-shop-name=["']([^"']+)["']/i);
+
+        if (shopMatch) {
+          author = shopMatch[1].replace(/<[^>]+>/g, '').trim();
+        }
+      }
+
+      // Subdomain fallback
+      if (!author || author === 'BOOTH' || author === 'BOOTHショップ') {
+        const subMatch = urlParam.match(/https?:\/\/([a-zA-Z0-9_-]+)\.booth\.pm/i);
+        if (subMatch && !['booth', 'ja', 'www'].includes(subMatch[1])) {
+          author = subMatch[1];
+        }
+      }
+
+      // Fallback Title if empty
+      if (!title) {
+        const titleMatch = html.match(/<h2[^>]*class=["'][^"']*(?:text-headline-1|item-name|title)[^"']*["'][^>]*>([\s\S]*?)<\/h2>/i);
+        if (titleMatch) {
+          title = titleMatch[1].replace(/<[^>]+>/g, '').replace(/\s*-\s*BOOTH$/, '').trim();
+        }
+      }
+
+      // Extract Price (Find lowest price if multiple variations exist)
+      let price = '';
+      const priceMatches = html.match(/<(?:div|span|p)[^>]*class=["'][^"']*(?:price|item-price|variation-price)[^"']*["'][^>]*>([\s\S]*?)<\/(?:div|span|p)>/gi);
+      
+      if (priceMatches && priceMatches.length > 0) {
+        let minPrice = Infinity;
+        for (const p of priceMatches) {
+          const text = p.replace(/<[^>]+>/g, '').trim();
+          const num = parseInt(text.replace(/[^\d]/g, ''), 10);
+          if (!isNaN(num) && num < minPrice) {
+            minPrice = num;
+          }
+        }
+        if (minPrice !== Infinity) {
+          price = `¥ ${minPrice}`;
+        }
+      } 
+      
+      if (!price) {
+        // Fallback to meta tag
+        const metaMatch = html.match(/<meta\s+property=["']product:price:amount["']\s+content=["']([^"']+)["']/i);
+        if (metaMatch) {
+          const num = parseInt(metaMatch[1].replace(/[^\d]/g, ''), 10);
+          if (!isNaN(num)) price = `¥ ${num}`;
+        }
+      }
+
+      // Extract Description
+      let description = '';
+      const descMatch = html.match(/class=["'][^"']*(?:autolink|component-description|item-description|js-autolink)[^"']*["'][^>]*>([\s\S]*?)<\/div>/i)
+        || html.match(/<meta\s+property=["']og:description["']\s+content=["']([^"']+)["']/i)
+        || html.match(/<meta\s+name=["']description["']\s+content=["']([^"']+)["']/i);
+
+      if (descMatch) {
+        let rawDesc = descMatch[1];
+        rawDesc = rawDesc
+          .replace(/<script[\s\S]*?<\/script>/gi, '')
+          .replace(/<style[\s\S]*?<\/style>/gi, '')
+          .replace(/<br\s*\/?>/gi, '\n')
+          .replace(/<\/p>/gi, '\n\n')
+          .replace(/<\/div>/gi, '\n')
+          .replace(/<\/li>/gi, '\n')
+          .replace(/<li[^>]*>/gi, '• ')
+          .replace(/<a\s+[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi, (match, href, text) => {
+            const cleanText = text.replace(/<[^>]+>/g, '').trim() || href;
+            return `[${cleanText}](${href})`;
+          })
+          .replace(/<(?:b|strong)>([\s\S]*?)<\/(?:b|strong)>/gi, '**$1**')
+          .replace(/<(?:i|em)>([\s\S]*?)<\/(?:i|em)>/gi, '*$1*')
+          .replace(/<h[1-6][^>]*>([\s\S]*?)<\/h[1-6]>/gi, '\n### $1\n')
+          .replace(/<[^>]+>/g, '')
+          .replace(/&amp;/g, '&')
+          .replace(/&lt;/g, '<')
+          .replace(/&gt;/g, '>')
+          .replace(/&quot;/g, '"')
+          .replace(/&#39;/g, "'")
+          .replace(/\n{3,}/g, '\n\n')
+          .trim();
+        description = rawDesc;
+      }
+
+      // Extract Images
+      const images: string[] = [];
+      const imgRegex = /https:\/\/booth\.pximg\.net\/[a-zA-Z0-9_\-\.\/]+/g;
+      let imgMatch;
+      while ((imgMatch = imgRegex.exec(html)) !== null) {
+        if (!images.includes(imgMatch[0])) {
+          images.push(imgMatch[0]);
+        }
+        if (images.length >= 6) break;
+      }
+
+      res.json({
+        success: true,
+        author: author || 'BOOTHショップ',
+        title,
+        price,
+        description,
+        images
+      });
+    } catch (err: any) {
+      console.error('Error in /api/ymm4/booth-detail:', err);
+      res.status(500).json({ success: false, error: err.message });
+    }
+  });
+
   // API Route: GitHub Release details
   app.get('/api/ymm4/github-detail/:user/:repo', async (req, res) => {
     const { user, repo } = req.params;
@@ -219,40 +691,49 @@ async function startServer() {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 8000);
 
-      let response = await fetch(url, { signal: controller.signal });
+      const response = await fetch(url, { signal: controller.signal }).catch(() => null);
       clearTimeout(timeout);
 
-      if (response.ok) {
-        const data = await response.json();
-        return res.json({ success: true, data });
+      if (response && response.ok) {
+        const data = await response.json().catch(() => null);
+        if (data) return res.json({ success: true, data });
       }
 
-      // If manjubox API fails or returns 404, fallback to direct GitHub API
-      console.warn(`Manjubox detail failed (${response.status}) for ${user}/${repo}, falling back to GitHub API...`);
+      // Seamless fallback to direct GitHub API if manjubox doesn't have it listed
       const ghApiUrl = `https://api.github.com/repos/${user}/${repo}/releases`;
       const ghRes = await fetch(ghApiUrl, {
         headers: { 'User-Agent': 'YMM4-Plugin-Portal' }
-      });
+      }).catch(() => null);
 
-      if (ghRes.ok) {
-        const releases = await ghRes.json();
+      if (ghRes && ghRes.ok) {
+        const releases = await ghRes.json().catch(() => null);
         return res.json({
           success: true,
           data: {
             user,
             repo,
-            releases: Array.isArray(releases) ? releases : [releases]
+            releases: Array.isArray(releases) ? releases : (releases ? [releases] : [])
           }
         });
       }
 
-      res.status(404).json({
-        success: false,
-        error: `Releases not found for ${user}/${repo}`
+      return res.json({
+        success: true,
+        data: {
+          user,
+          repo,
+          releases: []
+        }
       });
     } catch (err: any) {
-      console.error(`Error fetching detail for ${user}/${repo}:`, err);
-      res.status(500).json({ success: false, error: err.message });
+      res.json({
+        success: true,
+        data: {
+          user,
+          repo,
+          releases: []
+        }
+      });
     }
   });
 

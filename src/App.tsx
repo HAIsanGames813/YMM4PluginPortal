@@ -11,6 +11,8 @@ import { PaginationControls } from './components/PaginationControls';
 import { YMM4Plugin, ThemeMode, FilterState, PageSize } from './types';
 import { getStoredTheme, applyTheme } from './utils/theme';
 import { parseGithubRepo } from './utils/github';
+import { fetchExternalPlugins } from './utils/externalSearch';
+import { getSiteNameFromUrl } from './utils/site';
 import { RefreshCw, AlertCircle, Package, Info, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, SlidersHorizontal } from 'lucide-react';
 
 async function fetchDirectYmm4Plugins(): Promise<YMM4Plugin[]> {
@@ -198,28 +200,89 @@ export default function App() {
   // Side Drawer State
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
 
-  // Helper function to split composite category string (e.g. "映像エフェクト、図形" -> ["映像エフェクト", "図形"])
+  // Helper function to split composite category string
   const getPluginCategories = (typeStr?: string): string[] => {
     if (!typeStr || !typeStr.trim()) return ['その他'];
     const parts = typeStr
       .split(/[、、,／/\s]+/)
       .map((s) => s.trim())
       .filter(Boolean);
-    return parts.length > 0 ? parts : ['その他'];
+    const cleaned: string[] = [];
+    for (const p of parts) {
+      if (
+        p === 'BOOTHアイテム' ||
+        p === 'BOOTH自動検知' ||
+        p === 'Booth自動検知' ||
+        p === 'BOOTH自動取得' ||
+        p === 'Booth自動取得' ||
+        p === 'GitHub自動検知' ||
+        p === 'Github自動検知' ||
+        p === 'GitHub自動取得' ||
+        p === 'Github自動取得'
+      ) {
+        continue;
+      }
+      cleaned.push(p);
+    }
+    return cleaned.length > 0 ? Array.from(new Set(cleaned)) : ['その他'];
   };
 
   // Filter & Search State
   const [filterState, setFilterState] = useState<FilterState>({
     searchQuery: '',
     selectedTypes: [],
+    selectedHosts: [],
     hostFilter: 'all',
     statusFilter: 'all',
     sortBy: 'publishedAt',
     sortOrder: 'desc',
     pageSize: 20,
     currentPage: 1,
-    batchDownloadMode: 'zip'
+    batchDownloadMode: 'zip',
+    githubExternalMode: 'show',
+    boothExternalMode: 'show'
   });
+
+  // YMM4 Latest Version State from RSS
+  const [ymm4Version, setYmm4Version] = useState<string>('取得中...');
+
+  useEffect(() => {
+    const fetchYmm4Version = async () => {
+      try {
+        const res = await fetch('/api/ymm4/latest-version');
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.success && data.version) {
+            setYmm4Version(data.version);
+            return;
+          }
+        }
+      } catch (e) {
+        console.warn('Failed to fetch YMM4 version via API, trying fallback proxy...');
+      }
+
+      try {
+        const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent('https://manjubox.net/rss.xml')}`;
+        const res = await fetch(proxyUrl);
+        if (res.ok) {
+          const xmlText = await res.text();
+          const vMatch = xmlText.match(/v?4\.\d+(?:\.\d+)?(?:\.\d+)?/i);
+          if (vMatch) {
+            let ver = vMatch[0];
+            if (!ver.toLowerCase().startsWith('v')) ver = 'v' + ver;
+            setYmm4Version(ver);
+            return;
+          }
+        }
+      } catch (e) {
+        console.warn('Fallback RSS fetch failed:', e);
+      }
+
+      setYmm4Version('不明');
+    };
+
+    fetchYmm4Version();
+  }, []);
 
   // Selected Plugins for Batch Download
   const [selectedPluginIds, setSelectedPluginIds] = useState<Set<string>>(new Set());
@@ -244,6 +307,7 @@ export default function App() {
     setIsLoading(true);
     setError(null);
     try {
+      let basePlugins: YMM4Plugin[] = [];
       let data: any = null;
 
       // 1. Try local Express API route (in development / server container)
@@ -258,34 +322,52 @@ export default function App() {
       }
 
       if (data && data.success && Array.isArray(data.plugins) && data.plugins.length > 0) {
-        setPlugins(data.plugins);
+        basePlugins = data.plugins;
+        setPlugins(basePlugins);
         setLastUpdated(data.timestamp || new Date().toISOString());
-        return;
-      }
+      } else {
+        // 2. Try static generated plugins-data.json (for GitHub Pages / static hosting)
+        try {
+          const staticRes = await fetch('./plugins-data.json');
+          const contentType = staticRes.headers.get('content-type');
+          if (staticRes.ok && contentType && contentType.includes('application/json')) {
+            const staticData = await staticRes.json();
+            if (staticData && Array.isArray(staticData.plugins) && staticData.plugins.length > 0) {
+              basePlugins = staticData.plugins;
+              setPlugins(basePlugins);
+              setLastUpdated(staticData.timestamp || new Date().toISOString());
+            }
+          }
+        } catch (e) {
+          console.warn('Static plugins-data.json unavailable, trying CORS proxy fallback...');
+        }
 
-      // 2. Try static generated plugins-data.json (for GitHub Pages / static hosting)
-      try {
-        const staticRes = await fetch('./plugins-data.json');
-        const contentType = staticRes.headers.get('content-type');
-        if (staticRes.ok && contentType && contentType.includes('application/json')) {
-          const staticData = await staticRes.json();
-          if (staticData && Array.isArray(staticData.plugins) && staticData.plugins.length > 0) {
-            setPlugins(staticData.plugins);
-            setLastUpdated(staticData.timestamp || new Date().toISOString());
-            return;
+        // 3. CORS Proxy Fallback if static JSON is missing
+        if (basePlugins.length === 0) {
+          const directPlugins = await fetchDirectYmm4Plugins();
+          if (directPlugins && directPlugins.length > 0) {
+            basePlugins = directPlugins;
+            setPlugins(basePlugins);
+            setLastUpdated(new Date().toISOString());
+          } else {
+            setError('プラグインデータの取得に失敗しました。');
           }
         }
-      } catch (e) {
-        console.warn('Static plugins-data.json unavailable, trying CORS proxy fallback...');
       }
 
-      // 3. CORS Proxy Fallback if static JSON is missing
-      const directPlugins = await fetchDirectYmm4Plugins();
-      if (directPlugins && directPlugins.length > 0) {
-        setPlugins(directPlugins);
-        setLastUpdated(new Date().toISOString());
-      } else {
-        setError('プラグインデータの取得に失敗しました。');
+      // 4. Background fetch for unlisted external plugins (GitHub Search & BOOTH)
+      if (basePlugins.length > 0) {
+        fetchExternalPlugins(basePlugins).then((extPlugins) => {
+          if (extPlugins.length > 0) {
+            setPlugins((prev) => {
+              const existingIds = new Set(prev.map((p) => p.id));
+              const newExt = extPlugins.filter((p) => !existingIds.has(p.id));
+              return [...prev, ...newExt];
+            });
+          }
+        }).catch((err) => {
+          console.warn('Failed to fetch external plugins:', err);
+        });
       }
     } catch (err: any) {
       console.error('Error in loadPlugins:', err);
@@ -313,15 +395,70 @@ export default function App() {
     return list;
   }, [plugins]);
 
-  // Sync initial selectedTypes with availableTypes once plugins load
+  const availableHosts = useMemo(() => {
+    const hostMap = new Map<string, number>();
+    for (const p of plugins) {
+      const siteName = getSiteNameFromUrl(p.url || (p.links && p.links[0]?.url) || '');
+      hostMap.set(siteName, (hostMap.get(siteName) || 0) + 1);
+    }
+    const list = Array.from(hostMap.entries()).map(([name, count]) => ({ name, count }));
+    list.sort((a, b) => b.count - a.count);
+    return list;
+  }, [plugins]);
+
+  // Compute counts for external auto-fetched plugins
+  const githubExternalCount = useMemo(() => {
+    return plugins.filter(
+      (p) => p.isExternalSource && (p.isGithub || p.sourceName === 'GitHub')
+    ).length;
+  }, [plugins]);
+
+  const boothExternalCount = useMemo(() => {
+    return plugins.filter(
+      (p) =>
+        p.isExternalSource &&
+        (!p.isGithub || p.sourceName === 'BOOTH' || p.sourceName === 'Booth')
+    ).length;
+  }, [plugins]);
+
+  // Sync selectedTypes with availableTypes by default when categories change
   useEffect(() => {
-    if (availableTypes.length > 0 && filterState.selectedTypes.length === 0) {
-      setFilterState((prev) => ({
-        ...prev,
-        selectedTypes: availableTypes.map((t) => t.name)
-      }));
+    if (availableTypes.length > 0) {
+      setFilterState((prev) => {
+        // If uninitialized OR if all previously available types were selected, keep all selected by default
+        if (
+          prev.selectedTypes.length === 0 ||
+          prev.selectedTypes.length >= availableTypes.length - 2
+        ) {
+          return {
+            ...prev,
+            selectedTypes: availableTypes.map((t) => t.name)
+          };
+        }
+        return prev;
+      });
     }
   }, [availableTypes]);
+
+  // Sync selectedHosts with availableHosts by default when hosts change
+  useEffect(() => {
+    if (availableHosts.length > 0) {
+      setFilterState((prev) => {
+        // If uninitialized OR if all previously available hosts were selected, keep all selected by default
+        if (
+          (!prev.selectedHosts) ||
+          prev.selectedHosts.length === 0 ||
+          prev.selectedHosts.length >= availableHosts.length - 2
+        ) {
+          return {
+            ...prev,
+            selectedHosts: availableHosts.map((h) => h.name)
+          };
+        }
+        return prev;
+      });
+    }
+  }, [availableHosts]);
 
   const deferredFilterState = useDeferredValue(filterState);
 
@@ -351,6 +488,12 @@ export default function App() {
           if (!hasMatch) return false;
         }
 
+        // Multi-select host filter
+        if (deferredFilterState.selectedHosts && deferredFilterState.selectedHosts.length < availableHosts.length) {
+          const siteName = getSiteNameFromUrl(p.url || (p.links && p.links[0]?.url) || '');
+          if (!deferredFilterState.selectedHosts.includes(siteName)) return false;
+        }
+
         // Distribution Status Filter (isEnabled: false = 配布終了)
         if (deferredFilterState.statusFilter === 'enabled') {
           if (p.isEnabled === false) return false;
@@ -358,12 +501,24 @@ export default function App() {
           if (p.isEnabled !== false) return false;
         }
 
-        // Host filter
-        if (deferredFilterState.hostFilter === 'github') {
-          if (!p.isGithub) return false;
-        } else if (deferredFilterState.hostFilter === 'external') {
-          if (p.isGithub) return false;
+        // External source 3-state toggle filters (Github自動取得 & Booth自動取得)
+        const isGithubExt = p.isExternalSource && (p.isGithub || p.sourceName === 'GitHub');
+        const isBoothExt = p.isExternalSource && (!p.isGithub || p.sourceName === 'BOOTH' || p.sourceName === 'Booth');
+
+        const ghMode = deferredFilterState.githubExternalMode;
+        const boothMode = deferredFilterState.boothExternalMode;
+
+        // If either filter is set to 'only', restrict results to allowed sources
+        if (ghMode === 'only' || boothMode === 'only') {
+          let allowed = false;
+          if (ghMode === 'only' && isGithubExt) allowed = true;
+          if (boothMode === 'only' && isBoothExt) allowed = true;
+          if (!allowed) return false;
         }
+
+        // Hide logic
+        if (isGithubExt && ghMode === 'hide') return false;
+        if (isBoothExt && boothMode === 'hide') return false;
 
         return true;
       })
@@ -391,7 +546,7 @@ export default function App() {
         const comp = valA.localeCompare(valB, 'ja', { numeric: true });
         return deferredFilterState.sortOrder === 'asc' ? comp : -comp;
       });
-  }, [plugins, deferredFilterState, availableTypes]);
+  }, [plugins, deferredFilterState, availableTypes, availableHosts]);
 
   // Paginated plugins list
   const totalPages =
@@ -451,13 +606,16 @@ export default function App() {
     setFilterState({
       searchQuery: '',
       selectedTypes: availableTypes.map((t) => t.name),
+      selectedHosts: availableHosts.map((h) => h.name),
       hostFilter: 'all',
       statusFilter: 'all',
       sortBy: 'publishedAt',
       sortOrder: 'desc',
       pageSize: 20,
       currentPage: 1,
-      batchDownloadMode: 'zip'
+      batchDownloadMode: 'zip',
+      githubExternalMode: 'show',
+      boothExternalMode: 'show'
     });
   };
 
@@ -465,7 +623,9 @@ export default function App() {
     filterState.searchQuery !== '' ||
     filterState.selectedTypes.length < availableTypes.length ||
     filterState.hostFilter !== 'all' ||
-    filterState.statusFilter !== 'all';
+    filterState.statusFilter !== 'all' ||
+    filterState.githubExternalMode !== 'show' ||
+    filterState.boothExternalMode !== 'show';
 
   return (
     <div className="min-h-screen bg-zinc-100 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 flex flex-col font-mono pb-24">
@@ -494,8 +654,12 @@ export default function App() {
             setFilterState((prev) => ({ ...prev, ...newFields }))
           }
           availableTypes={availableTypes}
+          availableHosts={availableHosts}
           matchedCount={filteredPlugins.length}
           totalCount={plugins.length}
+          githubExternalCount={githubExternalCount}
+          boothExternalCount={boothExternalCount}
+          ymm4Version={ymm4Version}
           onResetFilters={handleResetFilters}
           isAllVisibleSelected={isAllVisibleSelected}
           onSelectAllVisible={handleSelectAllVisible}
