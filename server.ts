@@ -474,23 +474,62 @@ async function startServer() {
     }
   });
 
-  // API Route: Get latest YMM4 version from manjubox RSS
-    // API Route: Get latest YMM4 version from manjubox RSS with multiple proxies/fallbacks
-    // API Route: Get latest YMM4 version from official GitHub Releases (ManjuSummoner/YukkuriMovieMaker4)
-    // API Route: Get latest YMM4 version from official GitHub Tags / Releases (prioritizing tags as requested)
+  // API Route: Get latest YMM4 version from manjubox RSS (primary) with GitHub fallback
   app.get('/api/ymm4/latest-version', async (req, res) => {
     try {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 6000);
 
-      // 1. Try tags first as requested ("https://api.github.com/repos/manju-summoner/YukkuriMovieMaker4/tags")
+      // 1. Try manjubox RSS first (fast, reliable, no rate limit)
+      try {
+        const rssRes = await fetch('https://manjubox.net/rss.xml', {
+          signal: controller.signal,
+          headers: { 'User-Agent': 'YMM4-Plugin-Portal' }
+        });
+        if (rssRes.ok) {
+          const xmlText = await rssRes.text();
+          const match = xmlText.match(/ゆっくりMovieMaker\s+(?:v|ver\.?)?\s*([4-9]\.\d+(?:\.\d+)?(?:\.\d+)?)/i);
+          if (match && match[1]) {
+            let ver = match[1].trim();
+            if (!ver.toLowerCase().startsWith('v')) ver = 'v' + ver;
+            clearTimeout(timeout);
+            return res.json({
+              success: true,
+              version: ver,
+              title: `ゆっくりMovieMaker ${ver}`,
+              html_url: 'https://manjubox.net/ymm4/'
+            });
+          }
+          // Generic version match in RSS
+          const vMatch = xmlText.match(/v?4\.\d+(?:\.\d+)?(?:\.\d+)?/i);
+          if (vMatch) {
+            let ver = vMatch[0];
+            if (!ver.toLowerCase().startsWith('v')) ver = 'v' + ver;
+            clearTimeout(timeout);
+            return res.json({
+              success: true,
+              version: ver,
+              title: ver,
+              html_url: 'https://manjubox.net/ymm4/'
+            });
+          }
+        }
+      } catch (e) {
+        console.warn('manjubox RSS fetch error:', e);
+      }
+      clearTimeout(timeout);
+
+      // 2. Fallback to GitHub tags
+      const controller2 = new AbortController();
+      const timeout2 = setTimeout(() => controller2.abort(), 5000);
       const tagsRes = await fetch('https://api.github.com/repos/manju-summoner/YukkuriMovieMaker4/tags', {
         headers: {
           'User-Agent': 'YMM4-Plugin-Portal',
           'Accept': 'application/vnd.github+json'
         },
-        signal: controller.signal
+        signal: controller2.signal
       }).catch(() => null);
+      clearTimeout(timeout2);
 
       if (tagsRes && tagsRes.ok) {
         const tags = await tagsRes.json();
@@ -508,9 +547,8 @@ async function startServer() {
           }
         }
       }
-      clearTimeout(timeout);
 
-      // 2. Fallback to releases if tags fail
+      // 3. Fallback to releases
       const relRes = await fetch('https://api.github.com/repos/manju-summoner/YukkuriMovieMaker4/releases', {
         headers: {
           'User-Agent': 'YMM4-Plugin-Portal',
@@ -539,7 +577,7 @@ async function startServer() {
 
       res.json({ success: false, version: '不明' });
     } catch (err: any) {
-      console.error('Error fetching GitHub YMM4 tags/releases:', err);
+      console.error('Error fetching YMM4 version:', err);
       res.json({ success: false, version: '不明', error: err.message });
     }
   });

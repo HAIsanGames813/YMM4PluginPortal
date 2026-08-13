@@ -784,7 +784,7 @@ export default function App() {
                   />
                 </div>
               )}
-              <InfoModal isOpen={isInfoModalOpen} onClose={() => setIsInfoModalOpen(false)} siteVersion="v1.1.4" ymm4Version={ymm4Version} />
+              <InfoModal isOpen={isInfoModalOpen} onClose={() => setIsInfoModalOpen(false)} siteVersion="v1.1.5" ymm4Version={ymm4Version} />
     </>
           )}
 
