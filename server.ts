@@ -476,56 +476,61 @@ async function startServer() {
 
   // API Route: Get latest YMM4 version from manjubox RSS
     // API Route: Get latest YMM4 version from manjubox RSS with multiple proxies/fallbacks
+    // API Route: Get latest YMM4 version from official GitHub Releases (ManjuSummoner/YukkuriMovieMaker4)
   app.get('/api/ymm4/latest-version', async (req, res) => {
-    const urlsToTry = [
-      'https://manjubox.net/rss.xml',
-      'https://api.allorigins.win/raw?url=' + encodeURIComponent('https://manjubox.net/rss.xml'),
-      'https://corsproxy.io/?' + encodeURIComponent('https://manjubox.net/rss.xml'),
-      'https://manjubox.net/'
-    ];
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 6000);
+      const response = await fetch('https://api.github.com/repos/manju-summoner/YukkuriMovieMaker4/releases', {
+        headers: {
+          'User-Agent': 'YMM4-Plugin-Portal',
+          'Accept': 'application/vnd.github+json'
+        },
+        signal: controller.signal
+      }).catch(() => null);
+      clearTimeout(timeout);
 
-    for (const targetUrl of urlsToTry) {
-      try {
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 5000);
-        const response = await fetch(targetUrl, {
-          headers: {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-            'Accept': 'application/rss+xml, application/xml, text/xml, text/html, */*'
-          },
-          signal: controller.signal
-        }).catch(() => null);
-        clearTimeout(timeout);
-
-        if (response && response.ok) {
-          const text = await response.text();
-          const itemMatches = text.match(/<item[\s\S]*?<\/item>/gi);
-          if (itemMatches) {
-            for (const itemXml of itemMatches) {
-              const titleMatch = itemXml.match(/<title>([\s\S]*?)<\/title>/i);
-              if (titleMatch) {
-                const title = titleMatch[1].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/gi, '$1').trim();
-                const vMatch = title.match(/v?4\.\d+(?:\.\d+)?(?:\.\d+)?/i);
-                if (vMatch) {
-                  let ver = vMatch[0];
-                  if (!ver.toLowerCase().startsWith('v')) ver = 'v' + ver;
-                  return res.json({ success: true, version: ver, title });
-                }
-              }
-            }
-          }
-          const fullMatch = text.match(/v?4\.\d+\.\d+(?:\.\d+)?/i);
-          if (fullMatch) {
-            let ver = fullMatch[0];
+      if (response && response.ok) {
+        const releases = await response.json();
+        if (Array.isArray(releases) && releases.length > 0) {
+          const latest = releases[0];
+          const tagName = latest.tag_name || latest.name;
+          if (tagName) {
+            let ver = tagName.trim();
             if (!ver.toLowerCase().startsWith('v')) ver = 'v' + ver;
-            return res.json({ success: true, version: ver });
+            return res.json({
+              success: true,
+              version: ver,
+              title: latest.name || tagName,
+              published_at: latest.published_at,
+              html_url: latest.html_url
+            });
           }
         }
-      } catch (e) {}
-    }
+      }
 
-    // Fallback default version if all fetches fail
-    res.json({ success: true, version: 'v4.4.2.0', note: 'fallback' });
+      // Fallback to tags if releases API doesn't return anything
+      const tagsRes = await fetch('https://api.github.com/repos/manju-summoner/YukkuriMovieMaker4/tags', {
+        headers: { 'User-Agent': 'YMM4-Plugin-Portal' }
+      }).catch(() => null);
+
+      if (tagsRes && tagsRes.ok) {
+        const tags = await tagsRes.json();
+        if (Array.isArray(tags) && tags.length > 0) {
+          const tagName = tags[0].name;
+          if (tagName) {
+            let ver = tagName.trim();
+            if (!ver.toLowerCase().startsWith('v')) ver = 'v' + ver;
+            return res.json({ success: true, version: ver, title: tagName });
+          }
+        }
+      }
+
+      res.json({ success: false, version: '不明' });
+    } catch (err: any) {
+      console.error('Error fetching GitHub YMM4 releases:', err);
+      res.json({ success: false, version: '不明', error: err.message });
+    }
   });
 
   app.get('/api/ymm4/booth-detail', async (req, res) => {
