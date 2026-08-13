@@ -5,6 +5,7 @@ import { SideDrawer } from './components/SideDrawer';
 import { PluginCard } from './components/PluginCard';
 import { VersionModal } from './components/VersionModal';
 import { PluginDetailModal } from './components/PluginDetailModal';
+import { InfoModal } from './components/InfoModal';
 import { BatchDownloadBar } from './components/BatchDownloadBar';
 import { BatchDownloadModal } from './components/BatchDownloadModal';
 import { PaginationControls } from './components/PaginationControls';
@@ -291,6 +292,7 @@ export default function App() {
   const [versionModalPlugin, setVersionModalPlugin] = useState<YMM4Plugin | null>(null);
   const [detailModalPlugin, setDetailModalPlugin] = useState<YMM4Plugin | null>(null);
   const [isBatchModalOpen, setIsBatchModalOpen] = useState<boolean>(false);
+  const [isInfoModalOpen, setIsInfoModalOpen] = useState<boolean>(false);
 
   // Apply Theme Mode change
   const handleThemeChange = (mode: ThemeMode) => {
@@ -782,7 +784,8 @@ export default function App() {
                   />
                 </div>
               )}
-            </>
+              <InfoModal isOpen={isInfoModalOpen} onClose={() => setIsInfoModalOpen(false)} siteVersion="v1.1.4" ymm4Version={ymm4Version} />
+    </>
           )}
 
         </main>
@@ -833,7 +836,13 @@ export default function App() {
             <img src="./ymm4pluginportal.png" alt="YMM4プラグインポータルサイト Logo" className="w-5 h-5 object-contain" />
             <span>YMM4プラグインポータルサイト</span>
           </div>
-          <div className="text-[10px] text-zinc-400">Data provided by manjubox.net APIs &amp; GitHub Repositories</div>
+          <button
+            onClick={() => setIsInfoModalOpen(true)}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-zinc-900 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-lg border border-zinc-300 dark:border-zinc-700 transition-colors shadow-sm"
+          >
+            <Info className="w-3.5 h-3.5" />
+            <span>サイト情報・バージョン履歴 (README)</span>
+          </button>
         </div>
       </footer>
 

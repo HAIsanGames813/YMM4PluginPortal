@@ -94,28 +94,34 @@ export const MarkdownContent: React.FC<MarkdownContentProps> = ({
             );
           },
           h1: ({ node, ...props }) => (
-            <h1 {...props} className="text-sm font-extrabold mt-3 mb-1 border-b-2 border-zinc-300 dark:border-zinc-700 pb-1 text-zinc-900 dark:text-zinc-100 uppercase" />
+            <h1 {...props} className="text-base font-extrabold mt-4 mb-2 border-b border-zinc-300 dark:border-zinc-700 pb-1 text-zinc-900 dark:text-zinc-100" />
           ),
           h2: ({ node, ...props }) => (
-            <h2 {...props} className="text-xs font-extrabold mt-3 mb-1 text-zinc-900 dark:text-zinc-100 border-b border-zinc-200 dark:border-zinc-800 pb-0.5" />
+            <h2 {...props} className="text-sm font-extrabold mt-3.5 mb-2 text-zinc-900 dark:text-zinc-100 border-b border-zinc-200 dark:border-zinc-800 pb-0.5" />
           ),
           h3: ({ node, ...props }) => (
-            <h3 {...props} className="text-xs font-bold mt-2 mb-0.5 text-zinc-900 dark:text-zinc-100" />
+            <h3 {...props} className="text-xs font-bold mt-3 mb-1.5 text-zinc-900 dark:text-zinc-100" />
           ),
           h4: ({ node, ...props }) => (
-            <h4 {...props} className="text-[11px] font-bold mt-1.5 mb-0.5 text-zinc-800 dark:text-zinc-200" />
+            <h4 {...props} className="text-xs font-bold mt-2.5 mb-1 text-zinc-800 dark:text-zinc-200" />
+          ),
+          h5: ({ node, ...props }) => (
+            <h5 {...props} className="text-[11px] font-bold mt-2 mb-0.5 text-zinc-800 dark:text-zinc-200" />
+          ),
+          h6: ({ node, ...props }) => (
+            <h6 {...props} className="text-[11px] font-semibold mt-1.5 mb-0.5 text-zinc-700 dark:text-zinc-300" />
           ),
           p: ({ node, ...props }) => (
-            <p {...props} className="mb-2 last:mb-0 text-zinc-800 dark:text-zinc-200 leading-relaxed break-words" />
+            <p {...props} className="mb-2 last:mb-0 text-zinc-800 dark:text-zinc-200 leading-relaxed break-words text-xs" />
           ),
           ul: ({ node, ...props }) => (
-            <ul {...props} className="list-disc list-inside my-1.5 space-y-1 pl-1 text-zinc-800 dark:text-zinc-200" />
+            <ul {...props} className="list-disc list-inside my-2 space-y-1 pl-2 text-zinc-800 dark:text-zinc-200 text-xs" />
           ),
           ol: ({ node, ...props }) => (
-            <ol {...props} className="list-decimal list-inside my-1.5 space-y-1 pl-1 text-zinc-800 dark:text-zinc-200" />
+            <ol {...props} className="list-decimal list-inside my-2 space-y-1 pl-2 text-zinc-800 dark:text-zinc-200 text-xs" />
           ),
           li: ({ node, ...props }) => (
-            <li {...props} className="leading-relaxed inline-block w-full sm:inline text-zinc-800 dark:text-zinc-200" />
+            <li {...props} className="leading-relaxed text-zinc-800 dark:text-zinc-200 text-xs my-0.5" />
           ),
           hr: ({ node, ...props }) => (
             <hr {...props} className="my-3 border-t-2 border-zinc-300 dark:border-zinc-700" />
