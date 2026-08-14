@@ -1,9 +1,35 @@
 {
   "success": true,
-  "timestamp": "2026-08-13T01:56:56.488Z",
+  "timestamp": "2026-08-14T16:35:55.509Z",
+  "ymm4Version": "v4.55.1.1",
   "plugins": [
     {
-      "id": "plugin-0-1786586178945",
+      "id": "plugin-0-1786725272390",
+      "name": "部分分割テロップアニメーション",
+      "author": "ぐぐっす(ぐすお)",
+      "type": "テキスト補完",
+      "description": "文字ごとに分割を使わずに、文字を個別で「登場」「待機」「退場」で個別アニメーションをさせることができる映像エフェクトです。",
+      "url": "https://guggusu.booth.pm/items/8715683",
+      "links": [
+        {
+          "name": "Link",
+          "url": "https://x.com/gusutabu/status/2088197457176100922"
+        }
+      ],
+      "isGithub": false,
+      "githubUser": null,
+      "githubRepo": null,
+      "version": "",
+      "updatedAt": "",
+      "publishedAt": "2026-08-14",
+      "isEnabled": true,
+      "license": "",
+      "tags": [],
+      "extraGhData": null,
+      "price": "¥ 0"
+    },
+    {
+      "id": "plugin-1-1786725272390",
       "name": "領域内拡大縮小",
       "author": "ハイさんgames",
       "type": "映像エフェクト",
@@ -35,14 +61,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-08-11T11:20:26Z",
         "published_at": "2026-08-11T11:23:58Z",
-        "crawled_at": "2026-08-13 01:45:43",
+        "crawled_at": "2026-08-14 16:31:32",
         "file_name": "CropZoomEffect.v1.0.0.ymme",
         "browser_download_url": "https://github.com/HAIsanGames813/CropZoomEffect/releases/download/v1.0.0/CropZoomEffect.v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-1-1786586178946",
+      "id": "plugin-2-1786725272390",
       "name": "リップル編集",
       "author": "nekodon",
       "type": "ツール",
@@ -67,7 +93,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-2-1786586178946",
+      "id": "plugin-3-1786725272390",
       "name": "縁取り（引き延ばし）",
       "author": "イヤホンᖰ ᖳ",
       "type": "映像エフェクト",
@@ -95,14 +121,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-08-08T16:55:02Z",
         "published_at": "2026-08-08T17:21:09Z",
-        "crawled_at": "2026-08-13 01:46:22",
+        "crawled_at": "2026-08-14 16:31:49",
         "file_name": "ColoredCollar_v1.0.0.ymme",
         "browser_download_url": "https://github.com/panko200/ColoredCollar/releases/download/v1.0.0/ColoredCollar_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-3-1786586178946",
+      "id": "plugin-4-1786725272390",
       "name": "図形フレーム装飾（図形枠）",
       "author": "ひでチャンネル@VTuber",
       "type": "映像エフェクト",
@@ -127,7 +153,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-4-1786586178946",
+      "id": "plugin-5-1786725272390",
       "name": "連続回転プラグイン",
       "author": "ひでチャンネル@VTuber",
       "type": "映像エフェクト",
@@ -152,7 +178,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-5-1786586178946",
+      "id": "plugin-6-1786725272390",
       "name": "チャット風吹き出しプラグイン",
       "author": "ひでチャンネル@VTuber",
       "type": "図形",
@@ -177,7 +203,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-6-1786586178946",
+      "id": "plugin-7-1786725272390",
       "name": "書き庭の台本をYMM4へ一括配置するプラグイン",
       "author": "黒猫ゲーム部",
       "type": "ツール",
@@ -206,7 +232,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-7-1786586178946",
+      "id": "plugin-8-1786725272390",
       "name": "ColorPicker+",
       "author": "左コントローラー",
       "type": "その他",
@@ -234,14 +260,14 @@
         "tag_name": "1.1.0",
         "created_at": "2026-08-12T04:57:41Z",
         "published_at": "2026-08-07T00:21:02Z",
-        "crawled_at": "2026-08-13 01:46:46",
+        "crawled_at": "2026-08-14 16:31:48",
         "file_name": "ColorPicker_plus_1.1.0.ymme",
         "browser_download_url": "https://github.com/leftcontroller0518/colorpicker_plus/releases/download/1.1.0/ColorPicker_plus_1.1.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-8-1786586178946",
+      "id": "plugin-9-1786725272390",
       "name": "テロップ特化グラデーションエフェクト",
       "author": "ぐぐっす(ぐすお)",
       "type": "映像エフェクト",
@@ -266,7 +292,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-9-1786586178946",
+      "id": "plugin-10-1786725272390",
       "name": "立体化（K）",
       "author": "かへんしき。",
       "type": "映像エフェクト",
@@ -291,7 +317,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-10-1786586178946",
+      "id": "plugin-11-1786725272390",
       "name": "YMM4タイムラプスプラグイン",
       "author": "さぁぶないとぉ",
       "type": "ツール",
@@ -319,14 +345,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-07-26T13:50:17Z",
         "published_at": "2026-07-27T01:12:29Z",
-        "crawled_at": "2026-08-13 01:46:46",
+        "crawled_at": "2026-08-14 16:31:48",
         "file_name": "YMM4TimelapsePlugin.ymme",
         "browser_download_url": "https://github.com/naitonaito35/YMM4TimelapsePlugin/releases/download/v1.0.0/YMM4TimelapsePlugin.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-11-1786586178946",
+      "id": "plugin-12-1786725272390",
       "name": "光輸送結像",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -354,14 +380,14 @@
         "tag_name": "v1.0.1",
         "created_at": "2026-07-25T14:31:26Z",
         "published_at": "2026-07-25T14:46:47Z",
-        "crawled_at": "2026-08-13 01:46:34",
+        "crawled_at": "2026-08-14 16:31:35",
         "file_name": "CausticTransport_v1.0.1.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-CausticTransport/releases/download/v1.0.1/CausticTransport_v1.0.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-12-1786586178946",
+      "id": "plugin-13-1786725272390",
       "name": "タドコロキャッシュ修正パッチ",
       "author": "イヤホンᖰ ᖳ",
       "type": "その他",
@@ -389,14 +415,14 @@
         "tag_name": "v1.1.0",
         "created_at": "2026-07-23T11:19:54Z",
         "published_at": "2026-07-23T11:21:37Z",
-        "crawled_at": "2026-08-13 01:46:34",
+        "crawled_at": "2026-08-14 16:31:36",
         "file_name": "RamPreviewPluginFixPatch_v1.1.0.ymme",
         "browser_download_url": "https://github.com/panko200/RamPreviewPluginFixPatch/releases/download/v1.1.0/RamPreviewPluginFixPatch_v1.1.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-13-1786586178946",
+      "id": "plugin-14-1786725272390",
       "name": "中間点個別イージング",
       "author": "イヤホンᖰ ᖳ",
       "type": "ツール",
@@ -424,14 +450,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-07-21T15:45:20Z",
         "published_at": "2026-07-21T15:46:44Z",
-        "crawled_at": "2026-08-13 01:46:34",
+        "crawled_at": "2026-08-14 16:31:36",
         "file_name": "PerSegmentEasing_v1.0.0.ymme",
         "browser_download_url": "https://github.com/panko200/PerSegmentEasing/releases/download/v1.0.0/PerSegmentEasing_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-14-1786586178946",
+      "id": "plugin-15-1786725272390",
       "name": "局所トーン",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -459,14 +485,14 @@
         "tag_name": "v1.0.1",
         "created_at": "2026-07-19T00:06:31Z",
         "published_at": "2026-07-19T00:15:21Z",
-        "crawled_at": "2026-08-13 01:46:35",
+        "crawled_at": "2026-08-14 16:31:36",
         "file_name": "MultiscaleRetinex_v1.0.1.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-MultiscaleRetinex/releases/download/v1.0.1/MultiscaleRetinex_v1.0.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-15-1786586178946",
+      "id": "plugin-16-1786725272390",
       "name": "ローカルラプラシアン",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -494,14 +520,14 @@
         "tag_name": "v1.0.1",
         "created_at": "2026-07-18T05:09:03Z",
         "published_at": "2026-07-18T05:15:50Z",
-        "crawled_at": "2026-08-13 01:46:35",
+        "crawled_at": "2026-08-14 16:31:37",
         "file_name": "LaplacianRemapping_v1.0.1.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-LaplacianRemapping/releases/download/v1.0.1/LaplacianRemapping_v1.0.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-16-1786586178946",
+      "id": "plugin-17-1786725272390",
       "name": "浮世絵",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -529,14 +555,14 @@
         "tag_name": "v1.1.1",
         "created_at": "2026-08-11T10:03:00Z",
         "published_at": "2026-08-11T10:05:47Z",
-        "crawled_at": "2026-08-13 01:46:36",
+        "crawled_at": "2026-08-14 16:31:37",
         "file_name": "Ukiyoe_v1.1.1.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-Ukiyoe/releases/download/v1.1.1/Ukiyoe_v1.1.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-17-1786586178946",
+      "id": "plugin-18-1786725272390",
       "name": "装飾モザイク",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -564,14 +590,14 @@
         "tag_name": "v1.0.1",
         "created_at": "2026-07-18T13:25:00Z",
         "published_at": "2026-07-18T13:28:27Z",
-        "crawled_at": "2026-08-13 01:46:36",
+        "crawled_at": "2026-08-14 16:31:38",
         "file_name": "DecorativeMosaic_v1.0.1.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-DecorativeMosaic/releases/download/v1.0.1/DecorativeMosaic_v1.0.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-18-1786586178946",
+      "id": "plugin-19-1786725272390",
       "name": "ローポリ化",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -599,14 +625,14 @@
         "tag_name": "v1.0.1",
         "created_at": "2026-07-19T00:30:04Z",
         "published_at": "2026-07-19T00:34:32Z",
-        "crawled_at": "2026-08-13 01:46:36",
+        "crawled_at": "2026-08-14 16:31:38",
         "file_name": "LowPolyAbstraction_v1.0.1.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-LowPolyAbstraction/releases/download/v1.0.1/LowPolyAbstraction_v1.0.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-19-1786586178946",
+      "id": "plugin-20-1786725272390",
       "name": "墨拡散",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -634,14 +660,14 @@
         "tag_name": "v1.0.1",
         "created_at": "2026-07-18T13:44:20Z",
         "published_at": "2026-07-18T13:48:17Z",
-        "crawled_at": "2026-08-13 01:46:37",
+        "crawled_at": "2026-08-14 16:31:39",
         "file_name": "InkDispersion_v1.0.1.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-InkDispersion/releases/download/v1.0.1/InkDispersion_v1.0.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-20-1786586178946",
+      "id": "plugin-21-1786725272390",
       "name": "氷晶成長",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -669,14 +695,14 @@
         "tag_name": "v1.0.1",
         "created_at": "2026-07-18T02:35:06Z",
         "published_at": "2026-07-18T02:39:30Z",
-        "crawled_at": "2026-08-13 01:46:37",
+        "crawled_at": "2026-08-14 16:31:39",
         "file_name": "CrystallineGrowth_v1.0.1.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-CrystallineGrowth/releases/download/v1.0.1/CrystallineGrowth_v1.0.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-21-1786586178946",
+      "id": "plugin-22-1786725272390",
       "name": "TemplateTube",
       "author": "かへんしき。",
       "type": "ツール",
@@ -701,7 +727,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-22-1786586178946",
+      "id": "plugin-23-1786725272390",
       "name": "YMM4 Live Chat Plugin｜配信風コメントをかんたん作成！",
       "author": "夕輝ひかり",
       "type": "図形",
@@ -721,7 +747,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-23-1786586178946",
+      "id": "plugin-24-1786725272390",
       "name": "誘電破壊",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -749,14 +775,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-07-17T10:15:19Z",
         "published_at": "2026-07-17T10:19:55Z",
-        "crawled_at": "2026-08-13 01:46:38",
+        "crawled_at": "2026-08-14 16:31:40",
         "file_name": "DielectricBreakdown_v1.0.0.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-DielectricBreakdown/releases/download/v1.0.0/DielectricBreakdown_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-24-1786586178946",
+      "id": "plugin-25-1786725272390",
       "name": "字幕一括分割プラグイン",
       "author": "ナオ",
       "type": "ツール",
@@ -781,7 +807,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-25-1786586178946",
+      "id": "plugin-26-1786725272390",
       "name": "トポロジー誘導材質合成",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -809,14 +835,14 @@
         "tag_name": "v1.0.1",
         "created_at": "2026-07-16T06:11:11Z",
         "published_at": "2026-07-16T06:17:10Z",
-        "crawled_at": "2026-08-13 01:46:38",
+        "crawled_at": "2026-08-14 16:31:40",
         "file_name": "TopologicalMaterialField_v1.0.1.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-TopologicalMaterialField/releases/download/v1.0.1/TopologicalMaterialField_v1.0.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-26-1786586178946",
+      "id": "plugin-27-1786725272390",
       "name": "追加セリフ入力欄プラグイン",
       "author": "はじめよう",
       "type": "ツール",
@@ -844,14 +870,14 @@
         "tag_name": "v0.1.0",
         "created_at": "2026-07-15T15:37:44Z",
         "published_at": "2026-07-15T15:43:42Z",
-        "crawled_at": "2026-08-13 01:46:38",
+        "crawled_at": "2026-08-14 16:31:40",
         "file_name": "YMMLineBarPlugin.ymme",
         "browser_download_url": "https://github.com/hazimeyou/YMMLineBarPlugin/releases/download/v0.1.0/YMMLineBarPlugin.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-27-1786586178946",
+      "id": "plugin-28-1786725272390",
       "name": "暗所視",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -879,14 +905,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-07-14T07:58:58Z",
         "published_at": "2026-07-14T08:01:11Z",
-        "crawled_at": "2026-08-13 01:46:39",
+        "crawled_at": "2026-08-14 16:31:41",
         "file_name": "ScotopicVision_v1.0.0.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-ScotopicVision/releases/download/v1.0.0/ScotopicVision_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-28-1786586178946",
+      "id": "plugin-29-1786725272390",
       "name": "万華鏡",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -914,14 +940,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-07-13T22:43:42Z",
         "published_at": "2026-07-13T22:46:29Z",
-        "crawled_at": "2026-08-13 01:46:39",
+        "crawled_at": "2026-08-14 16:31:41",
         "file_name": "Kaleidoscope_v1.0.0.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-Kaleidoscope/releases/download/v1.0.0/Kaleidoscope_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-29-1786586178946",
+      "id": "plugin-30-1786725272390",
       "name": "AniRigSDKプラグイン",
       "author": "マシマシY㌠",
       "type": "立ち絵",
@@ -946,7 +972,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-30-1786586178946",
+      "id": "plugin-31-1786725272390",
       "name": "移動値反転",
       "author": "イヤホンᖰ ᖳ",
       "type": "その他",
@@ -974,14 +1000,14 @@
         "tag_name": "v1.0.1",
         "created_at": "2026-08-05T13:48:51Z",
         "published_at": "2026-08-05T13:50:40Z",
-        "crawled_at": "2026-08-13 01:46:39",
+        "crawled_at": "2026-08-14 16:31:42",
         "file_name": "ReverseMovementValues_v1.0.1.ymme",
         "browser_download_url": "https://github.com/panko200/ReverseMovementValues/releases/download/v1.0.1/ReverseMovementValues_v1.0.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-31-1786586178946",
+      "id": "plugin-32-1786725272390",
       "name": "シード付きランダム移動",
       "author": "イヤホンᖰ ᖳ",
       "type": "その他",
@@ -1009,14 +1035,14 @@
         "tag_name": "v1.0.2",
         "created_at": "2026-08-05T14:17:46Z",
         "published_at": "2026-08-05T14:21:27Z",
-        "crawled_at": "2026-08-13 01:46:40",
+        "crawled_at": "2026-08-14 16:31:42",
         "file_name": "SeededRandomMovement_v1.0.2.ymme",
         "browser_download_url": "https://github.com/panko200/SeededRandomMovement/releases/download/v1.0.2/SeededRandomMovement_v1.0.2.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-32-1786586178946",
+      "id": "plugin-33-1786725272390",
       "name": "3Dモデル",
       "author": "routersys",
       "type": "図形",
@@ -1039,14 +1065,14 @@
         "tag_name": "v1.0.1",
         "created_at": "2026-07-13T13:07:56Z",
         "published_at": "2026-07-13T13:09:53Z",
-        "crawled_at": "2026-08-13 01:46:40",
+        "crawled_at": "2026-08-14 16:31:42",
         "file_name": "Model3D_v1.0.1.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-Model3D/releases/download/v1.0.1/Model3D_v1.0.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-33-1786586178946",
+      "id": "plugin-34-1786725272390",
       "name": "環境遮蔽",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -1074,14 +1100,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-07-13T11:27:50Z",
         "published_at": "2026-07-13T11:31:27Z",
-        "crawled_at": "2026-08-13 01:46:41",
+        "crawled_at": "2026-08-14 16:31:43",
         "file_name": "AmbientOcclusion_v1.0.0.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-AmbientOcclusion/releases/download/v1.0.0/AmbientOcclusion_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-34-1786586178946",
+      "id": "plugin-35-1786725272390",
       "name": "輻射光",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -1109,14 +1135,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-07-13T11:52:46Z",
         "published_at": "2026-07-13T11:55:30Z",
-        "crawled_at": "2026-08-13 01:46:41",
+        "crawled_at": "2026-08-14 16:31:43",
         "file_name": "Radiance_v1.0.0.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-Radiance/releases/download/v1.0.0/Radiance_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-35-1786586178946",
+      "id": "plugin-36-1786725272390",
       "name": "VST3エフェクト",
       "author": "routersys",
       "type": "音声エフェクト",
@@ -1144,14 +1170,14 @@
         "tag_name": "v1.1.0",
         "created_at": "2026-07-17T14:09:41Z",
         "published_at": "2026-07-17T14:11:59Z",
-        "crawled_at": "2026-08-13 01:46:41",
+        "crawled_at": "2026-08-14 16:31:44",
         "file_name": "Vst3_v1.1.0.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-Vst3/releases/download/v1.1.0/Vst3_v1.1.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-36-1786586178946",
+      "id": "plugin-37-1786725272390",
       "name": "ディザリング",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -1179,14 +1205,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-07-12T23:21:39Z",
         "published_at": "2026-07-12T23:24:35Z",
-        "crawled_at": "2026-08-13 01:46:42",
+        "crawled_at": "2026-08-14 16:31:44",
         "file_name": "Dithering_v1.0.0.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-Dithering/releases/download/v1.0.0/Dithering_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-37-1786586178946",
+      "id": "plugin-38-1786725272390",
       "name": "集光模様",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -1214,14 +1240,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-07-12T01:22:57Z",
         "published_at": "2026-07-12T01:25:55Z",
-        "crawled_at": "2026-08-13 01:46:42",
+        "crawled_at": "2026-08-14 16:31:44",
         "file_name": "Caustics_v1.0.0.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-Caustics/releases/download/v1.0.0/Caustics_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-38-1786586178946",
+      "id": "plugin-39-1786725272390",
       "name": "光条",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -1249,14 +1275,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-07-12T00:49:51Z",
         "published_at": "2026-07-12T00:55:04Z",
-        "crawled_at": "2026-08-13 01:46:43",
+        "crawled_at": "2026-08-14 16:31:45",
         "file_name": "CrossFilter_v1.0.0.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-CrossFilter/releases/download/v1.0.0/CrossFilter_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-39-1786586178946",
+      "id": "plugin-40-1786725272390",
       "name": "霧",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -1284,14 +1310,14 @@
         "tag_name": "v1.0.1",
         "created_at": "2026-07-17T23:02:36Z",
         "published_at": "2026-07-17T23:04:57Z",
-        "crawled_at": "2026-08-13 01:46:43",
+        "crawled_at": "2026-08-14 16:31:45",
         "file_name": "Fog_v1.0.1.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-Fog/releases/download/v1.0.1/Fog_v1.0.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-40-1786586178946",
+      "id": "plugin-41-1786725272390",
       "name": "移動可能プレビュー",
       "author": "ハイさんgames",
       "type": "ツール",
@@ -1323,14 +1349,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-07-11T12:25:48Z",
         "published_at": "2026-07-11T12:36:09Z",
-        "crawled_at": "2026-08-13 01:46:43",
+        "crawled_at": "2026-08-14 16:31:46",
         "file_name": "MovingPreviewPlugin.v1.0.0.ymme",
         "browser_download_url": "https://github.com/HAIsanGames813/MovingPreviewPlugin/releases/download/v1.0.0/MovingPreviewPlugin.v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-41-1786586178946",
+      "id": "plugin-42-1786725272390",
       "name": "YMMタイムライン折り畳みプラグイン",
       "author": "ずんどうch",
       "type": "その他",
@@ -1355,7 +1381,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-42-1786586178946",
+      "id": "plugin-43-1786725272390",
       "name": "YMMSpine",
       "author": "ずんどうch",
       "type": "立ち絵",
@@ -1380,7 +1406,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-43-1786586178946",
+      "id": "plugin-44-1786725272390",
       "name": "Minecraftアバター",
       "author": "ねんねこ",
       "type": "図形",
@@ -1408,14 +1434,14 @@
         "tag_name": "1.0.1",
         "created_at": "2026-07-12T08:27:51Z",
         "published_at": "2026-07-12T08:39:35Z",
-        "crawled_at": "2026-08-13 01:46:44",
+        "crawled_at": "2026-08-14 16:31:46",
         "file_name": "YMM4MinecraftAvatar.ymme",
         "browser_download_url": "https://github.com/nennneko5787/YMM4MinecraftAvatar/releases/download/1.0.1/YMM4MinecraftAvatar.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-44-1786586178946",
+      "id": "plugin-45-1786725272390",
       "name": "色温度補正",
       "author": "イヤホンᖰ ᖳ",
       "type": "映像エフェクト",
@@ -1443,14 +1469,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-07-10T10:54:39Z",
         "published_at": "2026-07-10T11:03:27Z",
-        "crawled_at": "2026-08-13 01:46:44",
+        "crawled_at": "2026-08-14 16:31:46",
         "file_name": "ColorTemperatureCorrection_v1.0.0.ymme",
         "browser_download_url": "https://github.com/panko200/ColorTemperatureCorrection/releases/download/v1.0.0/ColorTemperatureCorrection_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-45-1786586178946",
+      "id": "plugin-46-1786725272390",
       "name": "YMM4VocaloidBridge",
       "author": "akina910",
       "type": "音声合成",
@@ -1469,7 +1495,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-46-1786586178946",
+      "id": "plugin-47-1786725272390",
       "name": "2Dカメラプラグイン",
       "author": "あおもや",
       "type": "映像エフェクト",
@@ -1497,14 +1523,14 @@
         "tag_name": "v1.1.0",
         "created_at": "2026-07-18T01:37:44Z",
         "published_at": "2026-07-18T01:38:13Z",
-        "crawled_at": "2026-08-13 01:46:45",
+        "crawled_at": "2026-08-14 16:31:47",
         "file_name": "TwoDCameraPlugin.v.1.1.0.ymme",
         "browser_download_url": "https://github.com/bluemistel/YMM4-2DCamera/releases/download/v1.1.0/TwoDCameraPlugin.v.1.1.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-47-1786586178946",
+      "id": "plugin-48-1786725272390",
       "name": "パス追従",
       "author": "イヤホンᖰ ᖳ",
       "type": "映像エフェクト",
@@ -1540,14 +1566,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-07-06T22:11:52Z",
         "published_at": "2026-07-06T22:12:42Z",
-        "crawled_at": "2026-08-13 01:46:45",
+        "crawled_at": "2026-08-14 16:31:48",
         "file_name": "PathFollowEffect_v1.0.0.ymme",
         "browser_download_url": "https://github.com/panko200/PathFollowEffect/releases/download/v1.0.0/PathFollowEffect_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-48-1786586178946",
+      "id": "plugin-49-1786725272390",
       "name": "拡張テンプレート",
       "author": "ぐぐっす(ぐすお)",
       "type": "ツール",
@@ -1572,7 +1598,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-49-1786586178946",
+      "id": "plugin-50-1786725272390",
       "name": "SAM3DObjectsPlugin",
       "author": "イヤホンᖰ ᖳ",
       "type": "ツール",
@@ -1600,14 +1626,14 @@
         "tag_name": "v0.1.0",
         "created_at": "2026-07-04T20:42:42Z",
         "published_at": "2026-07-04T20:44:16Z",
-        "crawled_at": "2026-08-13 01:46:33",
+        "crawled_at": "2026-08-14 16:31:35",
         "file_name": "SAM3DObjectsPlugin_v0.1.0.ymme",
         "browser_download_url": "https://github.com/panko200/SAM3DObjectsPlugin/releases/download/v0.1.0/SAM3DObjectsPlugin_v0.1.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-50-1786586178946",
+      "id": "plugin-51-1786725272390",
       "name": "YMM4LayerBatchTransformPlugin",
       "author": "Ambrose Starlit",
       "type": "映像エフェクト",
@@ -1635,7 +1661,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-51-1786586178946",
+      "id": "plugin-52-1786725272390",
       "name": "YMM4MaskingTapePlugin",
       "author": "Ambrose Starlit",
       "type": "図形",
@@ -1659,7 +1685,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-52-1786586178946",
+      "id": "plugin-53-1786725272390",
       "name": "タドコロノード修正パッチ",
       "author": "てとら",
       "type": "その他",
@@ -1687,14 +1713,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-06-22T16:30:49Z",
         "published_at": "2026-06-22T16:46:25Z",
-        "crawled_at": "2026-08-13 01:46:33",
+        "crawled_at": "2026-08-14 16:31:34",
         "file_name": "TadokoroNodeFixPatch_v1.0.0.ymme",
         "browser_download_url": "https://github.com/tetra-te/TadokoroNodeFixPatch/releases/download/v1.0.0/TadokoroNodeFixPatch_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-53-1786586178946",
+      "id": "plugin-54-1786725272390",
       "name": "YMM4WaterRippleShapePlugin",
       "author": "Ambrose Starlit",
       "type": "図形",
@@ -1718,7 +1744,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-54-1786586178946",
+      "id": "plugin-55-1786725272390",
       "name": "BloomFlowerTransition",
       "author": "Ambrose Starlit",
       "type": "場面切り替え",
@@ -1742,7 +1768,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-55-1786586178946",
+      "id": "plugin-56-1786725272390",
       "name": "YMM4ImageMaskZoomTransition",
       "author": "Ambrose Starlit",
       "type": "場面切り替え",
@@ -1766,7 +1792,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-56-1786586178946",
+      "id": "plugin-57-1786725272390",
       "name": "YMM4LayerGroupWindSwayPlugin",
       "author": "Ambrose Starlit",
       "type": "映像エフェクト",
@@ -1794,7 +1820,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-57-1786586178946",
+      "id": "plugin-58-1786725272390",
       "name": "上下黒帯(shorts)",
       "author": "Ambrose Starlit",
       "type": "図形",
@@ -1818,7 +1844,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-58-1786586178946",
+      "id": "plugin-59-1786725272390",
       "name": "YMM4IconSpeechBubblePlugin",
       "author": "Ambrose Starlit",
       "type": "図形",
@@ -1842,7 +1868,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-59-1786586178946",
+      "id": "plugin-60-1786725272390",
       "name": "CSVメイト",
       "author": "ぐぐっす(ぐすお)",
       "type": "ツール",
@@ -1867,7 +1893,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-60-1786586178946",
+      "id": "plugin-61-1786725272390",
       "name": "カスタムテーマプラグイン",
       "author": "てとら",
       "type": "その他",
@@ -1895,14 +1921,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-06-27T15:32:06Z",
         "published_at": "2026-06-27T15:41:47Z",
-        "crawled_at": "2026-08-13 01:46:32",
+        "crawled_at": "2026-08-14 16:31:34",
         "file_name": "CustomThemePlugin_v1.0.0.ymme",
         "browser_download_url": "https://github.com/tetra-te/CustomThemePlugin/releases/download/v1.0.0/CustomThemePlugin_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-61-1786586178946",
+      "id": "plugin-62-1786725272390",
       "name": "ペーカーカットアウト",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -1925,14 +1951,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-06-27T03:20:21Z",
         "published_at": "2026-06-27T03:22:12Z",
-        "crawled_at": "2026-08-13 01:46:32",
+        "crawled_at": "2026-08-14 16:31:34",
         "file_name": "PaperCutout_v1.0.0.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-PaperCutout/releases/download/v1.0.0/PaperCutout_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-62-1786586178946",
+      "id": "plugin-63-1786725272390",
       "name": "雪・雨エフェクトプラグイン",
       "author": "Ambrose Starlit",
       "type": "映像エフェクト",
@@ -1956,7 +1982,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-63-1786586178946",
+      "id": "plugin-64-1786725272390",
       "name": "YMM4CharacterDialogueDockPlugin",
       "author": "Ambrose Starlit",
       "type": "ツール",
@@ -1984,7 +2010,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-64-1786586178946",
+      "id": "plugin-65-1786725272390",
       "name": "ToolBoxプラグイン",
       "author": "いるかぁぁ",
       "type": "ツール",
@@ -2016,14 +2042,14 @@
         "tag_name": "v2.0.0",
         "created_at": "2026-08-10T16:24:46Z",
         "published_at": "2026-08-10T16:27:34Z",
-        "crawled_at": "2026-08-13 01:46:32",
+        "crawled_at": "2026-08-14 16:31:33",
         "file_name": "ToolBox_v2.0.0.ymme",
         "browser_download_url": "https://github.com/Dolphin-kun/ToolBoxPlugin/releases/download/v2.0.0/ToolBox_v2.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-65-1786586178946",
+      "id": "plugin-66-1786725272390",
       "name": "ターゲットレイヤープラグイン",
       "author": "ぐぐっす(ぐすお)",
       "type": "ツール",
@@ -2048,7 +2074,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-66-1786586178946",
+      "id": "plugin-67-1786725272390",
       "name": "クロスハッチ陰影",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -2080,7 +2106,7 @@
         "tag_name": "v1.0.3",
         "created_at": "2026-07-13T23:15:02Z",
         "published_at": "2026-07-13T23:16:52Z",
-        "crawled_at": "2026-08-13 01:46:31",
+        "crawled_at": "2026-08-14 16:31:32",
         "file_name": "CrossHatching_v1.0.3.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-CrossHatching/releases/download/v1.0.3/CrossHatching_v1.0.3.ymme",
         "prerelease": false
@@ -2088,7 +2114,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-67-1786586178946",
+      "id": "plugin-68-1786725272390",
       "name": "画像差分管理プラグイン",
       "author": "Ambrose Starlit",
       "type": "図形",
@@ -2112,7 +2138,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-68-1786586178946",
+      "id": "plugin-69-1786725272390",
       "name": "PSDレイヤー読み込みプラグイン",
       "author": "Ambrose Starlit",
       "type": "ツール",
@@ -2136,7 +2162,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-69-1786586178946",
+      "id": "plugin-70-1786725272390",
       "name": "多面体ガラス",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -2164,14 +2190,14 @@
         "tag_name": "v1.3.0",
         "created_at": "2026-07-14T23:05:41Z",
         "published_at": "2026-07-14T23:10:07Z",
-        "crawled_at": "2026-08-13 01:46:31",
+        "crawled_at": "2026-08-14 16:31:32",
         "file_name": "FacetedGlass_v1.3.0.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-FacetedGlass/releases/download/v1.3.0/FacetedGlass_v1.3.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-70-1786586178946",
+      "id": "plugin-71-1786725272390",
       "name": "アイコン付き字幕プラグイン",
       "author": "おもちのいぬい",
       "type": "映像エフェクト",
@@ -2196,7 +2222,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-71-1786586178946",
+      "id": "plugin-72-1786725272390",
       "name": "波動光学",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -2219,14 +2245,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-06-23T03:10:55Z",
         "published_at": "2026-06-23T03:12:46Z",
-        "crawled_at": "2026-08-13 01:46:31",
+        "crawled_at": "2026-08-14 16:31:33",
         "file_name": "WaveOptics_v1.0.0.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-WaveOptics/releases/download/v1.0.0/WaveOptics_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-72-1786586178946",
+      "id": "plugin-73-1786725272390",
       "name": "レイヤー別スライド",
       "author": "Ambrose Starlit",
       "type": "映像エフェクト",
@@ -2254,7 +2280,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-73-1786586178946",
+      "id": "plugin-74-1786725272390",
       "name": "YMMKeyboard",
       "author": "はじめよう",
       "type": "ツール",
@@ -2282,14 +2308,14 @@
         "tag_name": "v0.1.0",
         "created_at": "2026-06-07T13:31:46Z",
         "published_at": "2026-06-24T14:30:09Z",
-        "crawled_at": "2026-08-13 01:46:30",
+        "crawled_at": "2026-08-14 16:31:31",
         "file_name": "YMMKeyboardPlugin.ymme",
         "browser_download_url": "https://github.com/hazimeyou/YMMKeyboard/releases/download/v0.1.0/YMMKeyboardPlugin.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-74-1786586178946",
+      "id": "plugin-75-1786725272390",
       "name": "ループウェーブクリップ",
       "author": "Ambrose Starlit",
       "type": "映像エフェクト",
@@ -2317,7 +2343,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-75-1786586178946",
+      "id": "plugin-76-1786725272390",
       "name": "ホログラム箔",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -2345,14 +2371,14 @@
         "tag_name": "v1.0.3",
         "created_at": "2026-06-23T13:43:43Z",
         "published_at": "2026-06-23T13:45:37Z",
-        "crawled_at": "2026-08-13 01:46:29",
+        "crawled_at": "2026-08-14 16:31:31",
         "file_name": "HolographicFoil_v1.0.3.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-HolographicFoil/releases/download/v1.0.3/HolographicFoil_v1.0.3.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-76-1786586178946",
+      "id": "plugin-77-1786725272390",
       "name": "YMM4 フキダシ生成プラグイン",
       "author": "Ambrose Starlit",
       "type": "図形",
@@ -2376,7 +2402,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-77-1786586178946",
+      "id": "plugin-78-1786725272390",
       "name": "ベクトル場変形",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -2404,14 +2430,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-06-22T13:13:04Z",
         "published_at": "2026-06-22T13:16:21Z",
-        "crawled_at": "2026-08-13 01:46:27",
+        "crawled_at": "2026-08-14 16:31:29",
         "file_name": "VectorFieldWarp_v1.0.0.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-VectorFieldWarp/releases/download/v1.0.0/VectorFieldWarp_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-78-1786586178946",
+      "id": "plugin-79-1786725272390",
       "name": "YMM4-Radeon_Fast_Plugin_Pack",
       "author": "Pythonはる",
       "type": "動画出力",
@@ -2435,7 +2461,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-79-1786586178946",
+      "id": "plugin-80-1786725272390",
       "name": "YMM4StoryboardPaintPlugin",
       "author": "Ambrose Starlit",
       "type": "ツール",
@@ -2459,7 +2485,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-80-1786586178946",
+      "id": "plugin-81-1786725272390",
       "name": "Luaスクリプト",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -2491,7 +2517,7 @@
         "tag_name": "v1.20.3",
         "created_at": "2026-07-05T10:52:33Z",
         "published_at": "2026-07-05T10:54:26Z",
-        "crawled_at": "2026-08-13 01:46:28",
+        "crawled_at": "2026-08-14 16:31:30",
         "file_name": "LuaScript_v1.20.3.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-LuaScript/releases/download/v1.20.3/LuaScript_v1.20.3.ymme",
         "prerelease": false
@@ -2499,7 +2525,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-81-1786586178946",
+      "id": "plugin-82-1786725272390",
       "name": "方向色分離キー",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -2527,14 +2553,14 @@
         "tag_name": "v1.0.3",
         "created_at": "2026-07-13T14:18:48Z",
         "published_at": "2026-07-13T14:23:10Z",
-        "crawled_at": "2026-08-13 01:46:28",
+        "crawled_at": "2026-08-14 16:31:30",
         "file_name": "DirectionalColorKey_v1.0.3.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-DirectionalColorKey/releases/download/v1.0.3/DirectionalColorKey_v1.0.3.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-82-1786586178946",
+      "id": "plugin-83-1786725272390",
       "name": "EM-FilterSets",
       "author": "あおもや",
       "type": "映像エフェクト",
@@ -2574,7 +2600,7 @@
         "tag_name": "v1.0.2",
         "created_at": "2026-06-27T07:27:36Z",
         "published_at": "2026-06-27T07:44:24Z",
-        "crawled_at": "2026-08-13 01:46:29",
+        "crawled_at": "2026-08-14 16:31:30",
         "file_name": "EM-FilterSets.v.1.0.2.ymme",
         "browser_download_url": "https://github.com/bluemistel/EM-FilterSets/releases/download/v1.0.2/EM-FilterSets.v.1.0.2.ymme",
         "prerelease": false
@@ -2582,7 +2608,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-83-1786586178946",
+      "id": "plugin-84-1786725272390",
       "name": "YMM4 メディアエクスプローラー プラグイン",
       "author": "Ambrose Starlit",
       "type": "ツール",
@@ -2606,7 +2632,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-84-1786586178946",
+      "id": "plugin-85-1786725272390",
       "name": "YMM4 Shortcut Dock",
       "author": "Ambrose Starlit",
       "type": "ツール",
@@ -2630,7 +2656,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-85-1786586178946",
+      "id": "plugin-86-1786725272390",
       "name": "連番PNG口パク",
       "author": "Ambrose Starlit",
       "type": "図形",
@@ -2654,7 +2680,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-86-1786586178946",
+      "id": "plugin-87-1786725272390",
       "name": "YMM4AntiAliasPlugin",
       "author": "Ambrose Starlit",
       "type": "映像エフェクト",
@@ -2682,7 +2708,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-87-1786586178946",
+      "id": "plugin-88-1786725272390",
       "name": "連番PNGアニメーション",
       "author": "Ambrose Starlit",
       "type": "図形",
@@ -2706,7 +2732,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-88-1786586178946",
+      "id": "plugin-89-1786725272390",
       "name": "オールドフィルム",
       "author": "かへんしき。",
       "type": "映像エフェクト",
@@ -2731,7 +2757,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-89-1786586178946",
+      "id": "plugin-90-1786725272390",
       "name": "字幕一括入力プラグイン",
       "author": "Ambrose Starlit",
       "type": "ツール",
@@ -2755,7 +2781,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-90-1786586178946",
+      "id": "plugin-91-1786725272390",
       "name": "LayerCanvasYMMEffectsPlugin",
       "author": "Ambrose Starlit",
       "type": "映像エフェクト",
@@ -2779,7 +2805,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-91-1786586178946",
+      "id": "plugin-92-1786725272390",
       "name": "ClipMotionPlugin",
       "author": "Ambrose Starlit",
       "type": "映像エフェクト",
@@ -2803,7 +2829,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-92-1786586178946",
+      "id": "plugin-93-1786725272390",
       "name": "YMM4タイムスタンププラグイン",
       "author": "べにかずら",
       "type": "ツール",
@@ -2843,7 +2869,7 @@
         "tag_name": "ver1.0.0",
         "created_at": "2026-06-14T06:22:56Z",
         "published_at": "2026-06-14T06:24:15Z",
-        "crawled_at": "2026-08-13 01:46:27",
+        "crawled_at": "2026-08-14 16:31:28",
         "file_name": "Timestamp.ymme",
         "browser_download_url": "https://github.com/benikazura/Timestamp/releases/download/ver1.0.0/Timestamp.ymme",
         "prerelease": false
@@ -2851,7 +2877,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-93-1786586178946",
+      "id": "plugin-94-1786725272390",
       "name": "マニピュレート",
       "author": "左コントローラー",
       "type": "映像エフェクト",
@@ -2876,7 +2902,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-94-1786586178946",
+      "id": "plugin-95-1786725272390",
       "name": "可変式粒子化",
       "author": "かへんしき。",
       "type": "映像エフェクト",
@@ -2901,7 +2927,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-95-1786586178946",
+      "id": "plugin-96-1786725272390",
       "name": "縁取り（拡張）",
       "author": "イヤホンᖰ ᖳ",
       "type": "映像エフェクト",
@@ -2929,14 +2955,14 @@
         "tag_name": "v0.1.0",
         "created_at": "2026-06-06T16:29:46Z",
         "published_at": "2026-06-06T16:31:11Z",
-        "crawled_at": "2026-08-13 01:46:26",
+        "crawled_at": "2026-08-14 16:31:28",
         "file_name": "OutlineExtension_v0.1.0.ymme",
         "browser_download_url": "https://github.com/panko200/OutlineExtension/releases/download/v0.1.0/OutlineExtension_v0.1.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-96-1786586178946",
+      "id": "plugin-97-1786725272390",
       "name": "画像ウィンドウ",
       "author": "左コントローラー",
       "type": "ツール",
@@ -2961,7 +2987,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-97-1786586178946",
+      "id": "plugin-98-1786725272390",
       "name": "同型塗りつぶし",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -2993,14 +3019,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-06-05T14:34:53Z",
         "published_at": "2026-06-05T14:41:52Z",
-        "crawled_at": "2026-08-13 01:46:26",
+        "crawled_at": "2026-08-14 16:31:27",
         "file_name": "FillSametype.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-FillSametype/releases/download/v1.0.0/FillSametype.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-98-1786586178946",
+      "id": "plugin-99-1786725272390",
       "name": "SAM3 被写体切り抜きプラグイン",
       "author": "イヤホンᖰ ᖳ",
       "type": "映像エフェクト, ツール",
@@ -3040,14 +3066,14 @@
         "tag_name": "v0.1.1",
         "created_at": "2026-06-02T09:30:49Z",
         "published_at": "2026-06-02T09:33:11Z",
-        "crawled_at": "2026-08-13 01:46:26",
+        "crawled_at": "2026-08-14 16:31:27",
         "file_name": "SAM3CutoutPlugin_v0.1.1.ymme",
         "browser_download_url": "https://github.com/panko200/SAM3CutoutPlugin/releases/download/v0.1.1/SAM3CutoutPlugin_v0.1.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-99-1786586178946",
+      "id": "plugin-100-1786725272390",
       "name": "BpmTapTool",
       "author": "ゆっくりぴっと",
       "type": "音声合成",
@@ -3075,14 +3101,14 @@
         "tag_name": "Release",
         "created_at": "2026-05-31T06:09:57Z",
         "published_at": "2026-05-31T06:14:50Z",
-        "crawled_at": "2026-08-13 01:46:25",
+        "crawled_at": "2026-08-14 16:31:26",
         "file_name": "BpmTapTool.ymme",
         "browser_download_url": "https://github.com/Yukkuripit/BpmTapToolPlugin/releases/download/Release/BpmTapTool.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-100-1786586178946",
+      "id": "plugin-101-1786725272390",
       "name": "ymm4ToGPT_SoVITS_character",
       "author": "3e456(123abc)",
       "type": "音声合成",
@@ -3106,7 +3132,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-101-1786586178946",
+      "id": "plugin-102-1786725272390",
       "name": "ブラウザ/Spotify操作プラグイン",
       "author": "YukiSannn",
       "type": "ツール",
@@ -3134,14 +3160,14 @@
         "tag_name": "大きめの仕様変更",
         "created_at": "2026-05-31T13:07:45Z",
         "published_at": "2026-05-31T13:08:55Z",
-        "crawled_at": "2026-08-13 01:46:25",
+        "crawled_at": "2026-08-14 16:31:26",
         "file_name": "BrowserMusicController.ymme",
         "browser_download_url": "https://github.com/YurKLYK/Ymm4MusicController/releases/download/%E5%A4%A7%E3%81%8D%E3%82%81%E3%81%AE%E4%BB%95%E6%A7%98%E5%A4%89%E6%9B%B4/BrowserMusicController.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-102-1786586178946",
+      "id": "plugin-103-1786725272390",
       "name": "SVGバラバラ読み込み",
       "author": "左コントローラー",
       "type": "ツール",
@@ -3166,7 +3192,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-103-1786586178946",
+      "id": "plugin-104-1786725272390",
       "name": "HighPerformanceTimerTool",
       "author": "ゆっくりぴっと",
       "type": "ツール",
@@ -3194,14 +3220,14 @@
         "tag_name": "release",
         "created_at": "2026-05-30T06:04:24Z",
         "published_at": "2026-05-30T06:18:20Z",
-        "crawled_at": "2026-08-13 01:46:25",
+        "crawled_at": "2026-08-14 16:31:27",
         "file_name": "HighPerformanceTimerTool.ymme",
         "browser_download_url": "https://github.com/Yukkuripit/HighPerformanceTimerTool/releases/download/release/HighPerformanceTimerTool.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-104-1786586178946",
+      "id": "plugin-105-1786725272390",
       "name": "VTuberKitForYMM4",
       "author": "takoyakisoft",
       "type": "立ち絵",
@@ -3230,7 +3256,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-105-1786586178946",
+      "id": "plugin-106-1786725272390",
       "name": "パペット変形",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -3262,14 +3288,14 @@
         "tag_name": "v1.1.0",
         "created_at": "2026-06-23T14:35:45Z",
         "published_at": "2026-06-23T14:43:50Z",
-        "crawled_at": "2026-08-13 01:46:24",
+        "crawled_at": "2026-08-14 16:31:25",
         "file_name": "PuppetDeformation.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-PuppetDeformation/releases/download/v1.1.0/PuppetDeformation.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-106-1786586178946",
+      "id": "plugin-107-1786725272390",
       "name": "回転座標",
       "author": "メタロロ",
       "type": "映像エフェクト",
@@ -3297,14 +3323,14 @@
         "tag_name": "1.0.0",
         "created_at": "2026-05-24T13:45:57Z",
         "published_at": "2026-05-24T13:51:18Z",
-        "crawled_at": "2026-08-13 01:46:23",
+        "crawled_at": "2026-08-14 16:31:25",
         "file_name": "RotationCoordinatePlugin.ymme",
         "browser_download_url": "https://github.com/dmmo-com-jp/RotationCoordinatePlugin/releases/download/1.0.0/RotationCoordinatePlugin.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-107-1786586178946",
+      "id": "plugin-108-1786725272390",
       "name": "BarnDissolve",
       "author": "かへんしき。",
       "type": "映像エフェクト",
@@ -3333,7 +3359,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-108-1786586178946",
+      "id": "plugin-109-1786725272390",
       "name": "図形の貼り付け",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -3365,14 +3391,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-05-22T12:58:20Z",
         "published_at": "2026-05-22T13:01:05Z",
-        "crawled_at": "2026-08-13 01:46:23",
+        "crawled_at": "2026-08-14 16:31:24",
         "file_name": "ShapePaste.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-ShapePaste/releases/download/v1.0.0/ShapePaste.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-109-1786586178946",
+      "id": "plugin-110-1786725272390",
       "name": "テキストの貼り付け",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -3404,14 +3430,14 @@
         "tag_name": "v1.0.1",
         "created_at": "2026-05-26T09:28:39Z",
         "published_at": "2026-05-26T09:35:38Z",
-        "crawled_at": "2026-08-13 01:46:23",
+        "crawled_at": "2026-08-14 16:31:24",
         "file_name": "TextPaste.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-TextPaste/releases/download/v1.0.1/TextPaste.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-110-1786586178946",
+      "id": "plugin-111-1786725272390",
       "name": "CSV画像読み込み",
       "author": "あうまる",
       "type": "ツール",
@@ -3440,7 +3466,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-111-1786586178946",
+      "id": "plugin-112-1786725272390",
       "name": "空白セリフ長さ補正",
       "author": "あうまる",
       "type": "ツール",
@@ -3469,7 +3495,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-112-1786586178946",
+      "id": "plugin-113-1786725272390",
       "name": "YMM4 Snipping Tool",
       "author": "mochinekoo",
       "type": "ツール, 画像読み込み",
@@ -3487,13 +3513,13 @@
       "version": "",
       "updatedAt": "",
       "publishedAt": "2026-05-17",
-      "isEnabled": false,
+      "isEnabled": true,
       "license": "",
       "tags": [],
       "extraGhData": null
     },
     {
-      "id": "plugin-113-1786586178946",
+      "id": "plugin-114-1786725272390",
       "name": "余白除去",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -3521,14 +3547,14 @@
         "tag_name": "v1.0.1",
         "created_at": "2026-05-17T01:10:11Z",
         "published_at": "2026-05-17T01:14:32Z",
-        "crawled_at": "2026-08-13 01:46:22",
+        "crawled_at": "2026-08-14 16:31:23",
         "file_name": "TrimMargin.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-TrimMargin/releases/download/v1.0.1/TrimMargin.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-114-1786586178946",
+      "id": "plugin-115-1786725272390",
       "name": "影（立体投影）",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -3556,14 +3582,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-05-14T09:44:48Z",
         "published_at": "2026-05-14T09:50:34Z",
-        "crawled_at": "2026-08-13 01:46:21",
+        "crawled_at": "2026-08-14 16:31:23",
         "file_name": "PerspectiveShadow.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-PerspectiveShadow/releases/download/v1.0.0/PerspectiveShadow.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-115-1786586178946",
+      "id": "plugin-116-1786725272390",
       "name": "トリコロール",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -3591,14 +3617,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-05-11T10:07:24Z",
         "published_at": "2026-05-11T10:16:21Z",
-        "crawled_at": "2026-08-13 01:46:21",
+        "crawled_at": "2026-08-14 16:31:22",
         "file_name": "Tritone.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-Tritone/releases/download/v1.0.0/Tritone.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-116-1786586178946",
+      "id": "plugin-117-1786725272390",
       "name": "カバーアート",
       "author": "routersys",
       "type": "図形",
@@ -3626,14 +3652,14 @@
         "tag_name": "v1.0.1",
         "created_at": "2026-05-08T10:31:41Z",
         "published_at": "2026-05-08T10:33:17Z",
-        "crawled_at": "2026-08-13 01:46:20",
+        "crawled_at": "2026-08-14 16:31:22",
         "file_name": "CoverArt_v1.0.1.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-CoverArt/releases/download/v1.0.1/CoverArt_v1.0.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-117-1786586178946",
+      "id": "plugin-118-1786725272390",
       "name": "条件分岐ダイナミクス",
       "author": "routersys",
       "type": "音声エフェクト",
@@ -3669,7 +3695,7 @@
         "tag_name": "v1.0.1",
         "created_at": "2026-05-07T12:48:41Z",
         "published_at": "2026-05-07T12:51:43Z",
-        "crawled_at": "2026-08-13 01:46:20",
+        "crawled_at": "2026-08-14 16:31:21",
         "file_name": "DynamicEffect_v1.0.1.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-DynamicEffect/releases/download/v1.0.1/DynamicEffect_v1.0.1.ymme",
         "prerelease": false
@@ -3677,7 +3703,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-118-1786586178946",
+      "id": "plugin-119-1786725272390",
       "name": "タイムライン",
       "author": "routersys",
       "type": "ツール",
@@ -3713,7 +3739,7 @@
         "tag_name": "v1.1.0",
         "created_at": "2026-05-06T07:40:27Z",
         "published_at": "2026-05-06T07:49:56Z",
-        "crawled_at": "2026-08-13 01:46:19",
+        "crawled_at": "2026-08-14 16:31:21",
         "file_name": "Timeline_v1.1.0.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-Timeline/releases/download/v1.1.0/Timeline_v1.1.0.ymme",
         "prerelease": false
@@ -3721,7 +3747,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-119-1786586178946",
+      "id": "plugin-120-1786725272390",
       "name": "PreviewEnhancer",
       "author": "イヤホンᖰ ᖳ",
       "type": "その他",
@@ -3749,14 +3775,14 @@
         "tag_name": "v0.1.0",
         "created_at": "2026-05-05T10:53:28Z",
         "published_at": "2026-05-05T11:03:23Z",
-        "crawled_at": "2026-08-13 01:46:20",
+        "crawled_at": "2026-08-14 16:31:21",
         "file_name": "PreviewEnhancer_v0.1.0.ymme",
         "browser_download_url": "https://github.com/panko200/PreviewEnhancer/releases/download/v0.1.0/PreviewEnhancer_v0.1.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-120-1786586178946",
+      "id": "plugin-121-1786725272390",
       "name": "YmmpxLibPlugin",
       "author": "はじめよう",
       "type": "その他",
@@ -3784,14 +3810,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-06-11T21:47:31Z",
         "published_at": "2026-06-22T13:00:46Z",
-        "crawled_at": "2026-08-13 01:46:18",
+        "crawled_at": "2026-08-14 16:31:20",
         "file_name": "YmmpxLibPlugin.ymme",
         "browser_download_url": "https://github.com/hazimeyou/YmmpxLib/releases/download/v1.0.0/YmmpxLibPlugin.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-121-1786586178946",
+      "id": "plugin-122-1786725272390",
       "name": "コンテナ",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -3827,7 +3853,7 @@
         "tag_name": "v1.1.0",
         "created_at": "2026-05-04T11:01:11Z",
         "published_at": "2026-05-04T11:13:05Z",
-        "crawled_at": "2026-08-13 01:46:19",
+        "crawled_at": "2026-08-14 16:31:20",
         "file_name": "Container_v1.1.0.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-Container/releases/download/v1.1.0/Container_v1.1.0.ymme",
         "prerelease": false
@@ -3835,7 +3861,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-122-1786586178946",
+      "id": "plugin-123-1786725272391",
       "name": "スポットライト",
       "author": "破綻国家研究所",
       "type": "映像エフェクト",
@@ -3863,14 +3889,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-04-30T12:58:56Z",
         "published_at": "2026-05-02T00:03:35Z",
-        "crawled_at": "2026-08-13 01:46:18",
+        "crawled_at": "2026-08-14 16:31:20",
         "file_name": "SpotlightEffect.ymme",
         "browser_download_url": "https://github.com/hatankokka/YMM4-SpotlightEffect/releases/download/v1.0.0/SpotlightEffect.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-123-1786586178946",
+      "id": "plugin-124-1786725272391",
       "name": "NineSlice",
       "author": "もづりぃ",
       "type": "映像エフェクト",
@@ -3902,14 +3928,14 @@
         "tag_name": "v1.0",
         "created_at": "2026-04-29T06:53:51Z",
         "published_at": "2026-04-29T07:08:52Z",
-        "crawled_at": "2026-08-13 01:46:17",
+        "crawled_at": "2026-08-14 16:31:19",
         "file_name": "NineSlice.ymme",
         "browser_download_url": "https://github.com/modurili/NineSlice/releases/download/v1.0/NineSlice.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-124-1786586178946",
+      "id": "plugin-125-1786725272391",
       "name": "正多面体プラグイン",
       "author": "左コントローラー",
       "type": "図形",
@@ -3934,7 +3960,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-125-1786586178946",
+      "id": "plugin-126-1786725272391",
       "name": "ProjectionSettings",
       "author": "イヤホンᖰ ᖳ",
       "type": "映像エフェクト",
@@ -3962,14 +3988,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-04-23T15:40:59Z",
         "published_at": "2026-04-23T15:42:09Z",
-        "crawled_at": "2026-08-13 01:46:17",
+        "crawled_at": "2026-08-14 16:31:18",
         "file_name": "ProjectionSettings_v1.0.0.ymme",
         "browser_download_url": "https://github.com/panko200/ProjectionSettings/releases/download/v1.0.0/ProjectionSettings_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-126-1786586178946",
+      "id": "plugin-127-1786725272391",
       "name": "GroupControlApplyEffectsFirst",
       "author": "イヤホンᖰ ᖳ",
       "type": "その他",
@@ -3997,14 +4023,14 @@
         "tag_name": "v0.1.0",
         "created_at": "2026-04-22T13:37:18Z",
         "published_at": "2026-04-22T13:39:55Z",
-        "crawled_at": "2026-08-13 01:46:17",
+        "crawled_at": "2026-08-14 16:31:18",
         "file_name": "GroupControlApplyEffectsFirst_v0.1.0.ymme",
         "browser_download_url": "https://github.com/panko200/GroupControlApplyEffectsFirst/releases/download/v0.1.0/GroupControlApplyEffectsFirst_v0.1.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-127-1786586178946",
+      "id": "plugin-128-1786725272391",
       "name": "瞬間ループ",
       "author": "ハイさんgames",
       "type": "音声エフェクト",
@@ -4036,14 +4062,14 @@
         "tag_name": "v1.1.0",
         "created_at": "2026-04-21T12:53:21Z",
         "published_at": "2026-07-05T01:51:34Z",
-        "crawled_at": "2026-08-13 01:46:18",
+        "crawled_at": "2026-08-14 16:31:19",
         "file_name": "InstantLoopAudioEffect.v1.1.0.ymme",
         "browser_download_url": "https://github.com/HAIsanGames813/InstantLoopAudioEffect/releases/download/v1.1.0/InstantLoopAudioEffect.v1.1.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-128-1786586178946",
+      "id": "plugin-129-1786725272391",
       "name": "連続再生",
       "author": "もづりぃ",
       "type": "音声エフェクト",
@@ -4071,14 +4097,14 @@
         "tag_name": "v1.1",
         "created_at": "2026-04-20T18:57:12Z",
         "published_at": "2026-04-29T06:49:25Z",
-        "crawled_at": "2026-08-13 01:46:16",
+        "crawled_at": "2026-08-14 16:31:17",
         "file_name": "AudioRepeater.ymme",
         "browser_download_url": "https://github.com/modurili/AudioRepeater/releases/download/v1.1/AudioRepeater.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-129-1786586178946",
+      "id": "plugin-130-1786725272391",
       "name": "Cストックプラグイン",
       "author": "かへんしき。",
       "type": "ツール",
@@ -4103,7 +4129,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-130-1786586178946",
+      "id": "plugin-131-1786725272391",
       "name": "グラデーションマップ",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -4139,7 +4165,7 @@
         "tag_name": "v1.2.0",
         "created_at": "2026-04-18T05:16:33Z",
         "published_at": "2026-04-18T05:21:04Z",
-        "crawled_at": "2026-08-13 01:46:16",
+        "crawled_at": "2026-08-14 16:31:17",
         "file_name": "GradientMap_v1.2.0.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-GradientMap/releases/download/v1.2.0/GradientMap_v1.2.0.ymme",
         "prerelease": false
@@ -4147,7 +4173,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-131-1786586178946",
+      "id": "plugin-132-1786725272391",
       "name": "反復移動（拡張）",
       "author": "イヤホンᖰ ᖳ",
       "type": "その他",
@@ -4175,14 +4201,14 @@
         "tag_name": "v1.0.1",
         "created_at": "2026-08-05T13:43:43Z",
         "published_at": "2026-08-05T13:44:36Z",
-        "crawled_at": "2026-08-13 01:46:15",
+        "crawled_at": "2026-08-14 16:31:16",
         "file_name": "IterativeMovementExtension_v1.0.1.ymme",
         "browser_download_url": "https://github.com/panko200/IterativeMovementExtension/releases/download/v1.0.1/IterativeMovementExtension_v1.0.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-132-1786586178946",
+      "id": "plugin-133-1786725272391",
       "name": "YMM4個別中間点プラグイン",
       "author": "べにかずら",
       "type": "ツール",
@@ -4222,7 +4248,7 @@
         "tag_name": "ver1.0.0",
         "created_at": "2026-04-05T11:28:09Z",
         "published_at": "2026-04-05T11:28:52Z",
-        "crawled_at": "2026-08-13 01:46:15",
+        "crawled_at": "2026-08-14 16:31:16",
         "file_name": "IndividualKeyFrame.ymme",
         "browser_download_url": "https://github.com/benikazura/IndividualKeyFrame/releases/download/ver1.0.0/IndividualKeyFrame.ymme",
         "prerelease": false
@@ -4230,7 +4256,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-133-1786586178946",
+      "id": "plugin-134-1786725272391",
       "name": "可変式立体音響プラグイン",
       "author": "かへんしき。",
       "type": "音声エフェクト",
@@ -4254,7 +4280,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-134-1786586178946",
+      "id": "plugin-135-1786725272391",
       "name": "YMM4 Docking Manager",
       "author": "ケトルニキ",
       "type": "ツール",
@@ -4282,14 +4308,14 @@
         "tag_name": "Release",
         "created_at": "2026-04-03T13:44:47Z",
         "published_at": "2026-04-03T13:47:04Z",
-        "crawled_at": "2026-08-13 01:46:14",
+        "crawled_at": "2026-08-14 16:31:15",
         "file_name": "YMM4DockingManager.ymme",
         "browser_download_url": "https://github.com/elsl3/YMM4DockingManager/releases/download/Release/YMM4DockingManager.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-135-1786586178947",
+      "id": "plugin-136-1786725272391",
       "name": "アイテムパラメーターテキスト",
       "author": "tenContΔ",
       "type": "図形",
@@ -4317,14 +4343,14 @@
         "tag_name": "0.1.0",
         "created_at": "2026-04-03T09:41:53Z",
         "published_at": "2026-04-03T09:42:25Z",
-        "crawled_at": "2026-08-13 01:46:14",
+        "crawled_at": "2026-08-14 16:31:15",
         "file_name": "ItemParameterTextShape.ymme",
         "browser_download_url": "https://github.com/tenkonta/ItemParameterTextShape/releases/download/0.1.0/ItemParameterTextShape.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-136-1786586178947",
+      "id": "plugin-137-1786725272391",
       "name": "疑似3Dディスプレイスメントマップ",
       "author": "イヤホンᖰ ᖳ",
       "type": "映像エフェクト",
@@ -4352,14 +4378,14 @@
         "tag_name": "v1.0.1",
         "created_at": "2026-07-26T08:18:01Z",
         "published_at": "2026-07-26T08:20:14Z",
-        "crawled_at": "2026-08-13 01:46:15",
+        "crawled_at": "2026-08-14 16:31:16",
         "file_name": "Pseudo3DDisplacementMap_v1.0.1.ymme",
         "browser_download_url": "https://github.com/panko200/Pseudo3DDisplacementMap/releases/download/v1.0.1/Pseudo3DDisplacementMap_v1.0.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-137-1786586178947",
+      "id": "plugin-138-1786725272391",
       "name": "疑似被写界深度",
       "author": "イヤホンᖰ ᖳ",
       "type": "映像エフェクト",
@@ -4387,14 +4413,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-04-01T08:51:04Z",
         "published_at": "2026-04-01T08:55:11Z",
-        "crawled_at": "2026-08-13 01:46:14",
+        "crawled_at": "2026-08-14 16:31:15",
         "file_name": "PseudoDepthofField_v1.0.0.ymme",
         "browser_download_url": "https://github.com/panko200/PseudoDepthofField/releases/download/v1.0.0/PseudoDepthofField_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-138-1786586178947",
+      "id": "plugin-139-1786725272391",
       "name": "YMM4_Earthquake_Plugin",
       "author": "もちねこ",
       "type": "ツール",
@@ -4426,14 +4452,14 @@
         "tag_name": "v0.0.2",
         "created_at": "2026-04-02T06:00:56Z",
         "published_at": "2026-04-02T06:06:38Z",
-        "crawled_at": "2026-08-13 01:46:13",
+        "crawled_at": "2026-08-14 16:31:14",
         "file_name": "YMM4_Earthquake_Plugin.ymme",
         "browser_download_url": "https://github.com/mochinekoo/YMM4_Earthquake_Plugin/releases/download/v0.0.2/YMM4_Earthquake_Plugin.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-139-1786586178947",
+      "id": "plugin-140-1786725272391",
       "name": "YMM4 台本出力 プラグイン",
       "author": "はくあ",
       "type": "その他",
@@ -4458,7 +4484,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-140-1786586178947",
+      "id": "plugin-141-1786725272391",
       "name": "YMM4GameHub",
       "author": "いるかぁぁ",
       "type": "ツール",
@@ -4490,14 +4516,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-03-20T14:36:04Z",
         "published_at": "2026-03-31T09:28:08Z",
-        "crawled_at": "2026-08-13 01:46:13",
+        "crawled_at": "2026-08-14 16:31:14",
         "file_name": "YMM4GameHub_v1.0.0.ymme",
         "browser_download_url": "https://github.com/Dolphin-kun/YMM4GameHub/releases/download/v1.0.0/YMM4GameHub_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-141-1786586178947",
+      "id": "plugin-142-1786725272391",
       "name": "TimelineArt",
       "author": "イヤホンᖰ ᖳ",
       "type": "ツール",
@@ -4525,14 +4551,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-03-19T17:41:51Z",
         "published_at": "2026-03-19T17:50:58Z",
-        "crawled_at": "2026-08-13 01:46:12",
+        "crawled_at": "2026-08-14 16:31:13",
         "file_name": "TimelineArt_v1.0.0.ymme",
         "browser_download_url": "https://github.com/panko200/TimelineArt/releases/download/v1.0.0/TimelineArt_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-142-1786586178947",
+      "id": "plugin-143-1786725272391",
       "name": "MC サーバーホスト",
       "author": "routersys",
       "type": "ツール",
@@ -4564,14 +4590,14 @@
         "tag_name": "v1.0.2",
         "created_at": "2026-03-31T05:54:57Z",
         "published_at": "2026-03-31T06:00:59Z",
-        "crawled_at": "2026-08-13 01:46:12",
+        "crawled_at": "2026-08-14 16:31:13",
         "file_name": "MinecraftHost.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-MCServer/releases/download/v1.0.2/MinecraftHost.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-143-1786586178947",
+      "id": "plugin-144-1786725272391",
       "name": "YMM4賢い人にしか見えないプラグイン",
       "author": "べにかずら",
       "type": "その他",
@@ -4595,7 +4621,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-144-1786586178947",
+      "id": "plugin-145-1786725272391",
       "name": "縮小合成（ドロステ）",
       "author": "ハイさんgames",
       "type": "映像エフェクト",
@@ -4627,14 +4653,14 @@
         "tag_name": "1.0.0",
         "created_at": "2026-03-18T12:02:11Z",
         "published_at": "2026-03-18T12:03:25Z",
-        "crawled_at": "2026-08-13 01:46:12",
+        "crawled_at": "2026-08-14 16:31:13",
         "file_name": "ShrinkCompositeEffect.v1.0.0-4-1.ymme",
         "browser_download_url": "https://github.com/HAIsanGames813/ShrinkCompositeEffect/releases/download/1.0.0/ShrinkCompositeEffect.v1.0.0-4-1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-145-1786586178947",
+      "id": "plugin-146-1786725272391",
       "name": "バネぽよプラグイン",
       "author": "n@pu",
       "type": "映像エフェクト",
@@ -4659,7 +4685,7 @@
       "price": "¥ 300"
     },
     {
-      "id": "plugin-146-1786586178947",
+      "id": "plugin-147-1786725272391",
       "name": "図形切り抜き（拡張）",
       "author": "イヤホンᖰ ᖳ",
       "type": "図形",
@@ -4687,14 +4713,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-03-29T16:30:26Z",
         "published_at": "2026-03-29T16:31:47Z",
-        "crawled_at": "2026-08-13 01:46:11",
+        "crawled_at": "2026-08-14 16:31:12",
         "file_name": "ShapeCroppingPlus_v1.0.0.ymme",
         "browser_download_url": "https://github.com/panko200/ShapeCroppingPlus/releases/download/v1.0.0/ShapeCroppingPlus_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-147-1786586178947",
+      "id": "plugin-148-1786725272391",
       "name": "ウェーブクリッピング",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -4730,7 +4756,7 @@
         "tag_name": "v1.0.1",
         "created_at": "2026-03-31T07:48:14Z",
         "published_at": "2026-03-31T07:51:09Z",
-        "crawled_at": "2026-08-13 01:46:11",
+        "crawled_at": "2026-08-14 16:31:12",
         "file_name": "WaveClipping.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-WaveClipping/releases/download/v1.0.1/WaveClipping.ymme",
         "prerelease": false
@@ -4738,7 +4764,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-148-1786586178947",
+      "id": "plugin-149-1786725272391",
       "name": "室内残響再現",
       "author": "routersys",
       "type": "音声エフェクト",
@@ -4774,7 +4800,7 @@
         "tag_name": "v2.0.1",
         "created_at": "2026-06-23T09:44:28Z",
         "published_at": "2026-06-23T09:47:57Z",
-        "crawled_at": "2026-08-13 01:46:11",
+        "crawled_at": "2026-08-14 16:31:11",
         "file_name": "SpaceAudio.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-SpaceAudio/releases/download/v2.0.1/SpaceAudio.ymme",
         "prerelease": false
@@ -4782,7 +4808,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-149-1786586178947",
+      "id": "plugin-150-1786725272391",
       "name": "ProxyForge",
       "author": "routersys",
       "type": "動画読み込み",
@@ -4818,7 +4844,7 @@
         "tag_name": "v1.0.2",
         "created_at": "2026-03-27T23:12:19Z",
         "published_at": "2026-03-27T23:20:01Z",
-        "crawled_at": "2026-08-13 01:46:10",
+        "crawled_at": "2026-08-14 16:31:11",
         "file_name": "ProxyForge.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-ProxyForge/releases/download/v1.0.2/ProxyForge.ymme",
         "prerelease": false
@@ -4826,7 +4852,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-150-1786586178947",
+      "id": "plugin-151-1786725272391",
       "name": "文字ごと自由配置プラグイン",
       "author": "n@pu",
       "type": "映像エフェクト",
@@ -4851,7 +4877,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-151-1786586178947",
+      "id": "plugin-152-1786725272391",
       "name": "背景馴染ませプラグイン",
       "author": "n@pu",
       "type": "映像エフェクト",
@@ -4876,7 +4902,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-152-1786586178947",
+      "id": "plugin-153-1786725272391",
       "name": "テキスト自動分割プラグイン",
       "author": "りんだい",
       "type": "ツール",
@@ -4904,14 +4930,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-03-23T13:55:22Z",
         "published_at": "2026-03-23T14:08:07Z",
-        "crawled_at": "2026-08-13 01:46:10",
+        "crawled_at": "2026-08-14 16:31:11",
         "file_name": "TextAutoSplit.ymme",
         "browser_download_url": "https://github.com/Rindai0123-Artifact/ymm4-text-splitter-plugin/releases/download/v1.0.0/TextAutoSplit.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-153-1786586178947",
+      "id": "plugin-154-1786725272391",
       "name": "メディア検出&リネーム",
       "author": "ハイさんgames",
       "type": "ツール",
@@ -4943,14 +4969,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-03-23T08:16:09Z",
         "published_at": "2026-03-23T08:18:07Z",
-        "crawled_at": "2026-08-13 01:46:09",
+        "crawled_at": "2026-08-14 16:31:10",
         "file_name": "UsedMediaFinderPlugin.v1.0.0.ymme",
         "browser_download_url": "https://github.com/HAIsanGames813/UsedMediaFinderPlugin/releases/download/v1.0.0/UsedMediaFinderPlugin.v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-154-1786586178947",
+      "id": "plugin-155-1786725272391",
       "name": "拡張イコライザー",
       "author": "routersys",
       "type": "音声エフェクト",
@@ -4965,7 +4991,7 @@
       "isGithub": true,
       "githubUser": "routersys",
       "githubRepo": "YMM4-Equalizer",
-      "version": "v1.2.2",
+      "version": "v1.2.3",
       "updatedAt": "",
       "publishedAt": "2026-03-23",
       "isEnabled": true,
@@ -4974,18 +5000,18 @@
       "extraGhData": {
         "user": "routersys",
         "repo": "YMM4-Equalizer",
-        "name": "v1.2.2",
-        "tag_name": "v1.2.2",
-        "created_at": "2026-03-31T10:52:32Z",
-        "published_at": "2026-03-31T10:53:56Z",
-        "crawled_at": "2026-08-13 01:46:09",
+        "name": "v1.2.3",
+        "tag_name": "v1.2.3",
+        "created_at": "2026-06-20T05:08:28Z",
+        "published_at": "2026-06-20T05:10:53Z",
+        "crawled_at": "2026-08-14 16:31:10",
         "file_name": "Equalizer.ymme",
-        "browser_download_url": "https://github.com/routersys/YMM4-Equalizer/releases/download/v1.2.2/Equalizer.ymme",
+        "browser_download_url": "https://github.com/routersys/YMM4-Equalizer/releases/download/v1.2.3/Equalizer.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-155-1786586178947",
+      "id": "plugin-156-1786725272391",
       "name": "パーツ分解てとら",
       "author": "てとら",
       "type": "映像エフェクト",
@@ -5000,7 +5026,7 @@
       "isGithub": true,
       "githubUser": "tetra-te",
       "githubRepo": "PartsSplitTetra",
-      "version": "v1.0.3",
+      "version": "v1.0.4",
       "updatedAt": "",
       "publishedAt": "2026-03-22",
       "isEnabled": true,
@@ -5009,18 +5035,18 @@
       "extraGhData": {
         "user": "tetra-te",
         "repo": "PartsSplitTetra",
-        "name": "v1.0.3",
-        "tag_name": "v1.0.3",
-        "created_at": "2026-03-31T14:30:27Z",
-        "published_at": "2026-03-31T14:39:06Z",
-        "crawled_at": "2026-08-13 01:46:09",
-        "file_name": "PartsSplitTetra_v1.0.3.ymme",
-        "browser_download_url": "https://github.com/tetra-te/PartsSplitTetra/releases/download/v1.0.3/PartsSplitTetra_v1.0.3.ymme",
+        "name": "v1.0.4",
+        "tag_name": "v1.0.4",
+        "created_at": "2026-08-07T06:58:07Z",
+        "published_at": "2026-08-07T07:53:58Z",
+        "crawled_at": "2026-08-14 16:31:09",
+        "file_name": "PartsSplitTetra_v1.0.4.ymme",
+        "browser_download_url": "https://github.com/tetra-te/PartsSplitTetra/releases/download/v1.0.4/PartsSplitTetra_v1.0.4.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-156-1786586178947",
+      "id": "plugin-157-1786725272391",
       "name": "かたすみキャプチャプラグイン",
       "author": "あおもや",
       "type": "ツール",
@@ -5057,7 +5083,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-157-1786586178947",
+      "id": "plugin-158-1786725272391",
       "name": "YMM4_ntsc-rs",
       "author": "イヤホンᖰ ᖳ",
       "type": "映像エフェクト",
@@ -5085,14 +5111,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-03-18T16:07:56Z",
         "published_at": "2026-03-18T16:27:43Z",
-        "crawled_at": "2026-08-13 01:46:08",
+        "crawled_at": "2026-08-14 16:31:09",
         "file_name": "YMM4_ntsc-rs_v1.0.0.ymme",
         "browser_download_url": "https://github.com/panko200/YMM4_ntsc-rs/releases/download/v1.0.0/YMM4_ntsc-rs_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-158-1786586178947",
+      "id": "plugin-159-1786725272391",
       "name": "画像挿入",
       "author": "もづりぃ",
       "type": "映像エフェクト",
@@ -5120,14 +5146,14 @@
         "tag_name": "v1.0",
         "created_at": "2026-03-17T18:48:16Z",
         "published_at": "2026-03-17T18:57:05Z",
-        "crawled_at": "2026-08-13 01:46:07",
+        "crawled_at": "2026-08-14 16:31:08",
         "file_name": "ImageOverlay.ymme",
         "browser_download_url": "https://github.com/modurili/ImageOverlay/releases/download/v1.0/ImageOverlay.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-159-1786586178947",
+      "id": "plugin-160-1786725272391",
       "name": "簡易関数グラフ",
       "author": "イヤホンᖰ ᖳ",
       "type": "図形",
@@ -5155,14 +5181,14 @@
         "tag_name": "v0.1.0",
         "created_at": "2026-03-15T05:52:51Z",
         "published_at": "2026-03-15T05:54:52Z",
-        "crawled_at": "2026-08-13 01:46:07",
+        "crawled_at": "2026-08-14 16:31:07",
         "file_name": "YMM4SimpleGraphingfunctions_v0.1.0.ymme",
         "browser_download_url": "https://github.com/panko200/YMM4SimpleGraphingfunctions/releases/download/v0.1.0/YMM4SimpleGraphingfunctions_v0.1.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-160-1786586178947",
+      "id": "plugin-161-1786725272391",
       "name": "ライン行進エフェクト",
       "author": "たなずん",
       "type": "映像エフェクト",
@@ -5194,14 +5220,14 @@
         "tag_name": "v1.2.0",
         "created_at": "2026-03-29T08:24:11Z",
         "published_at": "2026-03-29T08:27:02Z",
-        "crawled_at": "2026-08-13 01:46:07",
+        "crawled_at": "2026-08-14 16:31:08",
         "file_name": "LineMarchEffect_v1.2.0.ymme",
         "browser_download_url": "https://github.com/tanazun/LineMarchEffect/releases/download/v1.2.0/LineMarchEffect_v1.2.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-161-1786586178947",
+      "id": "plugin-162-1786725272391",
       "name": "アイテム間線接続",
       "author": "イヤホンᖰ ᖳ",
       "type": "映像エフェクト",
@@ -5229,14 +5255,14 @@
         "tag_name": "v0.1.0",
         "created_at": "2026-03-11T13:27:31Z",
         "published_at": "2026-03-11T13:45:16Z",
-        "crawled_at": "2026-08-13 01:46:06",
+        "crawled_at": "2026-08-14 16:31:06",
         "file_name": "InterItemNode_v0.1.0.ymme",
         "browser_download_url": "https://github.com/panko200/InterItemNode/releases/download/v0.1.0/InterItemNode_v0.1.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-162-1786586178947",
+      "id": "plugin-163-1786725272391",
       "name": "疑似3D線",
       "author": "イヤホンᖰ ᖳ",
       "type": "映像エフェクト",
@@ -5264,14 +5290,14 @@
         "tag_name": "v0.1.0",
         "created_at": "2026-03-11T14:37:51Z",
         "published_at": "2026-03-11T14:41:51Z",
-        "crawled_at": "2026-08-13 01:46:06",
+        "crawled_at": "2026-08-14 16:31:07",
         "file_name": "Pseudo3DLine_v0.1.0.ymme",
         "browser_download_url": "https://github.com/panko200/Pseudo3DLine/releases/download/v0.1.0/Pseudo3DLine_v0.1.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-163-1786586178947",
+      "id": "plugin-164-1786725272391",
       "name": "指定秒間回転",
       "author": "ハイさんgames",
       "type": "映像エフェクト",
@@ -5303,14 +5329,14 @@
         "tag_name": "v1.0.1",
         "created_at": "2026-03-12T08:58:41Z",
         "published_at": "2026-03-12T09:01:01Z",
-        "crawled_at": "2026-08-13 01:46:06",
+        "crawled_at": "2026-08-14 16:31:07",
         "file_name": "RotationPerSecondEffect.v1.0.1.ymme",
         "browser_download_url": "https://github.com/HAIsanGames813/RotationPerSecondEffect/releases/download/v1.0.1/RotationPerSecondEffect.v1.0.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-164-1786586178947",
+      "id": "plugin-165-1786725272391",
       "name": "みゅしゃかーぶ（MuchaCurve）",
       "author": "ㅎュㅎ",
       "type": "映像エフェクト",
@@ -5335,7 +5361,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-165-1786586178947",
+      "id": "plugin-166-1786725272391",
       "name": "みゅしゃらっと（MuchaLUT）",
       "author": "ㅎュㅎ",
       "type": "映像エフェクト",
@@ -5360,7 +5386,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-166-1786586178947",
+      "id": "plugin-167-1786725272391",
       "name": "YMM4-Plugin-Bezier_Object",
       "author": "タイチョー",
       "type": "映像エフェクト",
@@ -5388,14 +5414,14 @@
         "tag_name": "ver1.0.2",
         "created_at": "2026-03-11T20:28:20Z",
         "published_at": "2026-03-11T21:04:24Z",
-        "crawled_at": "2026-08-13 01:46:05",
+        "crawled_at": "2026-08-14 16:31:05",
         "file_name": "Bezier_Object.ymme",
         "browser_download_url": "https://github.com/Mathmagical314/YMM4-Plugin-Bezier_Object/releases/download/ver1.0.2/Bezier_Object.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-167-1786586178947",
+      "id": "plugin-168-1786725272391",
       "name": "疑似3D球体",
       "author": "イヤホンᖰ ᖳ",
       "type": "映像エフェクト",
@@ -5423,14 +5449,14 @@
         "tag_name": "v0.2.2",
         "created_at": "2026-07-26T08:19:55Z",
         "published_at": "2026-07-26T08:22:26Z",
-        "crawled_at": "2026-08-13 01:46:05",
+        "crawled_at": "2026-08-14 16:31:06",
         "file_name": "Pseudo3DSphere_v0.2.2.ymme",
         "browser_download_url": "https://github.com/panko200/Pseudo3DSphere/releases/download/v0.2.2/Pseudo3DSphere_v0.2.2.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-168-1786586178947",
+      "id": "plugin-169-1786725272391",
       "name": "みゅしゃもにたー / MuchaMonitor",
       "author": "ㅎュㅎ",
       "type": "ツール",
@@ -5455,7 +5481,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-169-1786586178947",
+      "id": "plugin-170-1786725272391",
       "name": "YMM4 MCP プラグイン",
       "author": "SCPgamer",
       "type": "ツール",
@@ -5479,7 +5505,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-170-1786586178947",
+      "id": "plugin-171-1786725272391",
       "name": "ループ差分チェッカー",
       "author": "Hashibutogarasu",
       "type": "映像エフェクト",
@@ -5502,14 +5528,14 @@
         "tag_name": "v.1.0.0.0",
         "created_at": "2026-01-25T06:52:07Z",
         "published_at": "2026-01-25T06:55:02Z",
-        "crawled_at": "2026-08-13 01:46:04",
+        "crawled_at": "2026-08-14 16:31:05",
         "file_name": "LoopOverlayAssist.ymme",
         "browser_download_url": "https://github.com/Hashibutogarasu/LoopOverlayAssist/releases/download/v.1.0.0.0/LoopOverlayAssist.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-171-1786586178947",
+      "id": "plugin-172-1786725272391",
       "name": "TextBezierプラグイン",
       "author": "Salmon_P",
       "type": "映像エフェクト",
@@ -5537,14 +5563,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-03-05T13:52:38Z",
         "published_at": "2026-03-05T13:56:22Z",
-        "crawled_at": "2026-08-13 01:46:03",
+        "crawled_at": "2026-08-14 16:31:04",
         "file_name": "TextBezier.ymme",
         "browser_download_url": "https://github.com/Salmon-P-0517/ymm4-plugin-TextBezier/releases/download/v1.0.0/TextBezier.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-172-1786586178947",
+      "id": "plugin-173-1786725272391",
       "name": "疑似3D押し出し",
       "author": "イヤホンᖰ ᖳ",
       "type": "映像エフェクト",
@@ -5572,14 +5598,14 @@
         "tag_name": "v1.1.2",
         "created_at": "2026-07-26T08:13:40Z",
         "published_at": "2026-07-26T08:15:07Z",
-        "crawled_at": "2026-08-13 01:46:04",
+        "crawled_at": "2026-08-14 16:31:04",
         "file_name": "Pseudo3DExtrusion_v1.1.2.ymme",
         "browser_download_url": "https://github.com/panko200/Pseudo3DExtrusion/releases/download/v1.1.2/Pseudo3DExtrusion_v1.1.2.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-173-1786586178947",
+      "id": "plugin-174-1786725272391",
       "name": "YMM4_ffMosh",
       "author": "イヤホンᖰ ᖳ",
       "type": "ツール",
@@ -5607,14 +5633,14 @@
         "tag_name": "v0.1.0",
         "created_at": "2026-03-03T14:05:11Z",
         "published_at": "2026-03-03T14:27:45Z",
-        "crawled_at": "2026-08-13 01:46:03",
+        "crawled_at": "2026-08-14 16:31:03",
         "file_name": "YMM4_ffMosh_v0.1.0.ymme",
         "browser_download_url": "https://github.com/panko200/YMM4_ffMosh/releases/download/v0.1.0/YMM4_ffMosh_v0.1.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-174-1786586178947",
+      "id": "plugin-175-1786725272391",
       "name": "制御文字追加",
       "author": "ハイさんgames",
       "type": "その他",
@@ -5646,14 +5672,14 @@
         "tag_name": "v1.1.0",
         "created_at": "2026-03-03T10:31:40Z",
         "published_at": "2026-03-11T13:03:55Z",
-        "crawled_at": "2026-08-13 01:46:02",
+        "crawled_at": "2026-08-14 16:31:03",
         "file_name": "WeightControlPlugin.v1.1.0.ymme",
         "browser_download_url": "https://github.com/HAIsanGames813/WeightControlPlugin/releases/download/v1.1.0/WeightControlPlugin.v1.1.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-175-1786586178947",
+      "id": "plugin-176-1786725272391",
       "name": "棒グラフプラグイン",
       "author": "ひでチャンネル@VTuber",
       "type": "図形",
@@ -5677,7 +5703,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-176-1786586178947",
+      "id": "plugin-177-1786725272391",
       "name": "ツリー・階層図プラグイン",
       "author": "ひでチャンネル@VTuber",
       "type": "図形",
@@ -5702,7 +5728,7 @@
       "price": "¥ 500"
     },
     {
-      "id": "plugin-177-1786586178947",
+      "id": "plugin-178-1786725272391",
       "name": "Iyahon_Shape系統",
       "author": "イヤホンᖰ ᖳ",
       "type": "映像エフェクト",
@@ -5730,14 +5756,14 @@
         "tag_name": "v0.1.2",
         "created_at": "2026-07-26T08:26:15Z",
         "published_at": "2026-07-26T08:27:58Z",
-        "crawled_at": "2026-08-13 01:46:02",
+        "crawled_at": "2026-08-14 16:31:02",
         "file_name": "Iyahon_ShapeCore_v0.1.2.ymme",
         "browser_download_url": "https://github.com/panko200/Iyahon_ShapeCore/releases/download/v0.1.2/Iyahon_ShapeCore_v0.1.2.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-178-1786586178947",
+      "id": "plugin-179-1786725272391",
       "name": "ジェットカットプラグイン",
       "author": "りんだい",
       "type": "ツール",
@@ -5765,14 +5791,14 @@
         "tag_name": "v2.0.0",
         "created_at": "2026-03-18T12:22:22Z",
         "published_at": "2026-02-22T06:11:46Z",
-        "crawled_at": "2026-08-13 01:46:01",
+        "crawled_at": "2026-08-14 16:31:02",
         "file_name": "JetCutPlugin.ymme",
         "browser_download_url": "https://github.com/Rindai0123-Artifact/ymm4-jetcut-plugin/releases/download/v2.0.0/JetCutPlugin.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-179-1786586178947",
+      "id": "plugin-180-1786725272391",
       "name": "OpenCVエフェクトサンプルプラグイン",
       "author": "てとら",
       "type": "映像エフェクト",
@@ -5796,7 +5822,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-180-1786586178947",
+      "id": "plugin-181-1786725272391",
       "name": "動画プロキシ",
       "author": "いるかぁぁ",
       "type": "動画読み込み",
@@ -5828,14 +5854,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-02-17T05:15:25Z",
         "published_at": "2026-02-17T05:16:00Z",
-        "crawled_at": "2026-08-13 01:46:01",
+        "crawled_at": "2026-08-14 16:31:01",
         "file_name": "ProxyVideoSource_v1.0.0.ymme",
         "browser_download_url": "https://github.com/Dolphin-kun/ProxyVideoSource/releases/download/v1.0.0/ProxyVideoSource_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-181-1786586178947",
+      "id": "plugin-182-1786725272391",
       "name": "Modulator",
       "author": "aiubr",
       "type": "映像エフェクト",
@@ -5863,14 +5889,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-02-14T14:57:08Z",
         "published_at": "2026-02-14T15:08:26Z",
-        "crawled_at": "2026-08-13 01:45:59",
+        "crawled_at": "2026-08-14 16:31:00",
         "file_name": "Modulator.ymme",
         "browser_download_url": "https://github.com/NA-JPBrew/Modulator/releases/download/v1.0.0/Modulator.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-182-1786586178947",
+      "id": "plugin-183-1786725272391",
       "name": "WaveplusEffect",
       "author": "イヤホンᖰ ᖳ",
       "type": "映像エフェクト",
@@ -5898,14 +5924,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-02-14T08:33:53Z",
         "published_at": "2026-02-14T08:35:53Z",
-        "crawled_at": "2026-08-13 01:46:00",
+        "crawled_at": "2026-08-14 16:31:00",
         "file_name": "WaveplusEffect_v1.0.0.ymme",
         "browser_download_url": "https://github.com/panko200/WaveplusEffect/releases/download/v1.0.0/WaveplusEffect_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-183-1786586178947",
+      "id": "plugin-184-1786725272391",
       "name": "YMMProjectManager",
       "author": "はじめよう",
       "type": "ツール",
@@ -5933,14 +5959,14 @@
         "tag_name": "v0.4.0",
         "created_at": "2026-06-25T14:10:05Z",
         "published_at": "2026-06-25T14:51:41Z",
-        "crawled_at": "2026-08-13 01:46:00",
+        "crawled_at": "2026-08-14 16:31:01",
         "file_name": "YMMProjectManager.ymme",
         "browser_download_url": "https://github.com/hazimeyou/YMMProjectManager/releases/download/v0.4.0/YMMProjectManager.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-184-1786586178947",
+      "id": "plugin-185-1786725272391",
       "name": "SimpleScreenMotionBlurEffect",
       "author": "イヤホンᖰ ᖳ",
       "type": "映像エフェクト",
@@ -5968,14 +5994,14 @@
         "tag_name": "v1.0.2",
         "created_at": "2026-08-02T12:02:21Z",
         "published_at": "2026-08-02T12:06:21Z",
-        "crawled_at": "2026-08-13 01:45:58",
+        "crawled_at": "2026-08-14 16:30:59",
         "file_name": "SimpleScreenMotionBlurEffect_v1.0.2.ymme",
         "browser_download_url": "https://github.com/panko200/SimpleScreenMotionBlurEffect/releases/download/v1.0.2/SimpleScreenMotionBlurEffect_v1.0.2.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-185-1786586178947",
+      "id": "plugin-186-1786725272391",
       "name": "Indicator",
       "author": "てとら",
       "type": "映像エフェクト",
@@ -6003,14 +6029,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-02-13T08:15:05Z",
         "published_at": "2026-02-13T08:21:12Z",
-        "crawled_at": "2026-08-13 01:45:59",
+        "crawled_at": "2026-08-14 16:30:59",
         "file_name": "Indicator_v1.0.0.ymme",
         "browser_download_url": "https://github.com/tetra-te/Indicator/releases/download/v1.0.0/Indicator_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-186-1786586178947",
+      "id": "plugin-187-1786725272391",
       "name": "EffekseerForYMM4",
       "author": "takoyakisoft",
       "type": "映像エフェクト, 音声エフェクト",
@@ -6033,14 +6059,14 @@
         "tag_name": "v1.1.0",
         "created_at": "2026-03-25T10:35:51Z",
         "published_at": "2026-03-25T10:40:47Z",
-        "crawled_at": "2026-08-13 01:45:59",
+        "crawled_at": "2026-08-14 16:31:00",
         "file_name": "EffekseerForYMM4.ymme",
         "browser_download_url": "https://github.com/takoyakisoft/EffekseerForYMM4/releases/download/v1.1.0/EffekseerForYMM4.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-187-1786586178947",
+      "id": "plugin-188-1786725272391",
       "name": "CuboidTransform",
       "author": "イヤホンᖰ ᖳ",
       "type": "映像エフェクト",
@@ -6068,14 +6094,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-02-10T11:01:26Z",
         "published_at": "2026-02-10T11:03:39Z",
-        "crawled_at": "2026-08-13 01:45:58",
+        "crawled_at": "2026-08-14 16:30:58",
         "file_name": "CuboidTransformEffect_v1.0.0.ymme",
         "browser_download_url": "https://github.com/panko200/CuboidTransform/releases/download/v1.0.0/CuboidTransformEffect_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-188-1786586178947",
+      "id": "plugin-189-1786725272391",
       "name": "Z_DepthofField",
       "author": "イヤホンᖰ ᖳ",
       "type": "映像エフェクト",
@@ -6103,14 +6129,14 @@
         "tag_name": "v1.1.0",
         "created_at": "2026-02-07T12:46:28Z",
         "published_at": "2026-02-07T12:54:44Z",
-        "crawled_at": "2026-08-13 01:45:58",
+        "crawled_at": "2026-08-14 16:30:58",
         "file_name": "Z_DepthofFieldEffect_v1.1.0.ymme",
         "browser_download_url": "https://github.com/panko200/Z_DepthofField/releases/download/v1.1.0/Z_DepthofFieldEffect_v1.1.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-189-1786586178947",
+      "id": "plugin-190-1786725272391",
       "name": "Iyahon_TextureMap",
       "author": "イヤホンᖰ ᖳ",
       "type": "映像エフェクト",
@@ -6138,14 +6164,14 @@
         "tag_name": "v1.0.2",
         "created_at": "2026-06-11T11:00:33Z",
         "published_at": "2026-06-11T11:03:57Z",
-        "crawled_at": "2026-08-13 01:45:57",
+        "crawled_at": "2026-08-14 16:30:57",
         "file_name": "Iyahon_TextureMapEffect_v1.0.2.ymme",
         "browser_download_url": "https://github.com/panko200/Iyahon_TextureMap/releases/download/v1.0.2/Iyahon_TextureMapEffect_v1.0.2.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-190-1786586178947",
+      "id": "plugin-191-1786725272391",
       "name": "ymm4-monaural-plugin",
       "author": "taisan@@",
       "type": "音声エフェクト",
@@ -6173,14 +6199,14 @@
         "tag_name": "1",
         "created_at": "2026-02-01T01:44:06Z",
         "published_at": "2026-02-01T01:46:53Z",
-        "crawled_at": "2026-08-13 01:45:57",
+        "crawled_at": "2026-08-14 16:30:57",
         "file_name": "ymm4-monaural-plugin.ymme",
         "browser_download_url": "https://github.com/taisan11/ymm4-monaural-plugin/releases/download/1/ymm4-monaural-plugin.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-191-1786586178947",
+      "id": "plugin-192-1786725272391",
       "name": "ランダム画像読み込み",
       "author": "てとら",
       "type": "図形",
@@ -6208,14 +6234,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-01-28T09:49:25Z",
         "published_at": "2026-01-28T09:57:33Z",
-        "crawled_at": "2026-08-13 01:45:56",
+        "crawled_at": "2026-08-14 16:30:56",
         "file_name": "RandomImageSource_v1.0.0.ymme",
         "browser_download_url": "https://github.com/tetra-te/RandomImageSource/releases/download/v1.0.0/RandomImageSource_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-192-1786586178947",
+      "id": "plugin-193-1786725272391",
       "name": "快速捜索Lite",
       "author": "hiroチャンネル",
       "type": "ツール",
@@ -6240,7 +6266,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-193-1786586178947",
+      "id": "plugin-194-1786725272391",
       "name": "入力サウンド",
       "author": "ハイさんgames",
       "type": "その他",
@@ -6268,14 +6294,14 @@
         "tag_name": "v2.0.0",
         "created_at": "2026-01-20T10:05:44Z",
         "published_at": "2026-01-20T10:13:24Z",
-        "crawled_at": "2026-08-13 01:45:56",
+        "crawled_at": "2026-08-14 16:30:56",
         "file_name": "InputSoundPlugin.v2.0.0.ymme",
         "browser_download_url": "https://github.com/HAIsanGames813/InputSoundPlugin/releases/download/v2.0.0/InputSoundPlugin.v2.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-194-1786586178947",
+      "id": "plugin-195-1786725272391",
       "name": "トライトーン",
       "author": "えぬ",
       "type": "映像エフェクト",
@@ -6303,14 +6329,14 @@
         "tag_name": "v1.0",
         "created_at": "2026-01-18T01:02:52Z",
         "published_at": "2026-01-18T01:05:34Z",
-        "crawled_at": "2026-08-13 01:45:56",
+        "crawled_at": "2026-08-14 16:30:56",
         "file_name": "TritoneVideoEffect.ymme",
         "browser_download_url": "https://github.com/ENU-DAYO/YMM4TritoneVideoEffect/releases/download/v1.0/TritoneVideoEffect.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-195-1786586178947",
+      "id": "plugin-196-1786725272391",
       "name": "アイテム出力",
       "author": "tenContΔ",
       "type": "映像エフェクト",
@@ -6338,14 +6364,14 @@
         "tag_name": "1.0.0",
         "created_at": "2026-01-13T12:27:16Z",
         "published_at": "2026-01-13T12:28:04Z",
-        "crawled_at": "2026-08-13 01:45:55",
+        "crawled_at": "2026-08-14 16:30:55",
         "file_name": "ImageOutputEffect.ymme",
         "browser_download_url": "https://github.com/tenkonta/YMM4-ImageOutputEffect/releases/download/1.0.0/ImageOutputEffect.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-196-1786586178947",
+      "id": "plugin-197-1786725272391",
       "name": "プレビュー付きテキストプリセットプラグイン",
       "author": "あづさまる",
       "type": "ツール",
@@ -6370,7 +6396,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-197-1786586178947",
+      "id": "plugin-198-1786725272391",
       "name": "YMM4_NVEncPlugin",
       "author": "たるたる",
       "type": "動画出力",
@@ -6395,7 +6421,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-198-1786586178947",
+      "id": "plugin-199-1786725272391",
       "name": "YMM4 Cloud Sync",
       "author": "なまけもの",
       "type": "ツール",
@@ -6423,14 +6449,14 @@
         "tag_name": "v0.2.0",
         "created_at": "2026-01-12T09:56:27Z",
         "published_at": "2026-01-12T10:03:04Z",
-        "crawled_at": "2026-08-13 01:45:55",
+        "crawled_at": "2026-08-14 16:30:54",
         "file_name": "YMM4CloudSync.ymme",
         "browser_download_url": "https://github.com/namakemono-san/YMM4-CloudSync/releases/download/v0.2.0/YMM4CloudSync.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-199-1786586178947",
+      "id": "plugin-200-1786725272391",
       "name": "Lightweightoutline",
       "author": "イヤホンᖰ ᖳ",
       "type": "映像エフェクト",
@@ -6458,14 +6484,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-01-04T12:47:26Z",
         "published_at": "2026-01-04T13:00:07Z",
-        "crawled_at": "2026-08-13 01:45:54",
+        "crawled_at": "2026-08-14 16:30:54",
         "file_name": "LightweightoutlineEffect_v1.0.0.ymme",
         "browser_download_url": "https://github.com/panko200/Lightweightoutline/releases/download/v1.0.0/LightweightoutlineEffect_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-200-1786586178947",
+      "id": "plugin-201-1786725272391",
       "name": "プラグイン管理リスト",
       "author": "ハイさんgames",
       "type": "ツール",
@@ -6493,14 +6519,14 @@
         "tag_name": "v2.0.0",
         "created_at": "2026-03-08T06:37:45Z",
         "published_at": "2026-03-08T06:44:36Z",
-        "crawled_at": "2026-08-13 01:45:54",
+        "crawled_at": "2026-08-14 16:30:53",
         "file_name": "PluginListPluginv2.0.0.ymme",
         "browser_download_url": "https://github.com/HAIsanGames813/PluginListPlugin/releases/download/v2.0.0/PluginListPluginv2.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-201-1786586178947",
+      "id": "plugin-202-1786725272391",
       "name": "AiuPixelSorter",
       "author": "aiubr",
       "type": "映像エフェクト",
@@ -6524,7 +6550,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-202-1786586178947",
+      "id": "plugin-203-1786725272391",
       "name": "VectorMelt",
       "author": "イヤホンᖰ ᖳ",
       "type": "映像エフェクト",
@@ -6552,14 +6578,14 @@
         "tag_name": "v0.1.0",
         "created_at": "2025-12-31T03:07:46Z",
         "published_at": "2025-12-31T03:12:08Z",
-        "crawled_at": "2026-08-13 01:45:53",
+        "crawled_at": "2026-08-14 16:30:53",
         "file_name": "VectorMelt_v0.1.0.ymme",
         "browser_download_url": "https://github.com/panko200/VectorMelt/releases/download/v0.1.0/VectorMelt_v0.1.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-203-1786586178947",
+      "id": "plugin-204-1786725272391",
       "name": "3Dモデル読み込み",
       "author": "routersys",
       "type": "図形",
@@ -6591,7 +6617,7 @@
         "tag_name": "v3.4.0",
         "created_at": "2026-06-20T10:08:35Z",
         "published_at": "2026-06-20T10:22:48Z",
-        "crawled_at": "2026-08-13 01:45:53",
+        "crawled_at": "2026-08-14 16:30:53",
         "file_name": "ObjLoader_v3.4.0.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-ObjLoader/releases/download/v3.4.0/ObjLoader_v3.4.0.ymme",
         "prerelease": false
@@ -6599,7 +6625,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-204-1786586178947",
+      "id": "plugin-205-1786725272391",
       "name": "エフェクトカテゴリカスタマイズ",
       "author": "てとら",
       "type": "その他",
@@ -6627,14 +6653,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2025-12-29T04:16:02Z",
         "published_at": "2025-12-29T04:32:32Z",
-        "crawled_at": "2026-08-13 01:45:53",
+        "crawled_at": "2026-08-14 16:30:52",
         "file_name": "EffectCategoryCustomizer_v1.0.0.ymme",
         "browser_download_url": "https://github.com/tetra-te/EffectCategoryCustomizer/releases/download/v1.0.0/EffectCategoryCustomizer_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-205-1786586178947",
+      "id": "plugin-206-1786725272391",
       "name": "エフェクトランダム切り替え",
       "author": "てとら",
       "type": "映像エフェクト",
@@ -6662,14 +6688,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2025-12-25T18:20:55Z",
         "published_at": "2025-12-25T18:29:02Z",
-        "crawled_at": "2026-08-13 01:45:52",
+        "crawled_at": "2026-08-14 16:30:51",
         "file_name": "RandomSwitchingEffect_v1.0.0.ymme",
         "browser_download_url": "https://github.com/tetra-te/RandomSwitchingEffect/releases/download/v1.0.0/RandomSwitchingEffect_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-206-1786586178947",
+      "id": "plugin-207-1786725272391",
       "name": "Glowplus",
       "author": "イヤホンᖰ ᖳ",
       "type": "映像エフェクト",
@@ -6697,14 +6723,14 @@
         "tag_name": "v1.1.0",
         "created_at": "2026-06-15T11:16:09Z",
         "published_at": "2026-06-15T11:18:00Z",
-        "crawled_at": "2026-08-13 01:45:52",
+        "crawled_at": "2026-08-14 16:30:52",
         "file_name": "GlowplusEffect_v1.1.0.ymme",
         "browser_download_url": "https://github.com/panko200/Glowplus/releases/download/v1.1.0/GlowplusEffect_v1.1.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-207-1786586178947",
+      "id": "plugin-208-1786725272391",
       "name": "物理演算",
       "author": "いるかぁぁ",
       "type": "映像エフェクト",
@@ -6732,14 +6758,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2025-12-25T08:24:20Z",
         "published_at": "2025-12-25T08:30:17Z",
-        "crawled_at": "2026-08-13 01:45:52",
+        "crawled_at": "2026-08-14 16:30:51",
         "file_name": "YMM4Physics2D_v1.0.0.ymme",
         "browser_download_url": "https://github.com/Dolphin-kun/YMM4Physics2D/releases/download/v1.0.0/YMM4Physics2D_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-208-1786586178947",
+      "id": "plugin-209-1786725272391",
       "name": "タドコロキャッシュ",
       "author": "幼虫",
       "type": "ツール",
@@ -6764,7 +6790,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-209-1786586178947",
+      "id": "plugin-210-1786725272391",
       "name": "フォントマネージャ",
       "author": "routersys",
       "type": "ツール",
@@ -6792,14 +6818,14 @@
         "tag_name": "v1.1.0",
         "created_at": "2025-12-23T11:44:27Z",
         "published_at": "2025-12-23T12:04:06Z",
-        "crawled_at": "2026-08-13 01:45:51",
+        "crawled_at": "2026-08-14 16:30:50",
         "file_name": "FontManager.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-FontManager/releases/download/v1.1.0/FontManager.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-210-1786586178947",
+      "id": "plugin-211-1786725272391",
       "name": "YMM4LUT",
       "author": "lmnrz",
       "type": "映像エフェクト",
@@ -6822,14 +6848,14 @@
         "tag_name": "v1.1",
         "created_at": "2025-12-21T11:01:12Z",
         "published_at": "2025-12-21T11:05:22Z",
-        "crawled_at": "2026-08-13 01:45:51",
+        "crawled_at": "2026-08-14 16:30:50",
         "file_name": "YMM4LUT.ymme",
         "browser_download_url": "https://github.com/lmnrz/YMM4LUT/releases/download/v1.1/YMM4LUT.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-211-1786586178947",
+      "id": "plugin-212-1786725272391",
       "name": "タドコロノード, タドコログラフエディタ",
       "author": "幼虫",
       "type": "図形, 映像エフェクト",
@@ -6862,7 +6888,7 @@
       "price": "¥ 2500"
     },
     {
-      "id": "plugin-212-1786586178947",
+      "id": "plugin-213-1786725272391",
       "name": "AiuCurver",
       "author": "aiubr",
       "type": "図形",
@@ -6886,7 +6912,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-213-1786586178947",
+      "id": "plugin-214-1786725272391",
       "name": "スコープモニター",
       "author": "いるかぁぁ",
       "type": "ツール",
@@ -6918,14 +6944,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2025-12-20T11:21:35Z",
         "published_at": "2025-12-20T11:24:13Z",
-        "crawled_at": "2026-08-13 01:45:50",
+        "crawled_at": "2026-08-14 16:30:50",
         "file_name": "ScopeMonitor_v1.0.0.ymme",
         "browser_download_url": "https://github.com/Dolphin-kun/ScopeMonitorTool/releases/download/v1.0.0/ScopeMonitor_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-214-1786586178947",
+      "id": "plugin-215-1786725272391",
       "name": "YMM4テキストテンプレートプラグイン",
       "author": "べにかずら",
       "type": "ツール",
@@ -6965,7 +6991,7 @@
         "tag_name": "ver3.0.2",
         "created_at": "2026-01-04T10:21:34Z",
         "published_at": "2026-02-22T14:26:33Z",
-        "crawled_at": "2026-08-13 01:45:50",
+        "crawled_at": "2026-08-14 16:30:49",
         "file_name": "TextTemplate.ymme",
         "browser_download_url": "https://github.com/benikazura/TextTemplate/releases/download/ver3.0.2/TextTemplate.ymme",
         "prerelease": false
@@ -6973,7 +6999,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-215-1786586178947",
+      "id": "plugin-216-1786725272391",
       "name": "ColorRamp",
       "author": "イヤホンᖰ ᖳ",
       "type": "映像エフェクト",
@@ -7001,14 +7027,14 @@
         "tag_name": "v3.0.1",
         "created_at": "2026-07-20T14:53:41Z",
         "published_at": "2026-07-20T14:54:18Z",
-        "crawled_at": "2026-08-13 01:45:50",
+        "crawled_at": "2026-08-14 16:30:49",
         "file_name": "ColorRampEffect_v3.0.1.ymme",
         "browser_download_url": "https://github.com/panko200/ColorRamp/releases/download/v3.0.1/ColorRampEffect_v3.0.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-216-1786586178947",
+      "id": "plugin-217-1786725272391",
       "name": "間詰め分断",
       "author": "ハイさんgames",
       "type": "映像エフェクト",
@@ -7036,14 +7062,14 @@
         "tag_name": "1.0.0",
         "created_at": "2025-11-07T10:46:22Z",
         "published_at": "2025-11-07T10:47:08Z",
-        "crawled_at": "2026-08-13 01:45:49",
+        "crawled_at": "2026-08-14 16:30:49",
         "file_name": "FillerClippingPlugin.v1.0.0.ymme",
         "browser_download_url": "https://github.com/HAIsanGames813/FillerClippingPlugin/releases/download/1.0.0/FillerClippingPlugin.v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-217-1786586178947",
+      "id": "plugin-218-1786725272391",
       "name": "階段イージング",
       "author": "tenContΔ",
       "type": "その他",
@@ -7071,14 +7097,14 @@
         "tag_name": "1.0.0",
         "created_at": "2025-11-07T04:50:01Z",
         "published_at": "2025-11-07T04:51:43Z",
-        "crawled_at": "2026-08-13 01:45:49",
+        "crawled_at": "2026-08-14 16:30:48",
         "file_name": "StepsEasing.ymme",
         "browser_download_url": "https://github.com/tenkonta/YMM4-StepsEasing/releases/download/1.0.0/StepsEasing.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-218-1786586178947",
+      "id": "plugin-219-1786725272391",
       "name": "Particles3D",
       "author": "イヤホンᖰ ᖳ",
       "type": "映像エフェクト",
@@ -7106,14 +7132,14 @@
         "tag_name": "v2.0.0",
         "created_at": "2026-03-27T17:19:43Z",
         "published_at": "2026-03-27T17:21:42Z",
-        "crawled_at": "2026-08-13 01:45:48",
+        "crawled_at": "2026-08-14 16:30:48",
         "file_name": "Particles3DEffect_v2.0.0.ymme",
         "browser_download_url": "https://github.com/panko200/Particles3D/releases/download/v2.0.0/Particles3DEffect_v2.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-219-1786586178947",
+      "id": "plugin-220-1786725272391",
       "name": "YMM4素材同梱プラグイン",
       "author": "はじめよう",
       "type": "ツール",
@@ -7141,14 +7167,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-06-24T14:21:03Z",
         "published_at": "2026-06-24T14:40:34Z",
-        "crawled_at": "2026-08-13 01:45:48",
+        "crawled_at": "2026-08-14 16:30:47",
         "file_name": "YMMResourcePackager.ymme",
         "browser_download_url": "https://github.com/hazimeyou/YMMResourcePackager/releases/download/v1.0.0/YMMResourcePackager.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-220-1786586178947",
+      "id": "plugin-221-1786725272391",
       "name": "テキスト分割",
       "author": "いるかぁぁ",
       "type": "ツール",
@@ -7180,14 +7206,14 @@
         "tag_name": "v2.0.0",
         "created_at": "2025-10-29T09:03:07Z",
         "published_at": "2025-10-29T09:42:25Z",
-        "crawled_at": "2026-08-13 01:45:47",
+        "crawled_at": "2026-08-14 16:30:47",
         "file_name": "TextSplitter_v2.0.0.ymme",
         "browser_download_url": "https://github.com/Dolphin-kun/TextSplitter/releases/download/v2.0.0/TextSplitter_v2.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-221-1786586178947",
+      "id": "plugin-222-1786725272391",
       "name": "登場退場（汎用）",
       "author": "tiramisu_oTATo",
       "type": "映像エフェクト, 図形",
@@ -7215,14 +7241,14 @@
         "tag_name": "v1.1.1",
         "created_at": "2025-11-05T16:13:27Z",
         "published_at": "2025-11-05T16:15:09Z",
-        "crawled_at": "2026-08-13 01:45:47",
+        "crawled_at": "2026-08-14 16:30:46",
         "file_name": "GeneralInOutPlugin.ymme",
         "browser_download_url": "https://github.com/thiramisu/ymm4-plugin-general-in-out/releases/download/v1.1.1/GeneralInOutPlugin.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-222-1786586178947",
+      "id": "plugin-223-1786725272391",
       "name": "ピクセルソート",
       "author": "tenContΔ",
       "type": "映像エフェクト",
@@ -7250,14 +7276,14 @@
         "tag_name": "0.1.0",
         "created_at": "2025-10-24T06:50:33Z",
         "published_at": "2025-10-24T06:52:47Z",
-        "crawled_at": "2026-08-13 01:45:47",
+        "crawled_at": "2026-08-14 16:30:47",
         "file_name": "PixelSorterEffect.ymme",
         "browser_download_url": "https://github.com/tenkonta/YMM4-PixelSorterEffect/releases/download/0.1.0/PixelSorterEffect.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-223-1786586178947",
+      "id": "plugin-224-1786725272391",
       "name": "超！エキサイティン！！複製エフェクト",
       "author": "sinβ",
       "type": "映像エフェクト",
@@ -7289,14 +7315,14 @@
         "tag_name": "v1.1.0",
         "created_at": "2026-06-08T06:12:58Z",
         "published_at": "2026-06-08T06:14:42Z",
-        "crawled_at": "2026-08-13 01:45:46",
+        "crawled_at": "2026-08-14 16:30:46",
         "file_name": "SuperExcitingCloneEffect-v1.1.0.ymme",
         "browser_download_url": "https://github.com/sinBetaKun/SuperExcitingCloneEffect/releases/download/v1.1.0/SuperExcitingCloneEffect-v1.1.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-224-1786586178947",
+      "id": "plugin-225-1786725272391",
       "name": "キャンバス",
       "author": "ハイさんgames",
       "type": "ツール",
@@ -7324,14 +7350,14 @@
         "tag_name": "1.0.0",
         "created_at": "2025-10-19T10:05:04Z",
         "published_at": "2025-10-19T10:09:01Z",
-        "crawled_at": "2026-08-13 01:45:46",
+        "crawled_at": "2026-08-14 16:30:45",
         "file_name": "CanvasPlugin.v1.0.0.ymme",
         "browser_download_url": "https://github.com/HAIsanGames813/CanvasPlugin/releases/download/1.0.0/CanvasPlugin.v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-225-1786586178947",
+      "id": "plugin-226-1786725272391",
       "name": "超立方体",
       "author": "tenContΔ",
       "type": "図形",
@@ -7359,14 +7385,14 @@
         "tag_name": "0.1.0",
         "created_at": "2025-10-15T09:37:31Z",
         "published_at": "2025-10-15T09:38:25Z",
-        "crawled_at": "2026-08-13 01:45:45",
+        "crawled_at": "2026-08-14 16:30:45",
         "file_name": "HypercubeShape.ymme",
         "browser_download_url": "https://github.com/tenkonta/YMM4-HypercubeShape/releases/download/0.1.0/HypercubeShape.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-226-1786586178947",
+      "id": "plugin-227-1786725272391",
       "name": "波打ち（極座標）",
       "author": "sinβ",
       "type": "映像エフェクト",
@@ -7398,14 +7424,14 @@
         "tag_name": "v1.3.0.0",
         "created_at": "2026-06-24T09:14:45Z",
         "published_at": "2026-06-24T09:38:08Z",
-        "crawled_at": "2026-08-13 01:45:45",
+        "crawled_at": "2026-08-14 16:30:44",
         "file_name": "CircleWave-v1.3.0.0.ymme",
         "browser_download_url": "https://github.com/sinBetaKun/CircleWave/releases/download/v1.3.0.0/CircleWave-v1.3.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-227-1786586178947",
+      "id": "plugin-228-1786725272391",
       "name": "逆再生",
       "author": "ハイさんgames",
       "type": "音声エフェクト",
@@ -7433,14 +7459,14 @@
         "tag_name": "1.0.0",
         "created_at": "2025-10-13T11:08:54Z",
         "published_at": "2025-10-13T11:12:14Z",
-        "crawled_at": "2026-08-13 01:45:44",
+        "crawled_at": "2026-08-14 16:30:43",
         "file_name": "ReversePlaybackAudioEffect.v1.0.0.ymme",
         "browser_download_url": "https://github.com/HAIsanGames813/ReversePlaybackAudioEffectPlugin/releases/download/1.0.0/ReversePlaybackAudioEffect.v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-228-1786586178947",
+      "id": "plugin-229-1786725272391",
       "name": "YMM4クリップボード",
       "author": "いるかぁぁ",
       "type": "ツール",
@@ -7472,14 +7498,14 @@
         "tag_name": "v1.1.0",
         "created_at": "2025-10-13T14:59:44Z",
         "published_at": "2025-10-13T15:02:46Z",
-        "crawled_at": "2026-08-13 01:45:44",
+        "crawled_at": "2026-08-14 16:30:44",
         "file_name": "YMM4Clipboard_v1.1.0.ymme",
         "browser_download_url": "https://github.com/Dolphin-kun/YMM4Clipboard/releases/download/v1.1.0/YMM4Clipboard_v1.1.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-229-1786586178947",
+      "id": "plugin-230-1786725272391",
       "name": "シンメトリーエフェクト",
       "author": "てとら",
       "type": "映像エフェクト",
@@ -7503,7 +7529,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-230-1786586178947",
+      "id": "plugin-231-1786725272391",
       "name": "YMM4アニメーション音程プラグイン",
       "author": "べにかずら",
       "type": "音声エフェクト",
@@ -7543,14 +7569,14 @@
         "tag_name": "ver1.0.0",
         "created_at": "2025-10-12T05:20:47Z",
         "published_at": "2025-10-12T05:41:25Z",
-        "crawled_at": "2026-08-13 01:45:44",
+        "crawled_at": "2026-08-14 16:30:43",
         "file_name": "AnimationPitch.ymme",
         "browser_download_url": "https://github.com/benikazura/AnimationPitch/releases/download/ver1.0.0/AnimationPitch.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-231-1786586178947",
+      "id": "plugin-232-1786725272391",
       "name": "図形貼り付け",
       "author": "ハイさんgames",
       "type": "映像エフェクト",
@@ -7578,14 +7604,14 @@
         "tag_name": "4.0.0",
         "created_at": "2026-07-22T12:07:46Z",
         "published_at": "2026-07-22T12:10:25Z",
-        "crawled_at": "2026-08-13 01:45:43",
+        "crawled_at": "2026-08-14 16:30:43",
         "file_name": "AddShapeEffect.v4.0.0.ymme",
         "browser_download_url": "https://github.com/HAIsanGames813/AddShapeEffect/releases/download/4.0.0/AddShapeEffect.v4.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-232-1786586178947",
+      "id": "plugin-233-1786725272391",
       "name": "カスタム再生バー",
       "author": "tenContΔ",
       "type": "その他",
@@ -7613,14 +7639,14 @@
         "tag_name": "1.0.2",
         "created_at": "2025-10-07T09:05:45Z",
         "published_at": "2025-12-02T03:07:27Z",
-        "crawled_at": "2026-08-13 01:45:42",
+        "crawled_at": "2026-08-14 16:30:42",
         "file_name": "CustomBar.ymme",
         "browser_download_url": "https://github.com/tenkonta/YMM4-CustomBar/releases/download/1.0.2/CustomBar.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-233-1786586178947",
+      "id": "plugin-234-1786725272391",
       "name": "チェック柄コレクション",
       "author": "tenContΔ",
       "type": "模様",
@@ -7648,14 +7674,14 @@
         "tag_name": "1.0.0",
         "created_at": "2025-10-05T01:39:28Z",
         "published_at": "2025-10-05T01:41:32Z",
-        "crawled_at": "2026-08-13 01:45:42",
+        "crawled_at": "2026-08-14 16:30:42",
         "file_name": "CheckPatternCollection.ymme",
         "browser_download_url": "https://github.com/tenkonta/CheckPatternCollection/releases/download/1.0.0/CheckPatternCollection.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-234-1786586178947",
+      "id": "plugin-235-1786725272391",
       "name": "長文軽量スクロール",
       "author": "tiramisu_oTATo",
       "type": "図形",
@@ -7683,14 +7709,14 @@
         "tag_name": "v1.2.4",
         "created_at": "2025-11-08T09:09:32Z",
         "published_at": "2025-11-08T09:12:40Z",
-        "crawled_at": "2026-08-13 01:45:42",
+        "crawled_at": "2026-08-14 16:30:41",
         "file_name": "LongTextScrollerPlugin.ymme",
         "browser_download_url": "https://github.com/thiramisu/ymm4-plugin-long-text-scroller/releases/download/v1.2.4/LongTextScrollerPlugin.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-235-1786586178947",
+      "id": "plugin-236-1786725272391",
       "name": "YouTube字幕プラグイン",
       "author": "tenContΔ",
       "type": "図形, ツール",
@@ -7718,14 +7744,14 @@
         "tag_name": "β.2.0",
         "created_at": "2025-09-25T02:59:26Z",
         "published_at": "2025-09-25T08:28:05Z",
-        "crawled_at": "2026-08-13 01:45:41",
+        "crawled_at": "2026-08-14 16:30:41",
         "file_name": "YouTubeCCPlugin.ymme",
         "browser_download_url": "https://github.com/tenkonta/YTTMM4-YouTubeCCPlugin/releases/download/%CE%B2.2.0/YouTubeCCPlugin.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-236-1786586178947",
+      "id": "plugin-237-1786725272391",
       "name": "MIDI読み込み",
       "author": "routersys",
       "type": "音声読み込み",
@@ -7753,14 +7779,14 @@
         "tag_name": "v8.2.0",
         "created_at": "2025-11-26T12:36:42Z",
         "published_at": "2025-11-26T13:15:57Z",
-        "crawled_at": "2026-08-13 01:45:41",
+        "crawled_at": "2026-08-14 16:30:40",
         "file_name": "MIDI.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-MIDI/releases/download/v8.2.0/MIDI.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-237-1786586178947",
+      "id": "plugin-238-1786725272391",
       "name": "ブラウン管",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -7788,14 +7814,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2025-09-14T06:00:17Z",
         "published_at": "2025-09-14T06:01:16Z",
-        "crawled_at": "2026-08-13 01:45:41",
+        "crawled_at": "2026-08-14 16:30:41",
         "file_name": "CRT.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-CRT/releases/download/v1.0.0/CRT.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-238-1786586178947",
+      "id": "plugin-239-1786725272391",
       "name": "YMM4パフォーマンスモニター",
       "author": "いぬいぬGames",
       "type": "ツール",
@@ -7823,14 +7849,14 @@
         "tag_name": "v0.1.1",
         "created_at": "2025-09-13T01:55:55Z",
         "published_at": "2025-09-14T13:14:11Z",
-        "crawled_at": "2026-08-13 01:45:39",
+        "crawled_at": "2026-08-14 16:30:39",
         "file_name": "YMM4PerfMonitorPlugin.v.0.1.1.ymme",
         "browser_download_url": "https://github.com/InuInu2022/YMM4PerfMonitorPlugin/releases/download/v0.1.1/YMM4PerfMonitorPlugin.v.0.1.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-239-1786586178947",
+      "id": "plugin-240-1786725272391",
       "name": "画像リサイズ",
       "author": "routersys",
       "type": "ツール",
@@ -7858,14 +7884,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2025-09-12T14:09:07Z",
         "published_at": "2025-09-12T14:10:10Z",
-        "crawled_at": "2026-08-13 01:45:40",
+        "crawled_at": "2026-08-14 16:30:39",
         "file_name": "ImageResize.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-ImageResize/releases/download/v1.0.0/ImageResize.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-240-1786586178947",
+      "id": "plugin-241-1786725272391",
       "name": "表テーブル",
       "author": "いぬいぬGames",
       "type": "図形",
@@ -7893,14 +7919,14 @@
         "tag_name": "v0.1.1",
         "created_at": "2025-09-11T21:20:52Z",
         "published_at": "2025-09-14T13:05:58Z",
-        "crawled_at": "2026-08-13 01:45:40",
+        "crawled_at": "2026-08-14 16:30:40",
         "file_name": "YMM4TableShapePlugin.v.0.1.1.ymme",
         "browser_download_url": "https://github.com/InuInu2022/YMM4TableShapePlugin/releases/download/v0.1.1/YMM4TableShapePlugin.v.0.1.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-241-1786586178947",
+      "id": "plugin-242-1786725272391",
       "name": "CustomEffectSelector",
       "author": "メタロロ",
       "type": "映像エフェクト",
@@ -7928,14 +7954,14 @@
         "tag_name": "1.0.0",
         "created_at": "2025-09-10T14:44:26Z",
         "published_at": "2025-09-10T15:12:09Z",
-        "crawled_at": "2026-08-13 01:45:39",
+        "crawled_at": "2026-08-14 16:30:39",
         "file_name": "CustomSelector.ymme",
         "browser_download_url": "https://github.com/dmmo-com-jp/CustomEffectSelector/releases/download/1.0.0/CustomSelector.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-242-1786586178947",
+      "id": "plugin-243-1786725272391",
       "name": "文字反転・逆再生変換",
       "author": "ハイさんgames",
       "type": "ツール",
@@ -7963,14 +7989,14 @@
         "tag_name": "1.0.1",
         "created_at": "2025-09-07T08:27:27Z",
         "published_at": "2025-09-07T08:43:33Z",
-        "crawled_at": "2026-08-13 01:45:38",
+        "crawled_at": "2026-08-14 16:30:38",
         "file_name": "CharacterInversionAndReverseConversion.v1.0.1.ymme",
         "browser_download_url": "https://github.com/HAIsanGames813/CharacterInversionAndReverseConversionPlugin/releases/download/1.0.1/CharacterInversionAndReverseConversion.v1.0.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-243-1786586178947",
+      "id": "plugin-244-1786725272391",
       "name": "WaveOutput",
       "author": "Megria Scarlet",
       "type": "動画出力",
@@ -7998,14 +8024,14 @@
         "tag_name": "ver.2.1.0",
         "created_at": "2025-09-17T08:46:14Z",
         "published_at": "2025-09-17T08:49:12Z",
-        "crawled_at": "2026-08-13 01:45:38",
+        "crawled_at": "2026-08-14 16:30:38",
         "file_name": "WaveOutput-ver.2.1.ymme",
         "browser_download_url": "https://github.com/Megria-Scarlet/WaveOutput/releases/download/ver.2.1.0/WaveOutput-ver.2.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-244-1786586178947",
+      "id": "plugin-245-1786725272391",
       "name": "YMM-REC-Plugin",
       "author": "はじめよう",
       "type": "ツール",
@@ -8033,14 +8059,14 @@
         "tag_name": "v0.3.0",
         "created_at": "2026-04-09T11:41:31Z",
         "published_at": "2026-04-09T11:45:38Z",
-        "crawled_at": "2026-08-13 01:45:38",
+        "crawled_at": "2026-08-14 16:30:37",
         "file_name": "YMM-REC-Plugin.ymme",
         "browser_download_url": "https://github.com/hazimeyou/YMM-REC-Plugin/releases/download/v0.3.0/YMM-REC-Plugin.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-245-1786586178947",
+      "id": "plugin-246-1786725272391",
       "name": "まとめてエフェクト",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -8068,14 +8094,14 @@
         "tag_name": "v2.2.3",
         "created_at": "2026-04-23T11:52:53Z",
         "published_at": "2026-04-23T11:56:52Z",
-        "crawled_at": "2026-08-13 01:45:37",
+        "crawled_at": "2026-08-14 16:30:37",
         "file_name": "CombinedEffect_v2.2.3.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-CombinedEffect/releases/download/v2.2.3/CombinedEffect_v2.2.3.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-246-1786586178947",
+      "id": "plugin-247-1786725272391",
       "name": "AntiphaseAudioEffect",
       "author": "Megria Scarlet",
       "type": "音声エフェクト",
@@ -8099,7 +8125,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-247-1786586178947",
+      "id": "plugin-248-1786725272391",
       "name": "拡張ペンツール",
       "author": "routersys",
       "type": "図形",
@@ -8127,14 +8153,14 @@
         "tag_name": "v3.0.0",
         "created_at": "2026-03-26T08:48:42Z",
         "published_at": "2026-03-26T09:44:55Z",
-        "crawled_at": "2026-08-13 01:45:31",
+        "crawled_at": "2026-08-14 16:30:30",
         "file_name": "PenTool.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-PenTool/releases/download/v3.0.0/PenTool.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-248-1786586178947",
+      "id": "plugin-249-1786725272391",
       "name": "描画設定",
       "author": "ハイさんgames",
       "type": "映像エフェクト",
@@ -8162,14 +8188,14 @@
         "tag_name": "v1.0.1",
         "created_at": "2025-08-31T09:46:07Z",
         "published_at": "2025-12-24T09:26:57Z",
-        "crawled_at": "2026-08-13 01:45:30",
+        "crawled_at": "2026-08-14 16:30:30",
         "file_name": "DrawingSettingsEffect.v1.0.1.ymme",
         "browser_download_url": "https://github.com/HAIsanGames813/DrawingSettingsEffect/releases/download/v1.0.1/DrawingSettingsEffect.v1.0.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-249-1786586178947",
+      "id": "plugin-250-1786725272391",
       "name": "色相補正",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -8197,14 +8223,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2025-08-29T01:01:30Z",
         "published_at": "2025-08-30T02:30:42Z",
-        "crawled_at": "2026-08-13 01:45:01",
+        "crawled_at": "2026-08-14 16:30:01",
         "file_name": "HueCorrection.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-HueCorrection/releases/download/v1.0.0/HueCorrection.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-250-1786586178947",
+      "id": "plugin-251-1786725272391",
       "name": "MultiCoreImgWavExporter",
       "author": "メタロロ",
       "type": "動画出力",
@@ -8232,14 +8258,14 @@
         "tag_name": "1.0",
         "created_at": "2025-08-26T17:42:51Z",
         "published_at": "2025-08-26T18:35:37Z",
-        "crawled_at": "2026-08-13 01:45:02",
+        "crawled_at": "2026-08-14 16:30:02",
         "file_name": "MultiCoreImgWavExporter.ymme",
         "browser_download_url": "https://github.com/dmmo-com-jp/MultiCoreImgWavExporter/releases/download/1.0/MultiCoreImgWavExporter.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-251-1786586178947",
+      "id": "plugin-252-1786725272391",
       "name": "3D画像ループ",
       "author": "てとら",
       "type": "映像エフェクト",
@@ -8267,14 +8293,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2025-08-27T08:39:39Z",
         "published_at": "2025-08-27T08:54:31Z",
-        "crawled_at": "2026-08-13 01:45:02",
+        "crawled_at": "2026-08-14 16:30:02",
         "file_name": "ImageLoop3D_v1.0.0.ymme",
         "browser_download_url": "https://github.com/tetra-te/ImageLoop3D/releases/download/v1.0.0/ImageLoop3D_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-252-1786586178947",
+      "id": "plugin-253-1786725272391",
       "name": "簡易ブラウザ",
       "author": "routersys",
       "type": "ツール",
@@ -8306,14 +8332,14 @@
         "tag_name": "v3.0.1",
         "created_at": "2025-09-02T13:01:38Z",
         "published_at": "2025-11-08T04:19:35Z",
-        "crawled_at": "2026-08-13 01:45:03",
+        "crawled_at": "2026-08-14 16:30:03",
         "file_name": "Browser.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-Browser/releases/download/v3.0.1/Browser.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-253-1786586178947",
+      "id": "plugin-254-1786725272391",
       "name": "プロジェクトリスト",
       "author": "はじめよう",
       "type": "ツール",
@@ -8341,14 +8367,14 @@
         "tag_name": "0.3.2",
         "created_at": "2025-09-01T11:57:45Z",
         "published_at": "2025-09-01T11:58:40Z",
-        "crawled_at": "2026-08-13 01:45:03",
+        "crawled_at": "2026-08-14 16:30:03",
         "file_name": "ymm-projectlist.ymme",
         "browser_download_url": "https://github.com/hazimeyou/ymm-projectlist/releases/download/0.3.2/ymm-projectlist.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-254-1786586178947",
+      "id": "plugin-255-1786725272391",
       "name": "ゴッドレイ",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -8376,14 +8402,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-05-08T11:41:34Z",
         "published_at": "2026-05-08T11:56:46Z",
-        "crawled_at": "2026-08-13 01:45:04",
+        "crawled_at": "2026-08-14 16:30:04",
         "file_name": "GodRay_v1.0.0.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-GodRay/releases/download/v1.0.0/GodRay_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-255-1786586178947",
+      "id": "plugin-256-1786725272391",
       "name": "化学構造式",
       "author": "routersys",
       "type": "図形",
@@ -8411,14 +8437,14 @@
         "tag_name": "v0.0.1",
         "created_at": "2025-08-22T06:18:12Z",
         "published_at": "2025-08-22T06:28:39Z",
-        "crawled_at": "2026-08-13 01:45:04",
+        "crawled_at": "2026-08-14 16:30:04",
         "file_name": "ChemicalStructure.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-ChemicalStructure/releases/download/v0.0.1/ChemicalStructure.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-256-1786586178947",
+      "id": "plugin-257-1786725272391",
       "name": "シャッフルフォント",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -8446,14 +8472,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2025-08-20T08:40:15Z",
         "published_at": "2025-08-20T08:41:41Z",
-        "crawled_at": "2026-08-13 01:45:04",
+        "crawled_at": "2026-08-14 16:30:04",
         "file_name": "ShuffleFont.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-ShuffleFont/releases/download/v1.0.0/ShuffleFont.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-257-1786586178947",
+      "id": "plugin-258-1786725272391",
       "name": "QBCode",
       "author": "routersys",
       "type": "図形",
@@ -8485,14 +8511,14 @@
         "tag_name": "v0.0.3",
         "created_at": "2025-08-15T12:26:36Z",
         "published_at": "2025-08-16T08:17:21Z",
-        "crawled_at": "2026-08-13 01:45:05",
+        "crawled_at": "2026-08-14 16:30:05",
         "file_name": "QBCode.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-QBCode/releases/download/v0.0.3/QBCode.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-258-1786586178947",
+      "id": "plugin-259-1786725272391",
       "name": "熱揺らぎ",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -8520,14 +8546,14 @@
         "tag_name": "v1.1.0",
         "created_at": "2025-09-04T07:10:42Z",
         "published_at": "2025-09-04T08:20:58Z",
-        "crawled_at": "2026-08-13 01:45:05",
+        "crawled_at": "2026-08-14 16:30:05",
         "file_name": "HeatHaze.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-HeatHaze/releases/download/v1.1.0/HeatHaze.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-259-1786586178947",
+      "id": "plugin-260-1786725272391",
       "name": "拡張クロマキー",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -8555,14 +8581,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-04-23T13:34:29Z",
         "published_at": "2026-04-23T14:02:06Z",
-        "crawled_at": "2026-08-13 01:45:06",
+        "crawled_at": "2026-08-14 16:30:06",
         "file_name": "ExtendedChromakey.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-ExtendedChromakey/releases/download/v1.0.0/ExtendedChromakey.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-260-1786586178947",
+      "id": "plugin-261-1786725272391",
       "name": "YMM4Discord読み上げ",
       "author": "いるかぁぁ",
       "type": "ツール",
@@ -8594,14 +8620,14 @@
         "tag_name": "v1.1.0",
         "created_at": "2025-08-06T15:40:06Z",
         "published_at": "2025-08-06T15:52:39Z",
-        "crawled_at": "2026-08-13 01:45:06",
+        "crawled_at": "2026-08-14 16:30:06",
         "file_name": "YMM4DiscordTTS_v1.1.0.ymme",
         "browser_download_url": "https://github.com/Dolphin-kun/YMM4DiscordTTS/releases/download/v1.1.0/YMM4DiscordTTS_v1.1.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-261-1786586178947",
+      "id": "plugin-262-1786725272391",
       "name": "GUIイコライザー",
       "author": "routersys",
       "type": "音声エフェクト",
@@ -8624,14 +8650,14 @@
         "tag_name": "v0.0.4",
         "created_at": "2025-08-06T04:20:45Z",
         "published_at": "2025-08-06T09:49:31Z",
-        "crawled_at": "2026-08-13 01:45:06",
+        "crawled_at": "2026-08-14 16:30:06",
         "file_name": "GUI-Equalizer.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-GUIEqualizer/releases/download/v0.0.4/GUI-Equalizer.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-262-1786586178947",
+      "id": "plugin-263-1786725272391",
       "name": "YMM4オブジェクトリスト",
       "author": "いぬいぬGames",
       "type": "ツール",
@@ -8659,14 +8685,14 @@
         "tag_name": "v1.3.2",
         "created_at": "2025-09-13T02:31:21Z",
         "published_at": "2025-09-13T02:33:55Z",
-        "crawled_at": "2026-08-13 01:45:07",
+        "crawled_at": "2026-08-14 16:30:07",
         "file_name": "Ymm4ObjectListPlugin.v.1.3.2.ymme",
         "browser_download_url": "https://github.com/InuInu2022/YMM4ObjectListPlugin/releases/download/v1.3.2/Ymm4ObjectListPlugin.v.1.3.2.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-263-1786586178947",
+      "id": "plugin-264-1786725272391",
       "name": "PDF図形",
       "author": "routersys",
       "type": "図形",
@@ -8694,14 +8720,14 @@
         "tag_name": "v2.0.0",
         "created_at": "2026-04-05T12:46:21Z",
         "published_at": "2026-04-05T12:47:46Z",
-        "crawled_at": "2026-08-13 01:45:07",
+        "crawled_at": "2026-08-14 16:30:07",
         "file_name": "PDF_v2.0.0.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-PDF/releases/download/v2.0.0/PDF_v2.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-264-1786586178947",
+      "id": "plugin-265-1786725272391",
       "name": "カスタム移動",
       "author": "routersys",
       "type": "映像エフェクト",
@@ -8729,14 +8755,14 @@
         "tag_name": "v0.1.3",
         "created_at": "2025-08-02T23:38:14Z",
         "published_at": "2025-08-03T01:33:33Z",
-        "crawled_at": "2026-08-13 01:45:08",
+        "crawled_at": "2026-08-14 16:30:08",
         "file_name": "CustomEasing.ymme",
         "browser_download_url": "https://github.com/routersys/YMM4-CustomEasing/releases/download/v0.1.3/CustomEasing.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-265-1786586178947",
+      "id": "plugin-266-1786725272391",
       "name": "アスペクト比自動調整",
       "author": "べにかずら",
       "type": "映像エフェクト",
@@ -8776,7 +8802,7 @@
         "tag_name": "ver1.0.1",
         "created_at": "2025-08-23T14:06:05Z",
         "published_at": "2025-08-24T01:41:51Z",
-        "crawled_at": "2026-08-13 01:45:31",
+        "crawled_at": "2026-08-14 16:30:31",
         "file_name": "AutomaticAspectRatio.ymme",
         "browser_download_url": "https://github.com/benikazura/AutomaticAspectRatio/releases/download/ver1.0.1/AutomaticAspectRatio.ymme",
         "prerelease": false
@@ -8784,7 +8810,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-266-1786586178947",
+      "id": "plugin-267-1786725272391",
       "name": "残像",
       "author": "いるかぁぁ",
       "type": "映像エフェクト",
@@ -8816,14 +8842,14 @@
         "tag_name": "v1.0.2",
         "created_at": "2025-07-31T09:34:29Z",
         "published_at": "2025-08-01T10:55:45Z",
-        "crawled_at": "2026-08-13 01:45:08",
+        "crawled_at": "2026-08-14 16:30:08",
         "file_name": "Afterimage_v1.0.2.ymme",
         "browser_download_url": "https://github.com/Dolphin-kun/Afterimage/releases/download/v1.0.2/Afterimage_v1.0.2.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-267-1786586178947",
+      "id": "plugin-268-1786725272391",
       "name": "YMM4エクスプローラー",
       "author": "いるかぁぁ",
       "type": "ツール",
@@ -8855,14 +8881,14 @@
         "tag_name": "v1.5.3",
         "created_at": "2025-11-17T12:24:44Z",
         "published_at": "2025-11-17T12:26:45Z",
-        "crawled_at": "2026-08-13 01:45:08",
+        "crawled_at": "2026-08-14 16:30:09",
         "file_name": "YMM4FileExplorer_v1.5.3.ymme",
         "browser_download_url": "https://github.com/Dolphin-kun/YMM4FileExplorer/releases/download/v1.5.3/YMM4FileExplorer_v1.5.3.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-268-1786586178947",
+      "id": "plugin-269-1786725272391",
       "name": "モザイク縁取り",
       "author": "てとら",
       "type": "映像エフェクト",
@@ -8890,14 +8916,14 @@
         "tag_name": "v1.0.1",
         "created_at": "2026-03-04T15:25:26Z",
         "published_at": "2026-03-04T15:33:36Z",
-        "crawled_at": "2026-08-13 01:45:09",
+        "crawled_at": "2026-08-14 16:30:09",
         "file_name": "MosaicOutlineEffect_v1.0.1.ymme",
         "browser_download_url": "https://github.com/tetra-te/MosaicOutlineEffect/releases/download/v1.0.1/MosaicOutlineEffect_v1.0.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-269-1786586178947",
+      "id": "plugin-270-1786725272391",
       "name": "Depth Estimate",
       "author": "肉(mes)",
       "type": "映像エフェクト",
@@ -8925,14 +8951,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2025-07-08T15:32:52Z",
         "published_at": "2025-07-08T15:36:41Z",
-        "crawled_at": "2026-08-13 01:45:09",
+        "crawled_at": "2026-08-14 16:30:09",
         "file_name": "YMM_DepthEstimate_1.0.0.ymme",
         "browser_download_url": "https://github.com/mes51/YMM_DepthEstimate/releases/download/v1.0.0/YMM_DepthEstimate_1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-270-1786586178947",
+      "id": "plugin-271-1786725272391",
       "name": "動体検知",
       "author": "いるかぁぁ",
       "type": "映像エフェクト",
@@ -8964,14 +8990,14 @@
         "tag_name": "v1.0",
         "created_at": "2025-06-21T15:21:08Z",
         "published_at": "2025-06-21T15:23:40Z",
-        "crawled_at": "2026-08-13 01:45:10",
+        "crawled_at": "2026-08-14 16:30:10",
         "file_name": "MotionDetection_v1.0.ymme",
         "browser_download_url": "https://github.com/Dolphin-kun/MotionDetection/releases/download/v1.0/MotionDetection_v1.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-271-1786586178947",
+      "id": "plugin-272-1786725272391",
       "name": "Artifactalk-YMM4連携プラグイン",
       "author": "たきもと",
       "type": "音声合成",
@@ -8996,7 +9022,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-272-1786586178947",
+      "id": "plugin-273-1786725272391",
       "name": "比率縁取り",
       "author": "てとら",
       "type": "映像エフェクト",
@@ -9024,14 +9050,14 @@
         "tag_name": "v1.0.10",
         "created_at": "2026-03-04T02:24:34Z",
         "published_at": "2026-03-04T02:33:01Z",
-        "crawled_at": "2026-08-13 01:45:10",
+        "crawled_at": "2026-08-14 16:30:10",
         "file_name": "RatioOutlineEffect_v1.0.10.ymme",
         "browser_download_url": "https://github.com/tetra-te/RatioOutlineEffect/releases/download/v1.0.10/RatioOutlineEffect_v1.0.10.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-273-1786586178947",
+      "id": "plugin-274-1786725272391",
       "name": "AudioLink",
       "author": "メタロロ",
       "type": "音声エフェクト",
@@ -9059,14 +9085,14 @@
         "tag_name": "0.1",
         "created_at": "2025-06-15T12:50:22Z",
         "published_at": "2025-06-15T12:57:42Z",
-        "crawled_at": "2026-08-13 01:45:10",
+        "crawled_at": "2026-08-14 16:30:11",
         "file_name": "AudioLink.ymme",
         "browser_download_url": "https://github.com/dmmo-com-jp/AudioLinkPlugin/releases/download/0.1/AudioLink.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-274-1786586178947",
+      "id": "plugin-275-1786725272391",
       "name": "射出",
       "author": "たなずん",
       "type": "映像エフェクト",
@@ -9102,14 +9128,14 @@
         "tag_name": "v2.1.1",
         "created_at": "2026-01-31T12:42:55Z",
         "published_at": "2026-01-31T12:46:43Z",
-        "crawled_at": "2026-08-13 01:45:11",
+        "crawled_at": "2026-08-14 16:30:11",
         "file_name": "EjectEffectPlugin_v2.1.1.ymme",
         "browser_download_url": "https://github.com/tanazun/EjectEffectPlugin/releases/download/v2.1.1/EjectEffectPlugin_v2.1.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-275-1786586178947",
+      "id": "plugin-276-1786725272391",
       "name": "塗りつぶしアルファ",
       "author": "てとら",
       "type": "映像エフェクト",
@@ -9137,14 +9163,14 @@
         "tag_name": "v1.1.0",
         "created_at": "2025-06-13T12:48:49Z",
         "published_at": "2025-06-13T12:52:04Z",
-        "crawled_at": "2026-08-13 01:45:11",
+        "crawled_at": "2026-08-14 16:30:12",
         "file_name": "AlphaFillEffect_v1.1.0.ymme",
         "browser_download_url": "https://github.com/tetra-te/AlphaFillEffect/releases/download/v1.1.0/AlphaFillEffect_v1.1.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-276-1786586178947",
+      "id": "plugin-277-1786725272391",
       "name": "パーツ分解",
       "author": "いるかぁぁ",
       "type": "映像エフェクト",
@@ -9176,14 +9202,14 @@
         "tag_name": "v1.1",
         "created_at": "2025-07-06T12:47:07Z",
         "published_at": "2025-07-06T12:57:28Z",
-        "crawled_at": "2026-08-13 01:45:12",
+        "crawled_at": "2026-08-14 16:30:12",
         "file_name": "PartsSplitter_v1.1.ymme",
         "browser_download_url": "https://github.com/Dolphin-kun/PartsSplitter/releases/download/v1.1/PartsSplitter_v1.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-277-1786586178947",
+      "id": "plugin-278-1786725272391",
       "name": "画面を横断",
       "author": "べにかずら",
       "type": "映像エフェクト",
@@ -9223,7 +9249,7 @@
         "tag_name": "ver1.1.0",
         "created_at": "2025-08-24T03:53:54Z",
         "published_at": "2026-01-02T15:17:57Z",
-        "crawled_at": "2026-08-13 01:45:31",
+        "crawled_at": "2026-08-14 16:30:31",
         "file_name": "CrossingScreen.ymme",
         "browser_download_url": "https://github.com/benikazura/CrossingScreen/releases/download/ver1.1.0/CrossingScreen.ymme",
         "prerelease": false
@@ -9231,7 +9257,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-278-1786586178947",
+      "id": "plugin-279-1786725272391",
       "name": "漫画吹き出し枠",
       "author": "かぶまる",
       "type": "図形",
@@ -9255,7 +9281,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-279-1786586178947",
+      "id": "plugin-280-1786725272391",
       "name": "エフェクトトリガー",
       "author": "いるかぁぁ",
       "type": "映像エフェクト",
@@ -9287,14 +9313,14 @@
         "tag_name": "v1.0",
         "created_at": "2025-05-25T10:29:46Z",
         "published_at": "2025-05-25T10:55:24Z",
-        "crawled_at": "2026-08-13 01:45:12",
+        "crawled_at": "2026-08-14 16:30:13",
         "file_name": "EffectTrigger_v1.0.ymme",
         "browser_download_url": "https://github.com/Dolphin-kun/EffectTrigger/releases/download/v1.0/EffectTrigger_v1.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-280-1786586178947",
+      "id": "plugin-281-1786725272391",
       "name": "LaTex図形",
       "author": "いるかぁぁ",
       "type": "図形",
@@ -9326,14 +9352,14 @@
         "tag_name": "v1.2.0",
         "created_at": "2025-08-22T10:28:25Z",
         "published_at": "2025-08-22T10:31:46Z",
-        "crawled_at": "2026-08-13 01:45:13",
+        "crawled_at": "2026-08-14 16:30:13",
         "file_name": "FormulaText_v1.2.0.ymme",
         "browser_download_url": "https://github.com/Dolphin-kun/FormulaText/releases/download/v1.2.0/FormulaText_v1.2.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-281-1786586178947",
+      "id": "plugin-282-1786725272391",
       "name": "フィット回転",
       "author": "てとら",
       "type": "映像エフェクト",
@@ -9361,14 +9387,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2025-04-29T07:48:01Z",
         "published_at": "2025-04-29T07:52:33Z",
-        "crawled_at": "2026-08-13 01:45:13",
+        "crawled_at": "2026-08-14 16:30:14",
         "file_name": "FitRotateEffect_v1.0.0.ymme",
         "browser_download_url": "https://github.com/tetra-te/FitRotateEffect/releases/download/v1.0.0/FitRotateEffect_v1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-282-1786586178947",
+      "id": "plugin-283-1786725272391",
       "name": "リリックモーションしながら登場退場",
       "author": "いるかぁぁ",
       "type": "映像エフェクト",
@@ -9400,14 +9426,14 @@
         "tag_name": "v2.0",
         "created_at": "2025-04-17T11:55:09Z",
         "published_at": "2025-06-16T13:54:38Z",
-        "crawled_at": "2026-08-13 01:45:14",
+        "crawled_at": "2026-08-14 16:30:14",
         "file_name": "LyricMotion_v2.0.ymme",
         "browser_download_url": "https://github.com/Dolphin-kun/LyricMotion/releases/download/v2.0/LyricMotion_v2.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-283-1786586178947",
+      "id": "plugin-284-1786725272391",
       "name": "シャッフルテキスト",
       "author": "いるかぁぁ",
       "type": "映像エフェクト",
@@ -9439,14 +9465,14 @@
         "tag_name": "v1.1",
         "created_at": "2025-04-13T03:50:50Z",
         "published_at": "2025-04-13T03:53:48Z",
-        "crawled_at": "2026-08-13 01:45:14",
+        "crawled_at": "2026-08-14 16:30:14",
         "file_name": "ShuffleTextColor.ymme",
         "browser_download_url": "https://github.com/Dolphin-kun/ShuffleText/releases/download/v1.1/ShuffleTextColor.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-284-1786586178947",
+      "id": "plugin-285-1786725272391",
       "name": "反射",
       "author": "いるかぁぁ",
       "type": "映像エフェクト",
@@ -9478,14 +9504,14 @@
         "tag_name": "v1.1",
         "created_at": "2025-04-08T15:44:01Z",
         "published_at": "2025-04-08T15:45:50Z",
-        "crawled_at": "2026-08-13 01:45:14",
+        "crawled_at": "2026-08-14 16:30:15",
         "file_name": "Reflection.ymme",
         "browser_download_url": "https://github.com/Dolphin-kun/ReflectEffect/releases/download/v1.1/Reflection.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-285-1786586178947",
+      "id": "plugin-286-1786725272391",
       "name": "簡易モーションブラー",
       "author": "てとら",
       "type": "映像エフェクト",
@@ -9513,14 +9539,14 @@
         "tag_name": "v1.0.2",
         "created_at": "2025-04-07T09:16:43Z",
         "published_at": "2025-04-07T09:22:21Z",
-        "crawled_at": "2026-08-13 01:45:15",
+        "crawled_at": "2026-08-14 16:30:15",
         "file_name": "SimpleMotionBlurEffect_v1.0.2.ymme",
         "browser_download_url": "https://github.com/tetra-te/SimpleMotionBlurEffect/releases/download/v1.0.2/SimpleMotionBlurEffect_v1.0.2.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-286-1786586178947",
+      "id": "plugin-287-1786725272391",
       "name": "BPM同期プラグイン",
       "author": "べにかずら",
       "type": "映像エフェクト",
@@ -9560,7 +9586,7 @@
         "tag_name": "ver1.1.1",
         "created_at": "2026-03-29T05:53:05Z",
         "published_at": "2026-03-29T06:29:42Z",
-        "crawled_at": "2026-08-13 01:45:32",
+        "crawled_at": "2026-08-14 16:30:32",
         "file_name": "BpmSync.ymme",
         "browser_download_url": "https://github.com/benikazura/BpmSync/releases/download/ver1.1.1/BpmSync.ymme",
         "prerelease": false
@@ -9568,7 +9594,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-287-1786586178947",
+      "id": "plugin-288-1786725272391",
       "name": "動画出力メッセージプラグイン",
       "author": "てとら",
       "type": "その他",
@@ -9596,14 +9622,14 @@
         "tag_name": "v1.5",
         "created_at": "2025-12-07T03:17:38Z",
         "published_at": "2025-12-07T03:35:29Z",
-        "crawled_at": "2026-08-13 01:45:15",
+        "crawled_at": "2026-08-14 16:30:16",
         "file_name": "VideoOutputMessage_v1.5.ymme",
         "browser_download_url": "https://github.com/tetra-te/VideoOutputMessage/releases/download/v1.5/VideoOutputMessage_v1.5.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-288-1786586178947",
+      "id": "plugin-289-1786725272391",
       "name": "<| Falling Icicles |>",
       "author": "sinβ",
       "type": "その他",
@@ -9631,14 +9657,14 @@
         "tag_name": "4/1",
         "created_at": "2025-04-01T11:12:43Z",
         "published_at": "2025-04-01T11:18:40Z",
-        "crawled_at": "2026-08-13 01:45:16",
+        "crawled_at": "2026-08-14 16:30:16",
         "file_name": "Falling_Icicles.ymme",
         "browser_download_url": "https://github.com/sinBetaKun/Falling-Icicles/releases/download/4/1/Falling_Icicles.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-289-1786586178947",
+      "id": "plugin-290-1786725272391",
       "name": "YMM-RPC",
       "author": "なまけもの",
       "type": "その他",
@@ -9666,14 +9692,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2026-01-08T04:15:09Z",
         "published_at": "2026-01-08T04:16:15Z",
-        "crawled_at": "2026-08-13 01:45:16",
+        "crawled_at": "2026-08-14 16:30:16",
         "file_name": "YmmRPC.ymme",
         "browser_download_url": "https://github.com/namakemono-san/YMM-RPC/releases/download/v1.0.0/YmmRPC.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-290-1786586178947",
+      "id": "plugin-291-1786725272391",
       "name": "アーチ配置プラグイン",
       "author": "いるかぁぁ",
       "type": "映像エフェクト",
@@ -9705,14 +9731,14 @@
         "tag_name": "v1.2",
         "created_at": "2025-04-06T15:58:34Z",
         "published_at": "2025-05-19T16:30:06Z",
-        "crawled_at": "2026-08-13 01:45:16",
+        "crawled_at": "2026-08-14 16:30:17",
         "file_name": "ArcText_v1.2.ymme",
         "browser_download_url": "https://github.com/Dolphin-kun/ArcText/releases/download/v1.2/ArcText_v1.2.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-291-1786586178947",
+      "id": "plugin-292-1786725272391",
       "name": "RhythmAnimation",
       "author": "メタロロ",
       "type": "映像エフェクト",
@@ -9740,14 +9766,14 @@
         "tag_name": "1.6",
         "created_at": "2025-12-24T15:26:13Z",
         "published_at": "2025-12-24T15:29:52Z",
-        "crawled_at": "2026-08-13 01:45:17",
+        "crawled_at": "2026-08-14 16:30:17",
         "file_name": "RhythmAnimation.ymme",
         "browser_download_url": "https://github.com/dmmo-com-jp/RhythmAnimation/releases/download/1.6/RhythmAnimation.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-292-1786586178947",
+      "id": "plugin-293-1786725272391",
       "name": "RandomAnglePlugin",
       "author": "メタロロ",
       "type": "映像エフェクト",
@@ -9775,14 +9801,14 @@
         "tag_name": "1.0",
         "created_at": "2025-02-18T14:56:29Z",
         "published_at": "2025-02-18T15:07:32Z",
-        "crawled_at": "2026-08-13 01:45:17",
+        "crawled_at": "2026-08-14 16:30:18",
         "file_name": "RandomAnglePlugin.ymme",
         "browser_download_url": "https://github.com/dmmo-com-jp/RandomAnglePlugin/releases/download/1.0/RandomAnglePlugin.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-293-1786586178947",
+      "id": "plugin-294-1786725272391",
       "name": "HzWave",
       "author": "kotolin",
       "type": "音声エフェクト",
@@ -9805,14 +9831,14 @@
         "tag_name": "1.0.0",
         "created_at": "2025-02-17T06:12:59Z",
         "published_at": "2025-02-17T06:13:38Z",
-        "crawled_at": "2026-08-13 01:45:18",
+        "crawled_at": "2026-08-14 16:30:18",
         "file_name": "HzWave.ymme",
         "browser_download_url": "https://github.com/kotolin-sub/HzWave/releases/download/1.0.0/HzWave.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-294-1786586178947",
+      "id": "plugin-295-1786725272391",
       "name": "TextYurashiPlugin",
       "author": "メタロロ",
       "type": "映像エフェクト",
@@ -9840,14 +9866,14 @@
         "tag_name": "1.4",
         "created_at": "2025-12-20T07:25:20Z",
         "published_at": "2025-12-20T07:27:57Z",
-        "crawled_at": "2026-08-13 01:45:18",
+        "crawled_at": "2026-08-14 16:30:18",
         "file_name": "TextYurashiPlugin.ymme",
         "browser_download_url": "https://github.com/dmmo-com-jp/TextYurashiPlugin/releases/download/1.4/TextYurashiPlugin.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-295-1786586178947",
+      "id": "plugin-296-1786725272391",
       "name": "比率クリッピング",
       "author": "てとら",
       "type": "映像エフェクト",
@@ -9875,14 +9901,14 @@
         "tag_name": "v1.2",
         "created_at": "2025-02-18T12:15:00Z",
         "published_at": "2025-02-18T12:27:07Z",
-        "crawled_at": "2026-08-13 01:45:19",
+        "crawled_at": "2026-08-14 16:30:19",
         "file_name": "RatioCropEffect_v1.2.ymme",
         "browser_download_url": "https://github.com/tetra-te/RatioCropEffect/releases/download/v1.2/RatioCropEffect_v1.2.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-296-1786586178947",
+      "id": "plugin-297-1786725272391",
       "name": "YMM4OpenJTalkPlugin",
       "author": "いぬいぬGames",
       "type": "音声合成",
@@ -9905,14 +9931,14 @@
         "tag_name": "v0.1.2",
         "created_at": "2025-02-13T14:06:42Z",
         "published_at": "2025-02-13T14:13:37Z",
-        "crawled_at": "2026-08-13 01:45:19",
+        "crawled_at": "2026-08-14 16:30:19",
         "file_name": "YMM4OpenJTalkPlugin.v.0.1.2.ymme",
         "browser_download_url": "https://github.com/InuInu2022/YMM4OpenJTalkPlugin/releases/download/v0.1.2/YMM4OpenJTalkPlugin.v.0.1.2.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-297-1786586178947",
+      "id": "plugin-298-1786725272391",
       "name": "紅葛式場面切り替えプラグインセットA",
       "author": "べにかずら",
       "type": "場面切り替え",
@@ -9952,7 +9978,7 @@
         "tag_name": "ver3.0.0",
         "created_at": "2025-10-27T13:58:10Z",
         "published_at": "2026-08-06T06:00:19Z",
-        "crawled_at": "2026-08-13 01:45:32",
+        "crawled_at": "2026-08-14 16:30:32",
         "file_name": "BenikazuraTransitionPackA.ymme",
         "browser_download_url": "https://github.com/benikazura/BenikazuraTransitionPackA/releases/download/ver3.0.0/BenikazuraTransitionPackA.ymme",
         "prerelease": false
@@ -9960,7 +9986,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-298-1786586178947",
+      "id": "plugin-299-1786725272391",
       "name": "YMM4 VoiSona Talk",
       "author": "いぬいぬGames",
       "type": "音声合成",
@@ -10000,14 +10026,14 @@
         "tag_name": "v1.2.1",
         "created_at": "2025-06-08T01:43:45Z",
         "published_at": "2025-06-08T01:56:13Z",
-        "crawled_at": "2026-08-13 01:45:20",
+        "crawled_at": "2026-08-14 16:30:20",
         "file_name": "YMM4VoiSonaPlugin.v.1.2.1.ymme",
         "browser_download_url": "https://github.com/InuInu2022/YMM4VoiSonaPlugin/releases/download/v1.2.1/YMM4VoiSonaPlugin.v.1.2.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-299-1786586178947",
+      "id": "plugin-300-1786725272391",
       "name": "簡易カーニングプラグイン",
       "author": "てとら",
       "type": "映像エフェクト",
@@ -10039,14 +10065,14 @@
         "tag_name": "v3.7",
         "created_at": "2025-12-07T03:17:01Z",
         "published_at": "2025-12-07T03:33:35Z",
-        "crawled_at": "2026-08-13 01:45:20",
+        "crawled_at": "2026-08-14 16:30:20",
         "file_name": "SimpleKerningEffect_v3.7.ymme",
         "browser_download_url": "https://github.com/tetra-te/SimpleKerningEffect/releases/download/v3.7/SimpleKerningEffect_v3.7.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-300-1786586178947",
+      "id": "plugin-301-1786725272391",
       "name": "YMM4-MoreBOUYOMIPlugin",
       "author": "taisan@@",
       "type": "音声合成",
@@ -10074,14 +10100,14 @@
         "tag_name": "1.0.1",
         "created_at": "2025-01-06T10:18:10Z",
         "published_at": "2025-01-06T10:19:35Z",
-        "crawled_at": "2026-08-13 01:45:20",
+        "crawled_at": "2026-08-14 16:30:20",
         "file_name": "YMM4-MoreBOUYOMIPlugin.ymme",
         "browser_download_url": "https://github.com/taisan11/YMM4-MoreBOUYOMIPlugin/releases/download/1.0.1/YMM4-MoreBOUYOMIPlugin.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-301-1786586178947",
+      "id": "plugin-302-1786725272391",
       "name": "指定時にのみ表示",
       "author": "てとら",
       "type": "映像エフェクト",
@@ -10109,14 +10135,14 @@
         "tag_name": "v1.2",
         "created_at": "2025-02-14T05:10:26Z",
         "published_at": "2025-02-18T04:00:34Z",
-        "crawled_at": "2026-08-13 01:45:21",
+        "crawled_at": "2026-08-14 16:30:21",
         "file_name": "SpecifiedShowEffect_v1.2.ymme",
         "browser_download_url": "https://github.com/tetra-te/SpecifiedShowEffect/releases/download/v1.2/SpecifiedShowEffect_v1.2.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-302-1786586178947",
+      "id": "plugin-303-1786725272391",
       "name": "拡大縮小（描画位置）",
       "author": "てとら",
       "type": "映像エフェクト",
@@ -10144,14 +10170,14 @@
         "tag_name": "v1.2",
         "created_at": "2025-02-18T03:42:53Z",
         "published_at": "2025-02-18T03:52:14Z",
-        "crawled_at": "2026-08-13 01:45:21",
+        "crawled_at": "2026-08-14 16:30:21",
         "file_name": "ZoomDrawPositionEffect_v1.2.ymme",
         "browser_download_url": "https://github.com/tetra-te/ZoomDrawPositionEffect/releases/download/v1.2/ZoomDrawPositionEffect_v1.2.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-303-1786586178947",
+      "id": "plugin-304-1786725272391",
       "name": "YMM4縁取りTプラグイン",
       "author": "べにかずら",
       "type": "映像エフェクト",
@@ -10191,7 +10217,7 @@
         "tag_name": "ver1.0.1",
         "created_at": "2025-08-24T03:52:25Z",
         "published_at": "2025-08-24T05:03:54Z",
-        "crawled_at": "2026-08-13 01:45:33",
+        "crawled_at": "2026-08-14 16:30:32",
         "file_name": "OutlineT.ymme",
         "browser_download_url": "https://github.com/benikazura/OutlineT/releases/download/ver1.0.1/OutlineT.ymme",
         "prerelease": false
@@ -10199,7 +10225,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-304-1786586178947",
+      "id": "plugin-305-1786725272391",
       "name": "YMM_ToneCurve",
       "author": "肉(mes)",
       "type": "映像エフェクト",
@@ -10227,14 +10253,14 @@
         "tag_name": "v1.0.1",
         "created_at": "2026-01-10T12:27:51Z",
         "published_at": "2026-01-10T12:30:21Z",
-        "crawled_at": "2026-08-13 01:45:22",
+        "crawled_at": "2026-08-14 16:30:22",
         "file_name": "YMM_ToneCurve_1.0.1.ymme",
         "browser_download_url": "https://github.com/mes51/YMM_ToneCurve/releases/download/v1.0.1/YMM_ToneCurve_1.0.1.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-305-1786586178947",
+      "id": "plugin-306-1786725272391",
       "name": "YMM4コマ落ちプラグイン",
       "author": "べにかずら",
       "type": "映像エフェクト",
@@ -10274,7 +10300,7 @@
         "tag_name": "ver1.0.3",
         "created_at": "2025-08-24T05:54:16Z",
         "published_at": "2025-12-21T07:19:30Z",
-        "crawled_at": "2026-08-13 01:45:33",
+        "crawled_at": "2026-08-14 16:30:33",
         "file_name": "DropFrame.ymme",
         "browser_download_url": "https://github.com/benikazura/DropFrame/releases/download/ver1.0.3/DropFrame.ymme",
         "prerelease": false
@@ -10282,7 +10308,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-306-1786586178947",
+      "id": "plugin-307-1786725272391",
       "name": "YMM4スクワークル角丸",
       "author": "いぬいぬGames",
       "type": "図形",
@@ -10310,14 +10336,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2024-11-04T12:48:03Z",
         "published_at": "2024-11-04T12:58:17Z",
-        "crawled_at": "2026-08-13 01:45:22",
+        "crawled_at": "2026-08-14 16:30:22",
         "file_name": "Ymm4SquirclePlugin.ymme",
         "browser_download_url": "https://github.com/InuInu2022/YMM4SquirclePlugin/releases/download/v1.0.0/Ymm4SquirclePlugin.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-307-1786586178947",
+      "id": "plugin-308-1786725272391",
       "name": "sin型カスタムパーツ立ち絵",
       "author": "sinβ",
       "type": "立ち絵",
@@ -10345,14 +10371,14 @@
         "tag_name": "STP-v1.1.1.0",
         "created_at": "2025-08-02T05:48:27Z",
         "published_at": "2026-07-19T20:07:41Z",
-        "crawled_at": "2026-08-13 01:45:22",
+        "crawled_at": "2026-08-14 16:30:23",
         "file_name": "SinTachiePlugin-v1.1.1.0.ymme",
         "browser_download_url": "https://github.com/sinBetaKun/SinTachiePlugin/releases/download/STP-v1.1.1.0/SinTachiePlugin-v1.1.1.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-308-1786586178947",
+      "id": "plugin-309-1786725272391",
       "name": "音声遅延エフェクト",
       "author": "kotolin",
       "type": "音声エフェクト",
@@ -10380,14 +10406,14 @@
         "tag_name": "1.0",
         "created_at": "2024-10-03T14:36:38Z",
         "published_at": "2024-10-03T14:37:17Z",
-        "crawled_at": "2026-08-13 01:45:23",
+        "crawled_at": "2026-08-14 16:30:23",
         "file_name": "MicroSlide.ymme",
         "browser_download_url": "https://github.com/kotolin-sub/YMM4AudioDelayPlugin/releases/download/1.0/MicroSlide.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-309-1786586178947",
+      "id": "plugin-310-1786725272391",
       "name": "拡張PSD立ち絵プラグイン",
       "author": "翼",
       "type": "立ち絵",
@@ -10419,7 +10445,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-310-1786586178947",
+      "id": "plugin-311-1786725272391",
       "name": "HighSpeed動画出力プラグイン",
       "author": "翼",
       "type": "動画出力",
@@ -10451,7 +10477,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-311-1786586178947",
+      "id": "plugin-312-1786725272391",
       "name": "HighSpeed動画読み込みプラグイン",
       "author": "翼",
       "type": "動画読み込み",
@@ -10483,7 +10509,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-312-1786586178947",
+      "id": "plugin-313-1786725272391",
       "name": "YMM4扇クリッピングプラグイン",
       "author": "べにかずら",
       "type": "映像エフェクト",
@@ -10523,7 +10549,7 @@
         "tag_name": "ver1.1.1",
         "created_at": "2025-08-24T03:51:25Z",
         "published_at": "2025-08-24T06:17:59Z",
-        "crawled_at": "2026-08-13 01:45:34",
+        "crawled_at": "2026-08-14 16:30:33",
         "file_name": "FanClipping.ymme",
         "browser_download_url": "https://github.com/benikazura/FanClipping/releases/download/ver1.1.1/FanClipping.ymme",
         "prerelease": false
@@ -10531,7 +10557,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-313-1786586178947",
+      "id": "plugin-314-1786725272391",
       "name": "YMM_BrokenJpeg",
       "author": "肉(mes)",
       "type": "映像エフェクト",
@@ -10559,14 +10585,14 @@
         "tag_name": "v1.0.0",
         "created_at": "2024-08-11T15:18:34Z",
         "published_at": "2024-08-11T15:26:21Z",
-        "crawled_at": "2026-08-13 01:45:23",
+        "crawled_at": "2026-08-14 16:30:23",
         "file_name": "YMM_BrokenJpeg_1.0.0.ymme",
         "browser_download_url": "https://github.com/mes51/YMM_BrokenJpeg/releases/download/v1.0.0/YMM_BrokenJpeg_1.0.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-314-1786586178947",
+      "id": "plugin-315-1786725272391",
       "name": "カスタム複製エフェクト",
       "author": "sinβ",
       "type": "映像エフェクト",
@@ -10594,14 +10620,14 @@
         "tag_name": "2.2",
         "created_at": "2024-10-13T06:44:12Z",
         "published_at": "2024-10-13T06:50:17Z",
-        "crawled_at": "2026-08-13 01:45:24",
+        "crawled_at": "2026-08-14 16:30:24",
         "file_name": "CustomCloneEffectPlugin.ymme",
         "browser_download_url": "https://github.com/sinBetaKun/CustomCloneEffectPlugin/releases/download/2.2/CustomCloneEffectPlugin.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-315-1786586178947",
+      "id": "plugin-316-1786725272391",
       "name": "キャラクターモーションプラグイン",
       "author": "べにかずら",
       "type": "映像エフェクト",
@@ -10641,7 +10667,7 @@
         "tag_name": "ver1.1.1",
         "created_at": "2025-08-24T03:50:50Z",
         "published_at": "2025-08-24T06:28:18Z",
-        "crawled_at": "2026-08-13 01:45:34",
+        "crawled_at": "2026-08-14 16:30:34",
         "file_name": "CharactorMotion.ymme",
         "browser_download_url": "https://github.com/benikazura/CharactorMotion/releases/download/ver1.1.1/CharactorMotion.ymme",
         "prerelease": false
@@ -10649,7 +10675,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-316-1786586178947",
+      "id": "plugin-317-1786725272391",
       "name": "YMM4-CapCut",
       "author": "taisan@@",
       "type": "音声合成",
@@ -10677,14 +10703,14 @@
         "tag_name": "1.0.0",
         "created_at": "2024-06-23T01:46:23Z",
         "published_at": "2024-06-23T01:51:35Z",
-        "crawled_at": "2026-08-13 01:45:24",
+        "crawled_at": "2026-08-14 16:30:24",
         "file_name": "CapCutTTSPluginYMM4.ymme",
         "browser_download_url": "https://github.com/taisan11/YMM4-CapCut/releases/download/1.0.0/CapCutTTSPluginYMM4.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-317-1786586178947",
+      "id": "plugin-318-1786725272391",
       "name": "YMM4CustomEasengK",
       "author": "kotolin",
       "type": "映像エフェクト",
@@ -10712,14 +10738,14 @@
         "tag_name": "3.1",
         "created_at": "2024-06-27T03:06:40Z",
         "published_at": "2024-06-27T03:08:43Z",
-        "crawled_at": "2026-08-13 01:45:24",
+        "crawled_at": "2026-08-14 16:30:25",
         "file_name": "CustomEaseng.ymme",
         "browser_download_url": "https://github.com/kotolin-sub/YMM4CustomEasengK/releases/download/3.1/CustomEaseng.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-318-1786586178947",
+      "id": "plugin-319-1786725272391",
       "name": "YMM4Whisper",
       "author": "kotolin",
       "type": "音声エフェクト",
@@ -10743,7 +10769,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-319-1786586178947",
+      "id": "plugin-320-1786725272391",
       "name": "YPEI4",
       "author": "RainKasa",
       "type": "その他",
@@ -10762,7 +10788,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-320-1786586178947",
+      "id": "plugin-321-1786725272391",
       "name": "YMM4ConsolePlugin",
       "author": "kotolin",
       "type": "その他",
@@ -10781,7 +10807,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-321-1786586178947",
+      "id": "plugin-322-1786725272391",
       "name": "ウェーブテキストプラグイン",
       "author": "べにかずら",
       "type": "映像エフェクト",
@@ -10821,7 +10847,7 @@
         "tag_name": "ver1.1.1",
         "created_at": "2025-08-24T03:50:15Z",
         "published_at": "2025-08-24T06:43:56Z",
-        "crawled_at": "2026-08-13 01:45:34",
+        "crawled_at": "2026-08-14 16:30:34",
         "file_name": "WaveText.ymme",
         "browser_download_url": "https://github.com/benikazura/WaveText/releases/download/ver1.1.1/WaveText.ymme",
         "prerelease": false
@@ -10829,7 +10855,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-322-1786586178947",
+      "id": "plugin-323-1786725272391",
       "name": "時間差複製エフェクト",
       "author": "sinβ",
       "type": "映像エフェクト",
@@ -10865,14 +10891,14 @@
         "tag_name": "2.1",
         "created_at": "2024-08-31T09:27:40Z",
         "published_at": "2024-08-31T09:28:16Z",
-        "crawled_at": "2026-08-13 01:45:26",
+        "crawled_at": "2026-08-14 16:30:26",
         "file_name": "ShiftCloneEffect.ymme",
         "browser_download_url": "https://github.com/sinBetaKun/ShiftCloneEffectPlugin/releases/download/2.1/ShiftCloneEffect.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-323-1786586178947",
+      "id": "plugin-324-1786725272391",
       "name": "PolarDistortion",
       "author": "肉(mes)",
       "type": "映像エフェクト",
@@ -10896,7 +10922,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-324-1786586178947",
+      "id": "plugin-325-1786725272391",
       "name": "反復反転",
       "author": "しゃふろぐ",
       "type": "映像エフェクト",
@@ -10920,7 +10946,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-325-1786586178947",
+      "id": "plugin-326-1786725272391",
       "name": "点滅しながら登場退場",
       "author": "しゃふろぐ",
       "type": "映像エフェクト",
@@ -10944,7 +10970,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-326-1786586178947",
+      "id": "plugin-327-1786725272391",
       "name": "ビデオチェッカープラグイン",
       "author": "べにかずら",
       "type": "映像エフェクト",
@@ -10976,7 +11002,7 @@
         "tag_name": "ver1.4.1",
         "created_at": "2025-08-24T03:49:45Z",
         "published_at": "2025-10-28T11:53:36Z",
-        "crawled_at": "2026-08-13 01:45:35",
+        "crawled_at": "2026-08-14 16:30:34",
         "file_name": "VideoChecker.ymme",
         "browser_download_url": "https://github.com/benikazura/VideoChecker/releases/download/ver1.4.1/VideoChecker.ymme",
         "prerelease": false
@@ -10984,7 +11010,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-327-1786586178947",
+      "id": "plugin-328-1786725272391",
       "name": "YMMプラグイン集vol.1",
       "author": "Sometea_1024",
       "type": "映像エフェクト, 音声エフェクト, 図形",
@@ -11008,7 +11034,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-328-1786586178947",
+      "id": "plugin-329-1786725272391",
       "name": "数値テキストプラグイン",
       "author": "Prer",
       "type": "図形",
@@ -11032,7 +11058,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-329-1786586178947",
+      "id": "plugin-330-1786725272391",
       "name": "Volumetric FractalNoise",
       "author": "肉(mes)",
       "type": "映像エフェクト",
@@ -11056,7 +11082,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-330-1786586178947",
+      "id": "plugin-331-1786725272391",
       "name": "スクロールプラグイン",
       "author": "べにかずら",
       "type": "映像エフェクト",
@@ -11096,7 +11122,7 @@
         "tag_name": "ver1.2.1",
         "created_at": "2025-08-24T03:49:16Z",
         "published_at": "2025-08-24T07:19:52Z",
-        "crawled_at": "2026-08-13 01:45:35",
+        "crawled_at": "2026-08-14 16:30:35",
         "file_name": "ScrollEffect.ymme",
         "browser_download_url": "https://github.com/benikazura/ScrollEffect/releases/download/ver1.2.1/ScrollEffect.ymme",
         "prerelease": false
@@ -11104,7 +11130,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-331-1786586178947",
+      "id": "plugin-332-1786725272391",
       "name": "点滅プラグイン",
       "author": "ZZO",
       "type": "映像エフェクト",
@@ -11128,7 +11154,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-332-1786586178947",
+      "id": "plugin-333-1786725272391",
       "name": "YukkuriMovieMaker4SoVitsSvcFork",
       "author": "34j",
       "type": "音声エフェクト",
@@ -11147,7 +11173,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-333-1786586178947",
+      "id": "plugin-334-1786725272391",
       "name": "レターボックスプラグイン",
       "author": "べにかずら",
       "type": "図形",
@@ -11187,7 +11213,7 @@
         "tag_name": "ver1.2.1",
         "created_at": "2025-08-24T03:48:41Z",
         "published_at": "2025-08-24T07:35:50Z",
-        "crawled_at": "2026-08-13 01:45:36",
+        "crawled_at": "2026-08-14 16:30:35",
         "file_name": "LetterBoxShape.ymme",
         "browser_download_url": "https://github.com/benikazura/LetterBoxShape/releases/download/ver1.2.1/LetterBoxShape.ymme",
         "prerelease": false
@@ -11195,7 +11221,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-334-1786586178947",
+      "id": "plugin-335-1786725272391",
       "name": "非遅延描画（旧 描画変換）プラグイン",
       "author": "べにかずら",
       "type": "映像エフェクト",
@@ -11235,7 +11261,7 @@
         "tag_name": "ver4.0.0",
         "created_at": "2025-08-24T03:48:14Z",
         "published_at": "2026-03-07T14:15:47Z",
-        "crawled_at": "2026-08-13 01:45:36",
+        "crawled_at": "2026-08-14 16:30:36",
         "file_name": "DrawConversionEffect.ymme",
         "browser_download_url": "https://github.com/benikazura/DrawConversionEffect/releases/download/ver4.0.0/DrawConversionEffect.ymme",
         "prerelease": false
@@ -11243,7 +11269,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-335-1786586178947",
+      "id": "plugin-336-1786725272391",
       "name": "Unmultプラグイン",
       "author": "肉(mes)",
       "type": "映像エフェクト",
@@ -11271,14 +11297,14 @@
         "tag_name": "1.1.0",
         "created_at": "2026-02-11T06:27:48Z",
         "published_at": "2026-02-11T06:30:27Z",
-        "crawled_at": "2026-08-13 01:45:29",
+        "crawled_at": "2026-08-14 16:30:29",
         "file_name": "YMM_Unmult_1.1.0.ymme",
         "browser_download_url": "https://github.com/mes51/YMM_Unmult/releases/download/1.1.0/YMM_Unmult_1.1.0.ymme",
         "prerelease": false
       }
     },
     {
-      "id": "plugin-336-1786586178947",
+      "id": "plugin-337-1786725272391",
       "name": "疑似不透明度プラグイン",
       "author": "べにかずら",
       "type": "映像エフェクト",
@@ -11318,7 +11344,7 @@
         "tag_name": "ver1.1.1",
         "created_at": "2025-08-24T03:47:41Z",
         "published_at": "2025-08-24T04:07:53Z",
-        "crawled_at": "2026-08-13 01:45:36",
+        "crawled_at": "2026-08-14 16:30:36",
         "file_name": "PseudoOpacityEffect.ymme",
         "browser_download_url": "https://github.com/benikazura/PseudoOpacityEffect/releases/download/ver1.1.1/PseudoOpacityEffect.ymme",
         "prerelease": false
@@ -11326,7 +11352,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-337-1786586178947",
+      "id": "plugin-338-1786725272391",
       "name": "グリッチノイズプラグイン",
       "author": "べにかずら",
       "type": "映像エフェクト",
@@ -11366,7 +11392,7 @@
         "tag_name": "ver1.2.2",
         "created_at": "2025-08-23T14:01:35Z",
         "published_at": "2025-08-24T03:37:22Z",
-        "crawled_at": "2026-08-13 01:45:37",
+        "crawled_at": "2026-08-14 16:30:37",
         "file_name": "GlitchNoiseEffect.ymme",
         "browser_download_url": "https://github.com/benikazura/GlitchNoiseEffect/releases/download/ver1.2.2/GlitchNoiseEffect.ymme",
         "prerelease": false
@@ -11374,7 +11400,7 @@
       "price": "¥ 0"
     },
     {
-      "id": "plugin-338-1786586178947",
+      "id": "plugin-339-1786725272391",
       "name": "クソでか画像縮小プラグイン",
       "author": "ゆっくりコンピュータサイエンス",
       "type": "画像読み込み",
@@ -11402,7 +11428,7 @@
       "extraGhData": null
     },
     {
-      "id": "plugin-339-1786586178947",
+      "id": "plugin-340-1786725272391",
       "name": "音割れプラグイン",
       "author": "べにかずら",
       "type": "音声エフェクト",
@@ -11564,32 +11590,6 @@
       "sourceName": "BOOTH"
     },
     {
-      "id": "ext-booth-8204184",
-      "name": "YMM4 まとめてエフェクトプラグイン",
-      "author": "routersys",
-      "type": "Booth自動取得",
-      "description": "BOOTHで「YMM4Plugin」等のタグで出品されている作品です。 (価格: ¥ 100)",
-      "price": "¥ 100",
-      "url": "https://booth.pm/ja/items/8204184",
-      "links": [
-        {
-          "name": "BOOTH 商品ページ",
-          "url": "https://booth.pm/ja/items/8204184"
-        }
-      ],
-      "isGithub": false,
-      "githubUser": null,
-      "githubRepo": null,
-      "isEnabled": true,
-      "tags": [
-        "YMM4Plugin",
-        "BOOTH",
-        "外部検索"
-      ],
-      "isExternalSource": true,
-      "sourceName": "BOOTH"
-    },
-    {
       "id": "ext-booth-8098485",
       "name": "YMM4ジェットカットプラグイン",
       "author": "りんだいのショップ",
@@ -11616,17 +11616,17 @@
       "sourceName": "BOOTH"
     },
     {
-      "id": "ext-booth-8136687",
-      "name": "YMM4 拡張イコライザープラグイン",
+      "id": "ext-booth-8204184",
+      "name": "YMM4 まとめてエフェクトプラグイン",
       "author": "routersys",
       "type": "Booth自動取得",
       "description": "BOOTHで「YMM4Plugin」等のタグで出品されている作品です。 (価格: ¥ 100)",
       "price": "¥ 100",
-      "url": "https://booth.pm/ja/items/8136687",
+      "url": "https://booth.pm/ja/items/8204184",
       "links": [
         {
           "name": "BOOTH 商品ページ",
-          "url": "https://booth.pm/ja/items/8136687"
+          "url": "https://booth.pm/ja/items/8204184"
         }
       ],
       "isGithub": false,
@@ -11653,6 +11653,32 @@
         {
           "name": "BOOTH 商品ページ",
           "url": "https://booth.pm/ja/items/8151129"
+        }
+      ],
+      "isGithub": false,
+      "githubUser": null,
+      "githubRepo": null,
+      "isEnabled": true,
+      "tags": [
+        "YMM4Plugin",
+        "BOOTH",
+        "外部検索"
+      ],
+      "isExternalSource": true,
+      "sourceName": "BOOTH"
+    },
+    {
+      "id": "ext-booth-8136687",
+      "name": "YMM4 拡張イコライザープラグイン",
+      "author": "routersys",
+      "type": "Booth自動取得",
+      "description": "BOOTHで「YMM4Plugin」等のタグで出品されている作品です。 (価格: ¥ 100)",
+      "price": "¥ 100",
+      "url": "https://booth.pm/ja/items/8136687",
+      "links": [
+        {
+          "name": "BOOTH 商品ページ",
+          "url": "https://booth.pm/ja/items/8136687"
         }
       ],
       "isGithub": false,

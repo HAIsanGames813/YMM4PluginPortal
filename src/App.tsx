@@ -26,16 +26,22 @@ async function fetchDirectYmm4Plugins(): Promise<YMM4Plugin[]> {
       // Direct fetch failed (e.g. CORS)
     }
     try {
-      const proxyRes = await fetch(`https://corsproxy.io/?${encodeURIComponent(url)}`);
+      const proxyRes = await fetch(`https://corsproxy.org/?${encodeURIComponent(url)}`);
       if (proxyRes.ok) return proxyRes;
     } catch (e) {
       // CORS proxy 1 failed
     }
     try {
-      const proxyRes2 = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`);
+      const proxyRes2 = await fetch(`https://corsproxy.io/?${encodeURIComponent(url)}`);
       if (proxyRes2.ok) return proxyRes2;
     } catch (e) {
       // CORS proxy 2 failed
+    }
+    try {
+      const proxyRes3 = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`);
+      if (proxyRes3.ok) return proxyRes3;
+    } catch (e) {
+      // CORS proxy 3 failed
     }
     return null;
   };
@@ -250,34 +256,56 @@ export default function App() {
 
   useEffect(() => {
     const fetchYmm4Version = async () => {
+      // 1. Try local Express API route
       try {
         const res = await fetch('/api/ymm4/latest-version');
         if (res.ok) {
           const data = await res.json();
-          if (data && data.success && data.version) {
+          if (data && data.success && data.version && data.version !== '不明') {
             setYmm4Version(data.version);
             return;
           }
         }
       } catch (e) {
-        console.warn('Failed to fetch YMM4 version via API, trying fallback proxy...');
+        // Local Express API route unavailable
       }
 
+      // 2. Try static generated plugins-data.json
       try {
-        const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent('https://manjubox.net/rss.xml')}`;
-        const res = await fetch(proxyUrl);
-        if (res.ok) {
-          const xmlText = await res.text();
-          const vMatch = xmlText.match(/v?4\.\d+(?:\.\d+)?(?:\.\d+)?/i);
-          if (vMatch) {
-            let ver = vMatch[0];
-            if (!ver.toLowerCase().startsWith('v')) ver = 'v' + ver;
-            setYmm4Version(ver);
+        const staticRes = await fetch('./plugins-data.json');
+        if (staticRes.ok) {
+          const staticData = await staticRes.json();
+          if (staticData && staticData.ymm4Version && staticData.ymm4Version !== '不明') {
+            setYmm4Version(staticData.ymm4Version);
             return;
           }
         }
       } catch (e) {
-        console.warn('Fallback RSS fetch failed:', e);
+        // static file unavailable
+      }
+
+      // 3. Fallback: Proxy RSS fetch
+      const rssProxies = [
+        `https://corsproxy.io/?${encodeURIComponent('https://manjubox.net/rss.xml')}`,
+        `https://api.allorigins.win/raw?url=${encodeURIComponent('https://manjubox.net/rss.xml')}`
+      ];
+
+      for (const proxyUrl of rssProxies) {
+        try {
+          const res = await fetch(proxyUrl);
+          if (res.ok) {
+            const xmlText = await res.text();
+            const match = xmlText.match(/ゆっくりMovieMaker\s+(?:v|ver\.?)?\s*([4-9]\.\d+(?:\.\d+)?(?:\.\d+)?)/i) || xmlText.match(/v?4\.\d+(?:\.\d+)?(?:\.\d+)?/i);
+            if (match) {
+              let ver = match[1] || match[0];
+              if (!ver.toLowerCase().startsWith('v')) ver = 'v' + ver;
+              setYmm4Version(ver);
+              return;
+            }
+          }
+        } catch (e) {
+          // continue proxy
+        }
       }
 
       setYmm4Version('不明');
@@ -306,12 +334,34 @@ export default function App() {
   }, []);
 
   // Fetch Plugins Data
-  const loadPlugins = async () => {
+  const loadPlugins = async (forceFresh: boolean = false) => {
     setIsLoading(true);
     setError(null);
     try {
       let basePlugins: YMM4Plugin[] = [];
       let data: any = null;
+
+      // If forceFresh is true, prioritize live direct fetch
+      if (forceFresh) {
+        // Try live direct fetch from manjubox.net via CORS proxies first
+        const directPlugins = await fetchDirectYmm4Plugins();
+        if (directPlugins && directPlugins.length > 0) {
+          basePlugins = directPlugins;
+          // Also fetch live external GitHub & BOOTH items
+          try {
+            const externalItems = await fetchExternalPlugins(basePlugins);
+            if (externalItems && externalItems.length > 0) {
+              basePlugins = [...basePlugins, ...externalItems];
+            }
+          } catch (e) {
+            console.warn('Live external fetch failed:', e);
+          }
+          setPlugins(basePlugins);
+          setLastUpdated(new Date().toISOString());
+          setIsLoading(false);
+          return;
+        }
+      }
 
       // 1. Try local Express API route (in development / server container)
       try {
@@ -327,6 +377,9 @@ export default function App() {
       if (data && data.success && Array.isArray(data.plugins) && data.plugins.length > 0) {
         basePlugins = data.plugins;
         setPlugins(basePlugins);
+        if (data.ymm4Version && data.ymm4Version !== '不明') {
+          setYmm4Version(data.ymm4Version);
+        }
         setLastUpdated(data.timestamp || new Date().toISOString());
       } else {
         // 2. Try static generated plugins-data.json (for GitHub Pages / static hosting)
@@ -338,6 +391,9 @@ export default function App() {
             if (staticData && Array.isArray(staticData.plugins) && staticData.plugins.length > 0) {
               basePlugins = staticData.plugins;
               setPlugins(basePlugins);
+              if (staticData.ymm4Version && staticData.ymm4Version !== '不明') {
+                setYmm4Version(staticData.ymm4Version);
+              }
               setLastUpdated(staticData.timestamp || new Date().toISOString());
             }
           }
@@ -345,7 +401,7 @@ export default function App() {
           console.warn('Static plugins-data.json unavailable, trying CORS proxy fallback...');
         }
 
-        // 3. CORS Proxy Fallback if static JSON is missing
+        // 3. CORS Proxy Fallback if static JSON is missing or empty
         if (basePlugins.length === 0) {
           const directPlugins = await fetchDirectYmm4Plugins();
           if (directPlugins && directPlugins.length > 0) {
@@ -358,10 +414,19 @@ export default function App() {
         }
       }
 
-      // 4. Background fetch for unlisted external plugins (GitHub Search & BOOTH)
+      // 4. Background live update check for each accessing user to get the absolute latest updates
       if (basePlugins.length > 0) {
-        // External plugins are now baked into plugins-data.json at build time
-        // so we don't need to fetch them client-side anymore!
+        fetchDirectYmm4Plugins().then(async (livePlugins) => {
+          if (livePlugins && livePlugins.length > 0) {
+            // Fetch any new external GitHub/BOOTH items live
+            const externalItems = await fetchExternalPlugins(livePlugins).catch(() => []);
+            const allLive = externalItems.length > 0 ? [...livePlugins, ...externalItems] : livePlugins;
+            setPlugins(allLive);
+            setLastUpdated(new Date().toISOString());
+          }
+        }).catch((e) => {
+          console.warn('Background live refresh check failed:', e);
+        });
       }
     } catch (err: any) {
       console.error('Error in loadPlugins:', err);
@@ -628,7 +693,7 @@ export default function App() {
       <Navbar
         themeMode={themeMode}
         onThemeChange={handleThemeChange}
-        onRefresh={loadPlugins}
+        onRefresh={() => loadPlugins(true)}
         isRefreshing={isLoading}
         lastUpdated={lastUpdated}
         totalCount={plugins.length}
@@ -726,7 +791,7 @@ export default function App() {
               </div>
               <p className="text-xs text-zinc-700 dark:text-zinc-300">{error}</p>
               <button
-                onClick={loadPlugins}
+                onClick={() => loadPlugins(true)}
                 className="px-4 py-2 bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 text-xs font-bold border border-zinc-900 dark:border-zinc-100 cursor-pointer"
               >
                 再読み込みを試す

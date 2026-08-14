@@ -72,9 +72,15 @@ async function startServer() {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 10000);
 
+      const headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,text/yaml,text/plain,*/*;q=0.8',
+        'Accept-Language': 'ja,en-US;q=0.9,en;q=0.8'
+      };
+
       const [ymlRes, ghListRes] = await Promise.allSettled([
-        fetch('https://manjubox.net/ymm4plugins.yml', { signal: controller.signal }),
-        fetch('https://manjubox.net/api/ymm4plugins/github/list', { signal: controller.signal })
+        fetch('https://manjubox.net/ymm4plugins.yml', { signal: controller.signal, headers }),
+        fetch('https://manjubox.net/api/ymm4plugins/github/list', { signal: controller.signal, headers })
       ]);
 
       clearTimeout(timeout);

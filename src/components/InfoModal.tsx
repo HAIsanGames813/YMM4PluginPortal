@@ -30,6 +30,9 @@ const FALLBACK_README = `<img width="3200" height="800" alt="YMM4プラグイン
 
 ## 変更履歴
 
+### v1.2.01
+- プラグイン情報の読み込み調整
+
 ### v1.2.0
 - Google検索結果の表示を変更
 

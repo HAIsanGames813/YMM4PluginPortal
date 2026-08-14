@@ -5,6 +5,10 @@ on:
     branches:
       - main
       - master
+  schedule:
+    # 15分ごとに自動実行し、プラグイン一覧(ymm4plugins.yml/GitHub/BOOTH)およびYMM4バージョンを自動取得・更新
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:

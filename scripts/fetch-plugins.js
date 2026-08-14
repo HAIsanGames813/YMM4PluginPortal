@@ -29,14 +29,61 @@ function mapTopicsToCategory(topics) {
   return 'その他 (GitHub)';
 }
 
+const COMMON_HEADERS = {
+  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+  'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,text/yaml,text/plain,*/*;q=0.8',
+  'Accept-Language': 'ja,en-US;q=0.9,en;q=0.8'
+};
+
 async function main() {
   console.log('Fetching YMM4 plugins data at build time...');
-  
+
+  // 1. Fetch YMM4 latest version from manjubox RSS or GitHub releases/tags
+  let ymm4Version = '不明';
+  try {
+    const rssRes = await fetch('https://manjubox.net/rss.xml', { headers: COMMON_HEADERS });
+    if (rssRes.ok) {
+      const xmlText = await rssRes.text();
+      const match = xmlText.match(/ゆっくりMovieMaker\s+(?:v|ver\.?)?\s*([4-9]\.\d+(?:\.\d+)?(?:\.\d+)?)/i) || xmlText.match(/v?4\.\d+(?:\.\d+)?(?:\.\d+)?/i);
+      if (match) {
+        let ver = match[1] || match[0];
+        if (!ver.toLowerCase().startsWith('v')) ver = 'v' + ver;
+        ymm4Version = ver;
+        console.log(`Fetched YMM4 latest version from RSS: ${ymm4Version}`);
+      }
+    }
+  } catch (e) {
+    console.warn('Failed to fetch YMM4 version from RSS:', e.message);
+  }
+
+  if (ymm4Version === '不明') {
+    try {
+      const tagsRes = await fetch('https://api.github.com/repos/manju-summoner/YukkuriMovieMaker4/tags', {
+        headers: { ...COMMON_HEADERS, 'Accept': 'application/vnd.github+json' }
+      });
+      if (tagsRes.ok) {
+        const tags = await tagsRes.json();
+        if (Array.isArray(tags) && tags.length > 0 && tags[0].name) {
+          let ver = tags[0].name.trim();
+          if (!ver.toLowerCase().startsWith('v')) ver = 'v' + ver;
+          ymm4Version = ver;
+          console.log(`Fetched YMM4 latest version from GitHub tags: ${ymm4Version}`);
+        }
+      }
+    } catch (e) {
+      console.warn('Failed to fetch YMM4 version from GitHub tags:', e.message);
+    }
+  }
+
+  // 2. Fetch ymm4plugins.yml and github/list
   let yamlText = '';
   try {
-    const res = await fetch('https://manjubox.net/ymm4plugins.yml');
+    const res = await fetch('https://manjubox.net/ymm4plugins.yml', { headers: COMMON_HEADERS });
     if (res.ok) {
       yamlText = await res.text();
+      console.log(`Fetched ymm4plugins.yml successfully (${yamlText.length} bytes).`);
+    } else {
+      console.error(`Failed to fetch ymm4plugins.yml, status: ${res.status}`);
     }
   } catch (e) {
     console.error('Failed to fetch ymm4plugins.yml:', e);
@@ -44,9 +91,12 @@ async function main() {
 
   let githubList = [];
   try {
-    const res = await fetch('https://manjubox.net/api/ymm4plugins/github/list');
+    const res = await fetch('https://manjubox.net/api/ymm4plugins/github/list', { headers: COMMON_HEADERS });
     if (res.ok) {
       githubList = await res.json();
+      console.log(`Fetched github/list successfully (${githubList.length} items).`);
+    } else {
+      console.error(`Failed to fetch github/list, status: ${res.status}`);
     }
   } catch (e) {
     console.error('Failed to fetch github/list:', e);
@@ -342,6 +392,7 @@ const publicDir = path.resolve('public');
   const outputData = {
     success: true,
     timestamp: new Date().toISOString(),
+    ymm4Version: ymm4Version,
     plugins: normalizedPlugins
   };
   fs.writeFileSync(path.join(publicDir, 'plugins-data.json'), JSON.stringify(outputData, null, 2), 'utf-8');
