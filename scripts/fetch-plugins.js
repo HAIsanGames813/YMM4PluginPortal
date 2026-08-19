@@ -256,28 +256,141 @@ async function main() {
     }
   }
 
-  
+  // 3. Search GitHub API for unlisted YMM4 plugins - STRICTLY topic:ymm4-plugin ONLY
+  console.log('Searching GitHub API for unlisted YMM4 plugins (strictly topic:ymm4-plugin)...');
+  try {
+    const ghSearchQueries = [
+      'q=topic:ymm4-plugin'
+    ];
+
+    for (const q of ghSearchQueries) {
+      try {
+        const ghRes = await fetch(`https://api.github.com/search/repositories?${q}&per_page=50`, {
+          headers: { ...COMMON_HEADERS, 'Accept': 'application/vnd.github+json' }
+        });
+        if (ghRes.ok) {
+          const data = await ghRes.json();
+          if (data && Array.isArray(data.items)) {
+            for (const item of data.items) {
+              if (!item.owner || !item.name) continue;
+              const ownerLogin = item.owner.login.toLowerCase();
+              if (ownerLogin === 'manju-summoner') continue;
+
+              // STRICT REQUIREMENT: Topic MUST contain 'ymm4-plugin' (never match by name/description)
+              const itemTopics = Array.isArray(item.topics) ? item.topics : [];
+              const hasYmm4PluginTopic = itemTopics.some((t) => t.toLowerCase() === 'ymm4-plugin');
+              if (!hasYmm4PluginTopic) continue;
+
+              const key = `${ownerLogin}/${item.name.toLowerCase()}`;
+              const htmlUrl = (item.html_url || `https://github.com/${item.owner.login}/${item.name}`).toLowerCase();
+
+              if (existingGithubKeys.has(key) || existingUrls.has(htmlUrl)) continue;
+
+              existingGithubKeys.add(key);
+              existingUrls.add(htmlUrl);
+
+              const pluginType = mapTopicsToCategory(itemTopics);
+
+              normalizedPlugins.push({
+                id: `ext-gh-${item.id || `${item.owner.login}-${item.name}`}`,
+                name: item.name,
+                author: item.owner.login,
+                type: pluginType,
+                description: item.description || 'GitHubで公開されているYMM4プラグインです。',
+                url: item.html_url,
+                links: [{ name: 'GitHub Repo', url: item.html_url }],
+                isGithub: true,
+                githubUser: item.owner.login,
+                githubRepo: item.name,
+                version: item.default_branch || 'main',
+                updatedAt: item.updated_at || '',
+                publishedAt: item.created_at || '',
+                isEnabled: true,
+                license: item.license?.spdx_id || item.license?.name || '',
+                tags: itemTopics.length > 0 ? itemTopics : ['ymm4-plugin', 'GitHub', '外部検索'],
+                isExternalSource: true,
+                sourceName: 'GitHub'
+              });
+            }
+          }
+        }
+      } catch (e) {
+        console.warn(`GitHub search query failed: ${q}`, e.message);
+      }
+    }
+  } catch (err) {
+    console.warn('Failed GitHub topic search in build:', err.message);
+  }
+
+  // 4. BOOTH Scraping & Extraction Helper
   async function fetchBoothHtml(targetUrl) {
     try {
-      const direct = await fetch(targetUrl, { headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' }});
+      const direct = await fetch(targetUrl, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+          'Accept-Language': 'ja,en-US;q=0.9,en;q=0.8'
+        }
+      });
       if (direct.ok) {
         const text = await direct.text();
-        if (text && text.includes('booth.pm')) return text;
+        if (text && (text.includes('booth.pm') || text.includes('item-card'))) return text;
       }
     } catch(e) {}
 
     const proxies = [
+      `https://corsproxy.org/?${encodeURIComponent(targetUrl)}`,
       `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`,
-      `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`
+      `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`
     ];
     for (const proxy of proxies) {
       try {
         const pRes = await fetch(proxy);
         if (pRes.ok) {
           const text = await pRes.text();
-          if (text && text.includes('booth.pm')) return text;
+          if (text && (text.includes('booth.pm') || text.includes('item-card'))) return text;
         }
       } catch(e) {}
+    }
+    return null;
+  }
+
+  function parseBoothPriceFromHtml(html) {
+    if (!html) return null;
+    // JSON-LD parse
+    const jsonLdMatches = html.match(/<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi);
+    if (jsonLdMatches) {
+      for (const match of jsonLdMatches) {
+        try {
+          const jsonText = match.replace(/<script[^>]*>/i, '').replace(/<\/script>/i, '').trim();
+          const data = JSON.parse(jsonText);
+          const offers = data.offers || (Array.isArray(data) ? data.find(x => x.offers)?.offers : null);
+          if (offers) {
+            const price = Array.isArray(offers) ? offers[0].price : offers.price;
+            if (price !== undefined && price !== null && price !== '') {
+              const num = parseInt(String(price).replace(/[^\d]/g, ''), 10);
+              if (!isNaN(num)) return num === 0 ? '無料' : `¥ ${num.toLocaleString()}`;
+            }
+          }
+        } catch (e) {}
+      }
+    }
+
+    const $ = cheerio.load(html);
+    const metaPrice = $('meta[property="product:price:amount"]').attr('content') || $('meta[property="og:price:amount"]').attr('content');
+    if (metaPrice) {
+      const num = parseInt(metaPrice.replace(/[^\d]/g, ''), 10);
+      if (!isNaN(num)) return num === 0 ? '無料' : `¥ ${num.toLocaleString()}`;
+    }
+
+    let minPrice = Infinity;
+    $('.price, .item-price, .variation-price, [itemprop="price"], .item-card__price').each((_, el) => {
+      const text = $(el).text().replace(/[^\d]/g, '');
+      const num = parseInt(text, 10);
+      if (!isNaN(num) && num < minPrice) minPrice = num;
+    });
+
+    if (minPrice !== Infinity) {
+      return minPrice === 0 ? '無料' : `¥ ${minPrice.toLocaleString()}`;
     }
     return null;
   }
@@ -285,7 +398,6 @@ async function main() {
   try {
     const boothUrls = [
       'https://booth.pm/ja/items?tags%5B%5D=YMM4Plugin',
-      'https://booth.pm/ja/items?tags%5B%5D=ymm-plugin',
       'https://booth.pm/ja/items?tags%5B%5D=ymm4-plugin'
     ];
 
@@ -295,14 +407,14 @@ async function main() {
       if (!html) continue;
       const $ = cheerio.load(html);
 
-      $('.item-card, li.l-card').each((idx, el) => {
+      $('.item-card, li.l-card, .js-item-card, [data-product-id]').each((idx, el) => {
         const linkEl = $(el).find('a[href*="/items/"]');
         let href = linkEl.attr('href') || '';
         if (href && !href.startsWith('http')) href = `https://booth.pm${href}`;
         
         const dataBrand = $(el).attr('data-product-brand');
         const dataName = $(el).attr('data-product-name');
-        const titleEl = $(el).find('.item-card__title, .item-card__name');
+        const titleEl = $(el).find('.item-card__title, .item-card__name, .title');
         const shopEl = $(el).find('.item-card__shop-name-text, .item-card__shop-name, .item-card__author, .shop-name');
         
         let author = shopEl.text().trim() || dataBrand?.trim() || '';
@@ -317,8 +429,17 @@ async function main() {
 
         const name = titleEl.text().trim() || dataName?.trim();
         const priceAttr = $(el).attr('data-product-price');
-        const priceEl = $(el).find('.item-card__price, .price');
-        const rawPrice = priceAttr ? `¥ ${priceAttr}` : priceEl.text().trim();
+        const priceEl = $(el).find('.item-card__price, .price, .item-price');
+        let rawPrice = undefined;
+        if (priceAttr !== undefined && priceAttr !== null && priceAttr !== '') {
+          const num = parseInt(String(priceAttr).replace(/[^\d]/g, ''), 10);
+          if (!isNaN(num)) rawPrice = num === 0 ? '無料' : `¥ ${num.toLocaleString()}`;
+        }
+        if (!rawPrice && priceEl.length > 0) {
+          const textPrice = priceEl.text().trim();
+          const num = parseInt(textPrice.replace(/[^\d]/g, ''), 10);
+          if (!isNaN(num)) rawPrice = num === 0 ? '無料' : `¥ ${num.toLocaleString()}`;
+        }
         
         const cleanHref = href.split('?')[0].toLowerCase().replace(/\/$/, '');
         const boothId = extractBoothItemId(cleanHref);
@@ -329,11 +450,11 @@ async function main() {
           existingUrls.add(cleanHref);
           if (boothId) existingBoothItemIds.add(boothId);
           normalizedPlugins.push({
-            id: `ext-booth-${boothId || Date.now()}`,
+            id: `ext-booth-${boothId || Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
             name: name,
             author: author,
             type: 'Booth自動取得',
-            description: `BOOTHで「YMM4Plugin」等のタグで出品されている作品です。${rawPrice ? ` (価格: ${rawPrice})` : ''}`,
+            description: `BOOTHで出品されているYMM4関連作品です。${rawPrice ? ` (価格: ${rawPrice})` : ''}`,
             price: rawPrice || undefined,
             url: href,
             links: [{ name: 'BOOTH 商品ページ', url: href }],
@@ -353,7 +474,7 @@ async function main() {
   }
 
   console.log('Fetching BOOTH prices for all existing BOOTH links...');
-  const pluginsToFetch = normalizedPlugins.filter(p => !p.price && (p.url?.includes('booth.pm') || p.links?.some(l => l.url?.includes('booth.pm'))));
+  const pluginsToFetch = normalizedPlugins.filter(p => (!p.price || p.price === '¥ 0' || p.price === '¥ NaN') && (p.url?.includes('booth.pm') || p.links?.some(l => l.url?.includes('booth.pm'))));
   
   const limit = 5;
   for (let i = 0; i < pluginsToFetch.length; i += limit) {
@@ -364,29 +485,22 @@ async function main() {
       try {
         const bHtml = await fetchBoothHtml(boothUrl);
         if (bHtml) {
-           const $ = cheerio.load(bHtml);
-           let minPrice = Infinity;
-           $('.price, .item-price, .variation-price').each((_, el) => {
-              const text = $(el).text().replace(/[^\d]/g, '');
-              const num = parseInt(text, 10);
-              if (!isNaN(num) && num < minPrice) minPrice = num;
-           });
-           if (minPrice !== Infinity) {
-             p.price = `¥ ${minPrice}`;
-           } else {
-             const metaPrice = $('meta[property="product:price:amount"]').attr('content');
-             if (metaPrice) {
-                const num = parseInt(metaPrice.replace(/[^\d]/g, ''), 10);
-                if (!isNaN(num)) p.price = `¥ ${num}`;
-             }
-           }
+          const extractedPrice = parseBoothPriceFromHtml(bHtml);
+          if (extractedPrice) {
+            p.price = extractedPrice;
+          }
         }
       } catch (e) {}
     }));
   }
-const publicDir = path.resolve('public');
+
+  const publicDir = path.resolve('public');
   if (!fs.existsSync(publicDir)) {
     fs.mkdirSync(publicDir, { recursive: true });
+  }
+  const dataDir = path.resolve('data');
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true });
   }
 
   const outputData = {
@@ -395,8 +509,10 @@ const publicDir = path.resolve('public');
     ymm4Version: ymm4Version,
     plugins: normalizedPlugins
   };
-  fs.writeFileSync(path.join(publicDir, 'plugins-data.json'), JSON.stringify(outputData, null, 2), 'utf-8');
-  console.log(`Successfully generated public/plugins-data.json with ${normalizedPlugins.length} plugins.`);
+  const jsonContent = JSON.stringify(outputData, null, 2);
+  fs.writeFileSync(path.join(publicDir, 'plugins-data.json'), jsonContent, 'utf-8');
+  fs.writeFileSync(path.join(dataDir, 'plugins-db.json'), jsonContent, 'utf-8');
+  console.log(`Successfully saved database with ${normalizedPlugins.length} plugins to public/plugins-data.json and data/plugins-db.json.`);
 }
 
 main().catch(err => {

@@ -470,6 +470,7 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({
               <option value="name">プラグイン名順</option>
               <option value="author">作者名順</option>
               <option value="type">カテゴリー順</option>
+              <option value="price">価格順</option>
             </select>
             <button
               onClick={() => onFilterChange({ sortOrder: filterState.sortOrder === 'asc' ? 'desc' : 'asc', currentPage: 1 })}

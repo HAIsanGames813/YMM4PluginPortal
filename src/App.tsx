@@ -15,6 +15,7 @@ import { parseGithubRepo } from './utils/github';
 import { fetchExternalPlugins } from './utils/externalSearch';
 import { SITE_VERSION } from './config/version';
 import { getSiteNameFromUrl } from './utils/site';
+import { getPluginNumericPrice } from './utils/price';
 import { RefreshCw, AlertCircle, Package, Info, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, SlidersHorizontal, ExternalLink } from 'lucide-react';
 
 async function fetchDirectYmm4Plugins(): Promise<YMM4Plugin[]> {
@@ -420,8 +421,45 @@ export default function App() {
           if (livePlugins && livePlugins.length > 0) {
             // Fetch any new external GitHub/BOOTH items live
             const externalItems = await fetchExternalPlugins(livePlugins).catch(() => []);
-            const allLive = externalItems.length > 0 ? [...livePlugins, ...externalItems] : livePlugins;
-            setPlugins(allLive);
+            const allLiveFetched = externalItems.length > 0 ? [...livePlugins, ...externalItems] : livePlugins;
+
+            // Smart merge with existing basePlugins so we never lose items or price/description metadata
+            setPlugins((current) => {
+              if (!current || current.length === 0) return allLiveFetched;
+              const mergedMap = new Map<string, YMM4Plugin>();
+              
+              // Key generator for deduplication
+              const getItemKey = (p: YMM4Plugin) => {
+                if (p.githubUser && p.githubRepo) return `gh:${p.githubUser.toLowerCase()}/${p.githubRepo.toLowerCase()}`;
+                if (p.url) return `url:${p.url.split('?')[0].toLowerCase().replace(/\/$/, '')}`;
+                return `id:${p.id}`;
+              };
+
+              // First add current plugins (server/cached data)
+              for (const p of current) {
+                mergedMap.set(getItemKey(p), p);
+              }
+
+              // Merge live items
+              for (const p of allLiveFetched) {
+                const key = getItemKey(p);
+                const existing = mergedMap.get(key);
+                if (existing) {
+                  mergedMap.set(key, {
+                    ...existing,
+                    ...p,
+                    price: p.price || existing.price,
+                    description: p.description && p.description.length > (existing.description?.length || 0) ? p.description : existing.description,
+                    version: p.version || existing.version,
+                    updatedAt: p.updatedAt || existing.updatedAt
+                  });
+                } else {
+                  mergedMap.set(key, p);
+                }
+              }
+
+              return Array.from(mergedMap.values());
+            });
             setLastUpdated(new Date().toISOString());
           }
         }).catch((e) => {
@@ -582,6 +620,18 @@ export default function App() {
         return true;
       })
       .sort((a, b) => {
+        if (deferredFilterState.sortBy === 'price') {
+          const priceA = getPluginNumericPrice(a);
+          const priceB = getPluginNumericPrice(b);
+          if (priceA === -1 && priceB !== -1) return 1;
+          if (priceB === -1 && priceA !== -1) return -1;
+          if (priceA === -1 && priceB === -1) {
+            return a.name.localeCompare(b.name, 'ja', { numeric: true });
+          }
+          const comp = priceA - priceB;
+          return deferredFilterState.sortOrder === 'asc' ? comp : -comp;
+        }
+
         let valA = '';
         let valB = '';
 

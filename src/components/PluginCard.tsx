@@ -15,13 +15,14 @@ import {
 } from 'lucide-react';
 import { YMM4Plugin } from '../types';
 import { getSiteNameFromUrl } from '../utils/site';
+import { getPluginDisplayPrice } from '../utils/price';
 
 const BoothPriceTag: React.FC<{ plugin: YMM4Plugin }> = ({ plugin }) => {
-  if (!plugin.price) return null;
+  const displayPrice = getPluginDisplayPrice(plugin);
 
   return (
     <span className="text-[10px] font-mono px-2 py-0.5 bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 border border-zinc-300 dark:border-zinc-700 font-bold ml-auto">
-      価格: {plugin.price}
+      価格: {displayPrice}
     </span>
   );
 };
@@ -208,7 +209,7 @@ export const PluginCard: React.FC<PluginCardProps> = React.memo(({
             className="flex-1 min-w-[120px] bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 hover:bg-zinc-700 dark:hover:bg-zinc-300 px-3 py-1.5 text-xs font-mono font-bold flex items-center justify-center gap-1.5 border border-zinc-900 dark:border-zinc-100 transition-colors cursor-pointer"
           >
             <GitBranch className="w-3.5 h-3.5" />
-            <span>バージョン選択</span>
+            <span>バージョン・DL数</span>
           </button>
         ) : (
           <a

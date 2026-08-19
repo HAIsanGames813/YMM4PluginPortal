@@ -105,81 +105,87 @@ export async function fetchExternalPlugins(existingPlugins: YMM4Plugin[]): Promi
   // 2. Client-side Fallback
   const externalPlugins: YMM4Plugin[] = [];
 
-  // GitHub Search API (strictly by TOPIC)
+  // GitHub Search API - STRICTLY topic:ymm4-plugin ONLY (Never search title/description)
   try {
     const ghSearchQueries = [
-      'q=topic:ymm4-plugin+OR+topic:ymm-plugin+OR+topic:ymm4plugin+sort:updated-desc'
+      'q=topic:ymm4-plugin'
     ];
 
     for (const q of ghSearchQueries) {
-      const res = await fetch(`https://api.github.com/search/repositories?${q}&per_page=30`);
-      if (res.ok) {
-        const data = await res.json();
-        if (data && Array.isArray(data.items)) {
-          for (const item of data.items) {
-            if (!item.owner || !item.name) continue;
+      try {
+        const res = await fetch(`https://api.github.com/search/repositories?${q}&per_page=50`, {
+          headers: { 'Accept': 'application/vnd.github+json' }
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data && Array.isArray(data.items)) {
+            for (const item of data.items) {
+              if (!item.owner || !item.name) continue;
 
-            const ownerLogin = item.owner.login.toLowerCase();
-            if (ownerLogin === 'manju-summoner') continue;
+              const ownerLogin = item.owner.login.toLowerCase();
+              if (ownerLogin === 'manju-summoner') continue;
 
-            const key = `${ownerLogin}/${item.name.toLowerCase()}`;
-            const htmlUrl = (item.html_url || `https://github.com/${item.owner.login}/${item.name}`).toLowerCase();
+              // STRICT REQUIREMENT: Topic MUST contain 'ymm4-plugin' (never match by name/description)
+              const itemTopics: string[] = Array.isArray(item.topics) ? item.topics : [];
+              const hasYmm4PluginTopic = itemTopics.some((t) => t.toLowerCase() === 'ymm4-plugin');
+              if (!hasYmm4PluginTopic) continue;
 
-            if (existingGithubKeys.has(key) || existingUrls.has(htmlUrl)) continue;
+              const key = `${ownerLogin}/${item.name.toLowerCase()}`;
+              const htmlUrl = (item.html_url || `https://github.com/${item.owner.login}/${item.name}`).toLowerCase();
 
-            const itemTopics: string[] = Array.isArray(item.topics) ? item.topics : [];
-            const hasYmmTopic = itemTopics.some((t) =>
-              t.toLowerCase().startsWith('ymm') || t.toLowerCase().includes('ymm4')
-            );
-            if (!hasYmmTopic) continue;
+              if (existingGithubKeys.has(key) || existingUrls.has(htmlUrl)) continue;
 
-            existingGithubKeys.add(key);
-            existingUrls.add(htmlUrl);
+              existingGithubKeys.add(key);
+              existingUrls.add(htmlUrl);
 
-            const pluginType = mapTopicsToCategory(itemTopics);
+              const pluginType = mapTopicsToCategory(itemTopics);
 
-            externalPlugins.push({
-              id: `ext-gh-${item.id || item.node_id || `${item.owner.login}-${item.name}`}`,
-              name: item.name,
-              author: item.owner.login,
-              type: pluginType,
-              description: item.description || 'GitHubで公開されているYMM4関連プラグインリポジトリです。',
-              url: item.html_url,
-              links: [{ name: 'GitHub Repo', url: item.html_url }],
-              isGithub: true,
-              githubUser: item.owner.login,
-              githubRepo: item.name,
-              version: item.default_branch || 'main',
-              updatedAt: item.updated_at || '',
-              publishedAt: item.created_at || '',
-              isEnabled: true,
-              license: item.license?.spdx_id || item.license?.name || '',
-              tags: itemTopics.length > 0 ? itemTopics : ['ymm4-plugin', 'GitHub', '外部検索'],
-              isExternalSource: true,
-              sourceName: 'GitHub'
-            });
+              externalPlugins.push({
+                id: `ext-gh-${item.id || item.node_id || `${item.owner.login}-${item.name}`}`,
+                name: item.name,
+                author: item.owner.login,
+                type: pluginType,
+                description: item.description || 'GitHubで公開されているYMM4プラグインです。',
+                url: item.html_url,
+                links: [{ name: 'GitHub Repo', url: item.html_url }],
+                isGithub: true,
+                githubUser: item.owner.login,
+                githubRepo: item.name,
+                version: item.default_branch || 'main',
+                updatedAt: item.updated_at || '',
+                publishedAt: item.created_at || '',
+                isEnabled: true,
+                license: item.license?.spdx_id || item.license?.name || '',
+                tags: itemTopics.length > 0 ? itemTopics : ['ymm4-plugin', 'GitHub', '外部検索'],
+                isExternalSource: true,
+                sourceName: 'GitHub'
+              });
+            }
           }
         }
+      } catch (e) {
+        // ignore single query failure
       }
     }
   } catch (err) {
     console.warn('Failed to fetch GitHub search API for external plugins:', err);
   }
 
-  // BOOTH Search Fallback (strictly by TAG)
+  // BOOTH Search Fallback (by TAGS & Search)
   try {
     const fetchBoothHtml = async (searchUrl: string) => {
       const proxies = [
+        `https://corsproxy.org/?${encodeURIComponent(searchUrl)}`,
         `https://api.allorigins.win/raw?url=${encodeURIComponent(searchUrl)}`,
-        `https://corsproxy.io/?${encodeURIComponent(searchUrl)}`,
-        `https://cors-anywhere.herokuapp.com/${searchUrl}`
+        `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(searchUrl)}`,
+        `https://corsproxy.io/?${encodeURIComponent(searchUrl)}`
       ];
       for (const proxy of proxies) {
         try {
           const res = await fetch(proxy);
           if (res.ok) {
             const text = await res.text();
-            if (text && text.includes('booth.pm')) return text;
+            if (text && (text.includes('booth.pm') || text.includes('item-card'))) return text;
           }
         } catch (e) {
           // ignore
@@ -190,7 +196,6 @@ export async function fetchExternalPlugins(existingPlugins: YMM4Plugin[]): Promi
 
     const boothUrlsToSearch = [
       'https://booth.pm/ja/items?tags%5B%5D=YMM4Plugin',
-      'https://booth.pm/ja/items?tags%5B%5D=ymm-plugin',
       'https://booth.pm/ja/items?tags%5B%5D=ymm4-plugin'
     ];
 
@@ -201,18 +206,18 @@ export async function fetchExternalPlugins(existingPlugins: YMM4Plugin[]): Promi
       const parser = new DOMParser();
       const doc = parser.parseFromString(boothHtml, 'text/html');
 
-      const itemCards = doc.querySelectorAll('.item-card, li.l-card');
+      const itemCards = doc.querySelectorAll('.item-card, li.l-card, .js-item-card, [data-product-id]');
 
       itemCards.forEach((card, idx) => {
         const linkEl = card.querySelector('a[href*="/items/"]') as HTMLAnchorElement | null;
         let href = linkEl?.getAttribute('href') || '';
         if (href && !href.startsWith('http')) {
-          href = `https://booth.pm${href}`;
+          href = `https://booth.pm${href.startsWith('/') ? '' : '/'}${href}`;
         }
 
         const dataBrand = card.getAttribute('data-product-brand');
         const dataName = card.getAttribute('data-product-name');
-        const titleEl = card.querySelector('.item-card__title, .item-card__name');
+        const titleEl = card.querySelector('.item-card__title, .item-card__name, .title');
         const shopEl = card.querySelector('.item-card__shop-name-text, .item-card__shop-name, .item-card__author, .shop-name');
 
         let author = shopEl?.textContent?.trim() || dataBrand?.trim() || '';
@@ -231,8 +236,18 @@ export async function fetchExternalPlugins(existingPlugins: YMM4Plugin[]): Promi
 
         const name = titleEl?.textContent?.trim() || dataName?.trim();
         const priceAttr = card.getAttribute('data-product-price');
-        const priceEl = card.querySelector('.item-card__price, .price');
-        const rawPrice = priceAttr ? `¥ ${priceAttr}` : priceEl?.textContent?.trim();
+        const priceEl = card.querySelector('.item-card__price, .price, .item-price');
+        let rawPrice: string | undefined = undefined;
+
+        if (priceAttr !== undefined && priceAttr !== null && priceAttr !== '') {
+          const num = parseInt(priceAttr.replace(/[^\d]/g, ''), 10);
+          if (!isNaN(num)) rawPrice = num === 0 ? '無料' : `¥ ${num.toLocaleString()}`;
+        }
+        if (!rawPrice && priceEl && priceEl.textContent) {
+          const textPrice = priceEl.textContent.trim();
+          const num = parseInt(textPrice.replace(/[^\d]/g, ''), 10);
+          if (!isNaN(num)) rawPrice = num === 0 ? '無料' : `¥ ${num.toLocaleString()}`;
+        }
 
         const cleanHref = href.split('?')[0].toLowerCase().replace(/\/$/, '');
         const boothId = extractBoothItemId(cleanHref);
@@ -246,7 +261,7 @@ export async function fetchExternalPlugins(existingPlugins: YMM4Plugin[]): Promi
             name: name,
             author: author,
             type: 'Booth自動取得',
-            description: `BOOTHで「YMM4Plugin」等のタグで出品されている作品です。${rawPrice ? ` (価格: ${rawPrice})` : ''}`,
+            description: `BOOTHで出品されているYMM4関連作品です。${rawPrice ? ` (価格: ${rawPrice})` : ''}`,
             price: rawPrice || undefined,
             url: href,
             links: [{ name: 'BOOTH 商品ページ', url: href }],

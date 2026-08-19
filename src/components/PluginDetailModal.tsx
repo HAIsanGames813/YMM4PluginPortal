@@ -5,6 +5,7 @@ import { MarkdownContent } from './MarkdownContent';
 import { getSiteNameFromUrl } from '../utils/site';
 import { parseGithubRepo, fetchGithubReadme } from '../utils/github';
 import { fetchBoothDetails } from '../utils/booth';
+import { getPluginDisplayPrice } from '../utils/price';
 
 interface PluginDetailModalProps {
   plugin: YMM4Plugin | null;
@@ -225,10 +226,28 @@ export const PluginDetailModal: React.FC<PluginDetailModalProps> = ({
               </div>
 
               {plugin.version && (
-                <div className="flex items-center gap-1 bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 border border-zinc-300 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200">
+                <div className="flex items-center gap-1 bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 border border-zinc-300 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 font-mono">
                   <GitBranch className="w-3.5 h-3.5" />
                   <span>バージョン: {plugin.version}</span>
                 </div>
+              )}
+
+              <div className="flex items-center gap-1 bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 border border-zinc-300 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 font-mono font-bold">
+                <span>価格: {getPluginDisplayPrice(plugin, boothData?.price)}</span>
+              </div>
+
+              {plugin.isGithub && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    onClose();
+                    onOpenVersions(plugin);
+                  }}
+                  className="flex items-center gap-1.5 bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 px-2.5 py-0.5 border border-zinc-900 dark:border-zinc-100 font-mono text-xs font-bold hover:bg-zinc-700 dark:hover:bg-zinc-300 transition-colors cursor-pointer"
+                >
+                  <Download className="w-3 h-3" />
+                  <span>バージョン・DL数一覧</span>
+                </button>
               )}
 
               {plugin.publishedAt && (
@@ -352,11 +371,9 @@ export const PluginDetailModal: React.FC<PluginDetailModalProps> = ({
                       </div>
                     ) : boothData ? (
                       <div className="space-y-3">
-                        {boothData.price && (
-                          <div className="text-xs font-mono font-bold text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 px-2.5 py-1 border border-zinc-300 dark:border-zinc-700 inline-block">
-                            価格: {boothData.price}
-                          </div>
-                        )}
+                        <div className="text-xs font-mono font-bold text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 px-2.5 py-1 border border-zinc-300 dark:border-zinc-700 inline-block">
+                          価格: {getPluginDisplayPrice(plugin, boothData?.price)}
+                        </div>
                         {boothData.description ? (
                           <MarkdownContent content={boothData.description} />
                         ) : (
@@ -468,8 +485,8 @@ export const PluginDetailModal: React.FC<PluginDetailModalProps> = ({
                 }}
                 className="px-4 py-2 bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 font-mono text-xs font-bold border border-zinc-900 dark:border-zinc-100 hover:bg-zinc-700 dark:hover:bg-zinc-300 transition-colors cursor-pointer flex items-center gap-1.5"
               >
-                <GitBranch className="w-3.5 h-3.5" />
-                <span>バージョン・リリース選択</span>
+                <Download className="w-3.5 h-3.5" />
+                <span>バージョン・DL数一覧</span>
               </button>
             ) : (
               <a

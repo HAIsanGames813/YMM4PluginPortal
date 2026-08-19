@@ -81,27 +81,49 @@ export async function fetchBoothDetails(boothUrl: string): Promise<BoothDetails 
               title = titleEl?.textContent?.replace(/\s*-\s*BOOTH$/, '')?.trim() || '';
             }
 
-            // Extract minimum price among all variations
+            // Extract official product price prioritizing meta tag and JSON-LD
             let price = '';
-            const priceEls = doc.querySelectorAll('.item-price, .price, .variation-price');
-            if (priceEls && priceEls.length > 0) {
-              let minPrice = Infinity;
-              priceEls.forEach(el => {
-                const text = el.textContent || '';
-                const num = parseInt(text.replace(/[^\d]/g, ''), 10);
-                if (!isNaN(num) && num < minPrice) {
-                  minPrice = num;
-                }
-              });
-              if (minPrice !== Infinity) {
-                price = `¥ ${minPrice}`;
-              }
+            const metaPrice = doc.querySelector('meta[property="product:price:amount"]');
+            if (metaPrice) {
+              const num = parseInt((metaPrice.getAttribute('content') || '').replace(/[^\d]/g, ''), 10);
+              if (!isNaN(num)) price = num === 0 ? '無料' : `¥ ${num.toLocaleString()}`;
             }
+
             if (!price) {
-              const metaPrice = doc.querySelector('meta[property="product:price:amount"]');
-              if (metaPrice) {
-                const num = parseInt((metaPrice.getAttribute('content') || '').replace(/[^\d]/g, ''), 10);
-                if (!isNaN(num)) price = `¥ ${num}`;
+              const scriptEls = doc.querySelectorAll('script[type="application/ld+json"]');
+              scriptEls.forEach(script => {
+                try {
+                  const json = JSON.parse(script.textContent || '{}');
+                  const items = Array.isArray(json) ? json : [json];
+                  items.forEach((item: any) => {
+                    if (item && item.offers) {
+                      const offers = Array.isArray(item.offers) ? item.offers : [item.offers];
+                      offers.forEach((offer: any) => {
+                        const p = parseInt(String(offer.price || '').replace(/[^\d]/g, ''), 10);
+                        if (!isNaN(p) && !price) {
+                          price = p === 0 ? '無料' : `¥ ${p.toLocaleString()}`;
+                        }
+                      });
+                    }
+                  });
+                } catch {}
+              });
+            }
+
+            if (!price) {
+              const priceEls = doc.querySelectorAll('.item-price, .variation-price');
+              if (priceEls && priceEls.length > 0) {
+                let minPrice = Infinity;
+                priceEls.forEach(el => {
+                  const text = el.textContent || '';
+                  const num = parseInt(text.replace(/[^\d]/g, ''), 10);
+                  if (!isNaN(num) && num < minPrice) {
+                    minPrice = num;
+                  }
+                });
+                if (minPrice !== Infinity) {
+                  price = minPrice === 0 ? '無料' : `¥ ${minPrice.toLocaleString()}`;
+                }
               }
             }
 

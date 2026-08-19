@@ -62,11 +62,13 @@ export interface GithubRelease {
   zipball_url: string;
   tarball_url: string;
   assets: GithubAsset[];
+  release_download_count?: number;
 }
 
 export interface GithubDetailData {
   user: string;
   repo: string;
+  total_downloads?: number;
   releases: GithubRelease[];
 }
 
@@ -78,7 +80,7 @@ export interface FilterState {
   selectedHosts?: string[]; // multi-select hosts
   hostFilter: 'all' | 'github' | 'external';
   statusFilter: 'all' | 'enabled' | 'disabled';
-  sortBy: 'updatedAt' | 'publishedAt' | 'name' | 'author' | 'type';
+  sortBy: 'updatedAt' | 'publishedAt' | 'name' | 'author' | 'type' | 'price';
   sortOrder: 'asc' | 'desc';
   pageSize: PageSize;
   currentPage: number;
