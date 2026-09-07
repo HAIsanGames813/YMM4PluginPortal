@@ -172,9 +172,14 @@ async function fetchDirectYmm4Plugins(): Promise<YMM4Plugin[]> {
       p => p.githubUser?.toLowerCase() === ghItem.user.toLowerCase() && p.githubRepo?.toLowerCase() === ghItem.repo.toLowerCase()
     );
     if (!exists) {
+      // In manjubox GitHub list, ghItem.name is the release tag/title (e.g. "v1.0.0").
+      // We must avoid setting the release tag as the plugin name, falling back to repository name.
+      const isReleaseTag = (s?: string) => !s || /^v?\d+(\.\d+)*/i.test(String(s).trim()) || /^【?v?\d+/i.test(String(s).trim()) || String(s).toLowerCase().startsWith('release') || s === ghItem.tag_name;
+      const cleanName = ghItem.name && !isReleaseTag(ghItem.name) ? ghItem.name : ghItem.repo;
+
       normalizedPlugins.push({
         id: `gh-${ghItem.user}-${ghItem.repo}`,
-        name: ghItem.name || ghItem.repo,
+        name: cleanName,
         author: ghItem.user || ghItem.owner || 'GitHub User',
         type: ghItem.type || 'GitHubプラグイン',
         description: ghItem.description || '',
@@ -375,8 +380,16 @@ export default function App() {
         console.warn('Local Express API route unavailable, checking static bundle...');
       }
 
+      const isVersionString = (s?: string) => !s || /^v?\d+(\.\d+)*/i.test(String(s).trim()) || /^【?v?\d+/i.test(String(s).trim()) || String(s).toLowerCase().startsWith('release') || s === '無題プラグイン' || s === 'Link';
+      const cleanPluginList = (list: YMM4Plugin[]) => list.map(p => {
+        if (isVersionString(p.name)) {
+          return { ...p, name: p.githubRepo || (p.extraGhData && p.extraGhData.repo) || p.name };
+        }
+        return p;
+      });
+
       if (data && data.success && Array.isArray(data.plugins) && data.plugins.length > 0) {
-        basePlugins = data.plugins;
+        basePlugins = cleanPluginList(data.plugins);
         setPlugins(basePlugins);
         if (data.ymm4Version && data.ymm4Version !== '不明') {
           setYmm4Version(data.ymm4Version);
@@ -384,29 +397,39 @@ export default function App() {
         setLastUpdated(data.timestamp || new Date().toISOString());
       } else {
         // 2. Try static generated plugins-data.json (for GitHub Pages / static hosting)
-        try {
-          const staticRes = await fetch('./plugins-data.json');
-          const contentType = staticRes.headers.get('content-type');
-          if (staticRes.ok && contentType && contentType.includes('application/json')) {
-            const staticData = await staticRes.json();
-            if (staticData && Array.isArray(staticData.plugins) && staticData.plugins.length > 0) {
-              basePlugins = staticData.plugins;
-              setPlugins(basePlugins);
-              if (staticData.ymm4Version && staticData.ymm4Version !== '不明') {
-                setYmm4Version(staticData.ymm4Version);
+        const staticCandidates = [
+          './plugins-data.json',
+          'plugins-data.json',
+          '/plugins-data.json',
+          `${((import.meta as any).env?.BASE_URL || '').replace(/\/$/, '')}/plugins-data.json`
+        ];
+
+        for (const url of staticCandidates) {
+          try {
+            const staticRes = await fetch(url);
+            const contentType = staticRes.headers.get('content-type');
+            if (staticRes.ok && (!contentType || contentType.includes('application/json') || contentType.includes('text/plain'))) {
+              const staticData = await staticRes.json();
+              if (staticData && Array.isArray(staticData.plugins) && staticData.plugins.length > 0) {
+                basePlugins = cleanPluginList(staticData.plugins);
+                setPlugins(basePlugins);
+                if (staticData.ymm4Version && staticData.ymm4Version !== '不明') {
+                  setYmm4Version(staticData.ymm4Version);
+                }
+                setLastUpdated(staticData.timestamp || new Date().toISOString());
+                break;
               }
-              setLastUpdated(staticData.timestamp || new Date().toISOString());
             }
+          } catch (e) {
+            // try next candidate
           }
-        } catch (e) {
-          console.warn('Static plugins-data.json unavailable, trying CORS proxy fallback...');
         }
 
         // 3. CORS Proxy Fallback if static JSON is missing or empty
         if (basePlugins.length === 0) {
           const directPlugins = await fetchDirectYmm4Plugins();
           if (directPlugins && directPlugins.length > 0) {
-            basePlugins = directPlugins;
+            basePlugins = cleanPluginList(directPlugins);
             setPlugins(basePlugins);
             setLastUpdated(new Date().toISOString());
           } else {
@@ -421,7 +444,7 @@ export default function App() {
           if (livePlugins && livePlugins.length > 0) {
             // Fetch any new external GitHub/BOOTH items live
             const externalItems = await fetchExternalPlugins(livePlugins).catch(() => []);
-            const allLiveFetched = externalItems.length > 0 ? [...livePlugins, ...externalItems] : livePlugins;
+            const allLiveFetched = cleanPluginList(externalItems.length > 0 ? [...livePlugins, ...externalItems] : livePlugins);
 
             // Smart merge with existing basePlugins so we never lose items or price/description metadata
             setPlugins((current) => {
@@ -445,9 +468,18 @@ export default function App() {
                 const key = getItemKey(p);
                 const existing = mergedMap.get(key);
                 if (existing) {
+                  // Protect existing plugin name from being replaced by release tags or generic names
+                  let bestName = existing.name;
+                  if (isVersionString(bestName)) {
+                    bestName = !isVersionString(p.name) ? p.name : (p.githubRepo || existing.githubRepo || p.name || existing.name);
+                  } else if (!isVersionString(p.name) && p.name !== p.githubRepo && !p.isExternalSource) {
+                    bestName = p.name;
+                  }
+
                   mergedMap.set(key, {
                     ...existing,
                     ...p,
+                    name: bestName,
                     price: p.price || existing.price,
                     description: p.description && p.description.length > (existing.description?.length || 0) ? p.description : existing.description,
                     version: p.version || existing.version,

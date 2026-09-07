@@ -212,9 +212,12 @@ async function main() {
       p => p.githubUser?.toLowerCase() === ghItem.user.toLowerCase() && p.githubRepo?.toLowerCase() === ghItem.repo.toLowerCase()
     );
     if (!exists) {
+      const isReleaseTag = (s) => !s || /^v?\d+(\.\d+)*/i.test(String(s).trim()) || /^【?v?\d+/i.test(String(s).trim()) || String(s).toLowerCase().startsWith('release') || s === ghItem.tag_name;
+      const cleanName = ghItem.name && !isReleaseTag(ghItem.name) ? ghItem.name : ghItem.repo;
+
       normalizedPlugins.push({
         id: `gh-${ghItem.user}-${ghItem.repo}`,
-        name: ghItem.name || ghItem.repo,
+        name: cleanName,
         author: ghItem.user || ghItem.owner || 'GitHub User',
         type: ghItem.type || 'GitHubプラグイン',
         description: ghItem.description || '',
@@ -503,16 +506,25 @@ async function main() {
     fs.mkdirSync(dataDir, { recursive: true });
   }
 
+  const isVersionLike = (s) => !s || /^v?\d+(\.\d+)*/i.test(String(s).trim()) || /^【?v?\d+/i.test(String(s).trim()) || String(s).toLowerCase().startsWith('release') || s === '無題プラグイン';
+  const cleanPlugins = normalizedPlugins.map(p => {
+    if (isVersionLike(p.name)) {
+      const clean = p.githubRepo || (p.extraGhData && p.extraGhData.repo) || p.name;
+      return { ...p, name: clean };
+    }
+    return p;
+  });
+
   const outputData = {
     success: true,
     timestamp: new Date().toISOString(),
     ymm4Version: ymm4Version,
-    plugins: normalizedPlugins
+    plugins: cleanPlugins
   };
   const jsonContent = JSON.stringify(outputData, null, 2);
   fs.writeFileSync(path.join(publicDir, 'plugins-data.json'), jsonContent, 'utf-8');
   fs.writeFileSync(path.join(dataDir, 'plugins-db.json'), jsonContent, 'utf-8');
-  console.log(`Successfully saved database with ${normalizedPlugins.length} plugins to public/plugins-data.json and data/plugins-db.json.`);
+  console.log(`Successfully saved database with ${cleanPlugins.length} plugins to public/plugins-data.json and data/plugins-db.json.`);
 }
 
 main().catch(err => {

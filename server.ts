@@ -330,9 +330,12 @@ async function startServer() {
           p => p.githubUser?.toLowerCase() === ghItem.user.toLowerCase() && p.githubRepo?.toLowerCase() === ghItem.repo.toLowerCase()
         );
         if (!exists) {
+          const isReleaseTag = (s?: string) => !s || /^v?\d+(\.\d+)*/i.test(s.trim()) || /^【?v?\d+/i.test(s.trim()) || s.toLowerCase().startsWith('release') || s === ghItem.tag_name;
+          const cleanName = ghItem.name && !isReleaseTag(ghItem.name) ? ghItem.name : ghItem.repo;
+
           fetchedFreshPlugins.push({
             id: `gh-${ghItem.user}-${ghItem.repo}`,
-            name: ghItem.name || ghItem.repo,
+            name: cleanName,
             author: ghItem.user || ghItem.owner || 'GitHub User',
             type: ghItem.type || 'GitHubプラグイン',
             description: ghItem.description || '',
@@ -576,9 +579,14 @@ async function startServer() {
 
           const updatedItem = { ...existing };
 
+          const isVersionLike = (s?: string) => !s || /^v?\d+(\.\d+)*/i.test(String(s).trim()) || /^【?v?\d+/i.test(String(s).trim()) || String(s).toLowerCase().startsWith('release') || s === '無題プラグイン' || s === 'Link';
+
           // Compare basic fields
-          if (fresh.name && fresh.name !== existing.name && fresh.name !== '無題プラグイン') {
+          if (fresh.name && fresh.name !== existing.name && !isVersionLike(fresh.name)) {
             updatedItem.name = fresh.name;
+            isModified = true;
+          } else if (isVersionLike(updatedItem.name)) {
+            updatedItem.name = updatedItem.githubRepo || (updatedItem.extraGhData?.repo) || updatedItem.name;
             isModified = true;
           }
           if (fresh.author && fresh.author !== existing.author && fresh.author !== '不明') {
@@ -651,15 +659,24 @@ async function startServer() {
         mergedList.push(leftover);
       }
 
-      // Final sanitization of mergedList: ensure ALL external GitHub items strictly have 'ymm4-plugin'
-      const sanitizedList = mergedList.filter((p) => {
-        const isExternalGh = (p.isExternalSource && p.isGithub) || (p.id && String(p.id).startsWith('ext-gh-'));
-        if (isExternalGh) {
-          const tags: string[] = Array.isArray(p.tags) ? p.tags : [];
-          return tags.some((t: string) => t.toLowerCase() === 'ymm4-plugin');
-        }
-        return true;
-      });
+      // Final sanitization of mergedList: ensure names are valid and ALL external GitHub items strictly have 'ymm4-plugin'
+      const isVersionString = (s?: string) => !s || /^v?\d+(\.\d+)*/i.test(String(s).trim()) || /^【?v?\d+/i.test(String(s).trim()) || String(s).toLowerCase().startsWith('release') || s === '無題プラグイン' || s === 'Link';
+      const sanitizedList = mergedList
+        .filter((p) => {
+          const isExternalGh = (p.isExternalSource && p.isGithub) || (p.id && String(p.id).startsWith('ext-gh-'));
+          if (isExternalGh) {
+            const tags: string[] = Array.isArray(p.tags) ? p.tags : [];
+            return tags.some((t: string) => t.toLowerCase() === 'ymm4-plugin');
+          }
+          return true;
+        })
+        .map((p) => {
+          if (isVersionString(p.name)) {
+            const clean = p.githubRepo || (p.extraGhData && p.extraGhData.repo) || p.name;
+            return { ...p, name: clean };
+          }
+          return p;
+        });
 
       const hasChanges = addedCount > 0 || updatedCount > 0 || pluginsDatabase.plugins.length === 0 || sanitizedList.length !== pluginsDatabase.plugins.length;
 
