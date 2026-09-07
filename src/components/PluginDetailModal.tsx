@@ -257,11 +257,19 @@ export const PluginDetailModal: React.FC<PluginDetailModalProps> = ({
                 </div>
               )}
 
-              {plugin.updatedAt && (
-                <div className="flex items-center gap-1 text-zinc-600 dark:text-zinc-400 font-mono">
-                  <span>更新日: {formatDate(plugin.updatedAt)}</span>
-                </div>
-              )}
+              {(() => {
+                const dlDate = plugin.updatedAt || (plugin.extraGhData ? (plugin.extraGhData.published_at || plugin.extraGhData.created_at || plugin.extraGhData.updated_at) : undefined);
+                const updatedFmt = formatDate(dlDate);
+                const pubFmt = formatDate(plugin.publishedAt);
+                if (updatedFmt && (!pubFmt || updatedFmt !== pubFmt)) {
+                  return (
+                    <div className="flex items-center gap-1 text-zinc-600 dark:text-zinc-400 font-mono">
+                      <span>更新日: {updatedFmt}</span>
+                    </div>
+                  );
+                }
+                return null;
+              })()}
 
               {plugin.license && (
                 <div className="flex items-center gap-1 text-zinc-500">

@@ -16,6 +16,7 @@ import { fetchExternalPlugins } from './utils/externalSearch';
 import { SITE_VERSION } from './config/version';
 import { getSiteNameFromUrl } from './utils/site';
 import { getPluginNumericPrice } from './utils/price';
+import { getPluginUpdatedEffectiveTime, getPluginPublishedEffectiveTime } from './utils/date';
 import { RefreshCw, AlertCircle, Package, Info, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, SlidersHorizontal, ExternalLink } from 'lucide-react';
 
 async function fetchDirectYmm4Plugins(): Promise<YMM4Plugin[]> {
@@ -157,7 +158,7 @@ async function fetchDirectYmm4Plugins(): Promise<YMM4Plugin[]> {
       githubUser,
       githubRepo,
       version: item.version || (extraGhData ? extraGhData.latest_tag || extraGhData.tag_name : '') || '',
-      updatedAt: item.updated_at || item.updatedAt || (extraGhData ? extraGhData.updated_at : '') || '',
+      updatedAt: item.updated_at || item.updatedAt || (extraGhData ? extraGhData.published_at || extraGhData.created_at || extraGhData.updated_at : '') || '',
       publishedAt,
       isEnabled,
       license: item.license || '',
@@ -189,7 +190,7 @@ async function fetchDirectYmm4Plugins(): Promise<YMM4Plugin[]> {
         githubUser: ghItem.user,
         githubRepo: ghItem.repo,
         version: ghItem.latest_tag || ghItem.tag_name || '',
-        updatedAt: ghItem.updated_at || '',
+        updatedAt: ghItem.updated_at || ghItem.published_at || ghItem.created_at || '',
         publishedAt: ghItem.created_at || ghItem.published_at || '',
         isEnabled: true,
         license: ghItem.license || '',
@@ -664,6 +665,45 @@ export default function App() {
           return deferredFilterState.sortOrder === 'asc' ? comp : -comp;
         }
 
+        if (deferredFilterState.sortBy === 'updatedAt') {
+          // 更新日順:
+          // 1. 更新日(updatedAt)の取得データを優先
+          // 2. 更新日が取得できなかった組は公開日(publishedAt)として間間に配置
+          // 3. それでも取得できなかったやつ(日付なし)は一番古いやつの後に配置
+          const timeA = getPluginUpdatedEffectiveTime(a);
+          const timeB = getPluginUpdatedEffectiveTime(b);
+
+          if (timeA === null && timeB !== null) return 1;
+          if (timeB === null && timeA !== null) return -1;
+          if (timeA === null && timeB === null) {
+            return a.name.localeCompare(b.name, 'ja', { numeric: true });
+          }
+
+          if (timeA !== timeB) {
+            const comp = timeA - timeB;
+            return deferredFilterState.sortOrder === 'asc' ? comp : -comp;
+          }
+          return a.name.localeCompare(b.name, 'ja', { numeric: true });
+        }
+
+        if (deferredFilterState.sortBy === 'publishedAt') {
+          // 公開日順: 日付が取得できなかった組は一番古いやつの後に配置
+          const timeA = getPluginPublishedEffectiveTime(a);
+          const timeB = getPluginPublishedEffectiveTime(b);
+
+          if (timeA === null && timeB !== null) return 1;
+          if (timeB === null && timeA !== null) return -1;
+          if (timeA === null && timeB === null) {
+            return a.name.localeCompare(b.name, 'ja', { numeric: true });
+          }
+
+          if (timeA !== timeB) {
+            const comp = timeA - timeB;
+            return deferredFilterState.sortOrder === 'asc' ? comp : -comp;
+          }
+          return a.name.localeCompare(b.name, 'ja', { numeric: true });
+        }
+
         let valA = '';
         let valB = '';
 
@@ -676,12 +716,6 @@ export default function App() {
         } else if (deferredFilterState.sortBy === 'type') {
           valA = a.type || 'その他';
           valB = b.type || 'その他';
-        } else if (deferredFilterState.sortBy === 'updatedAt') {
-          valA = a.updatedAt || a.version || '';
-          valB = b.updatedAt || b.version || '';
-        } else if (deferredFilterState.sortBy === 'publishedAt') {
-          valA = a.publishedAt || a.createdAt || '';
-          valB = b.publishedAt || b.createdAt || '';
         }
 
         const comp = valA.localeCompare(valB, 'ja', { numeric: true });

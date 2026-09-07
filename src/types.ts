@@ -34,6 +34,10 @@ export interface YMM4Plugin {
     name?: string;
     tag_name?: string;
     published_at?: string;
+    created_at?: string;
+    updated_at?: string;
+    crawled_at?: string;
+    prerelease?: boolean;
     file_name?: string;
     browser_download_url?: string;
   } | null;

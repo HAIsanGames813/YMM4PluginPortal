@@ -30,6 +30,9 @@ const FALLBACK_README = `<img width="3200" height="800" alt="YMM4プラグイン
 
 ## 変更履歴
 
+### v1.2.2
+- 更新日順の動作を正常化
+
 ### v1.2.1
 - 価格順のソートを追加
 

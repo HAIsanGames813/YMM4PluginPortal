@@ -53,8 +53,9 @@ export const PluginCard: React.FC<PluginCardProps> = React.memo(({
   onOpenVersions,
   onOpenDetails
 }) => {
+  const dlDate = plugin.updatedAt || (plugin.extraGhData ? (plugin.extraGhData.published_at || plugin.extraGhData.created_at || plugin.extraGhData.updated_at) : undefined);
   const publishedDateFormatted = formatDate(plugin.publishedAt);
-  const updatedDateFormatted = formatDate(plugin.updatedAt);
+  const updatedDateFormatted = formatDate(dlDate);
 
   return (
     <div
@@ -164,19 +165,21 @@ export const PluginCard: React.FC<PluginCardProps> = React.memo(({
           </div>
 
           {/* Plugin Dates: Published Date & Update Date */}
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] font-mono text-zinc-500 dark:text-zinc-400 bg-zinc-50 dark:bg-zinc-800/40 p-2 border border-zinc-200 dark:border-zinc-800">
-            {publishedDateFormatted && (
-              <div className="flex items-center gap-1">
-                <Calendar className="w-3 h-3 text-zinc-400" />
-                <span>公開日: <strong className="text-zinc-700 dark:text-zinc-300">{publishedDateFormatted}</strong></span>
-              </div>
-            )}
-            {updatedDateFormatted && (
-              <div className="flex items-center gap-1">
-                <span>更新日: <strong className="text-zinc-700 dark:text-zinc-300">{updatedDateFormatted}</strong></span>
-              </div>
-            )}
-          </div>
+          {(publishedDateFormatted || updatedDateFormatted) && (
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] font-mono text-zinc-500 dark:text-zinc-400 bg-zinc-50 dark:bg-zinc-800/40 p-2 border border-zinc-200 dark:border-zinc-800">
+              {publishedDateFormatted && (
+                <div className="flex items-center gap-1">
+                  <Calendar className="w-3 h-3 text-zinc-400" />
+                  <span>公開日: <strong className="text-zinc-700 dark:text-zinc-300">{publishedDateFormatted}</strong></span>
+                </div>
+              )}
+              {updatedDateFormatted && (!publishedDateFormatted || updatedDateFormatted !== publishedDateFormatted) && (
+                <div className="flex items-center gap-1">
+                  <span>更新日: <strong className="text-zinc-700 dark:text-zinc-300">{updatedDateFormatted}</strong></span>
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Plugin Description */}
           <p className="text-xs text-zinc-600 dark:text-zinc-300 line-clamp-3 leading-relaxed min-h-[3rem]">
