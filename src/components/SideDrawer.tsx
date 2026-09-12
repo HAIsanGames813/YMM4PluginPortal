@@ -16,7 +16,9 @@ import {
   Layers,
   ListFilter,
   Download,
-  ShoppingBag
+  ShoppingBag,
+  ChevronDown,
+  ChevronRight
 } from 'lucide-react';
 import { FilterState, PageSize } from '../types';
 
@@ -120,6 +122,10 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({
     availableHosts.length > 0 &&
     availableHosts.every((h) => (filterState.selectedHosts || []).includes(h.name));
 
+  // Collapse states for collapsible sections
+  const [isCategoryOpen, setIsCategoryOpen] = React.useState(true);
+  const [isSiteOpen, setIsSiteOpen] = React.useState(true);
+
   // Sidebar Content JSX
   const sidebarContent = (
     <div className="flex flex-col h-full bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 font-mono">
@@ -139,22 +145,8 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({
 
       {/* Scrollable Form Content */}
       <div className="flex-1 overflow-y-auto p-4 space-y-6">
-        
-        {/* Quick Batch Actions */}
-        <div className="p-3 bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 space-y-2">
-          <div className="text-xs font-bold uppercase text-zinc-600 dark:text-zinc-400">
-            一括選択操作
-          </div>
-          <button
-            onClick={onSelectAllVisible}
-            className="w-full py-2 px-3 bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 text-[11px] font-bold border border-zinc-900 dark:border-zinc-100 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer flex items-center justify-center gap-2"
-          >
-            {isAllVisibleSelected ? <CheckSquare className="w-4 h-4" /> : <Square className="w-4 h-4" />}
-            <span>{isAllVisibleSelected ? '現在のページの選択解除' : '現在のページを全選択'}</span>
-          </button>
-        </div>
 
-        {/* Keyword Search */}
+        {/* 1. Keyword Search (検索) */}
         <div className="space-y-2">
           <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase flex items-center gap-1.5">
             <Search className="w-3.5 h-3.5" />
@@ -191,13 +183,46 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({
           </form>
         </div>
 
-        {/* Category Filter (Vertical Checkbox List) */}
+        {/* 2. Sort Dropdown & Order (並び替え) */}
+        <div className="space-y-2 border-t border-zinc-200 dark:border-zinc-800 pt-4">
+          <label className="text-[11px] font-bold text-zinc-700 dark:text-zinc-300 uppercase flex items-center gap-1.5">
+            <ArrowUpDown className="w-3 h-3" />
+            <span>並び替え</span>
+          </label>
+          <div className="grid grid-cols-12 gap-2">
+            <select
+              value={filterState.sortBy}
+              onChange={(e) => onFilterChange({ sortBy: e.target.value as any, currentPage: 1 })}
+              className="col-span-8 p-1.5 bg-zinc-50 dark:bg-zinc-800 border border-zinc-900 dark:border-zinc-200 text-xs font-mono cursor-pointer"
+            >
+              <option value="updatedAt">更新日順</option>
+              <option value="publishedAt">公開日順</option>
+              <option value="name">プラグイン名順</option>
+              <option value="author">作者名順</option>
+              <option value="type">カテゴリー順</option>
+              <option value="price">価格順</option>
+            </select>
+            <button
+              onClick={() => onFilterChange({ sortOrder: filterState.sortOrder === 'asc' ? 'desc' : 'asc', currentPage: 1 })}
+              className="col-span-4 p-1.5 bg-zinc-100 dark:bg-zinc-800 border border-zinc-900 dark:border-zinc-200 text-[10px] font-bold hover:bg-zinc-900 hover:text-white dark:hover:bg-zinc-100 dark:hover:text-zinc-900 transition-colors cursor-pointer text-center"
+            >
+              {filterState.sortOrder === 'asc' ? '昇順' : '降順'}
+            </button>
+          </div>
+        </div>
+
+        {/* 3. Category Filter (カテゴリ - Collapsible) */}
         <div className="space-y-2 border-t border-zinc-200 dark:border-zinc-800 pt-4">
           <div className="flex items-center justify-between">
-            <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase flex items-center gap-1.5">
+            <button
+              type="button"
+              onClick={() => setIsCategoryOpen(!isCategoryOpen)}
+              className="text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase flex items-center gap-1.5 cursor-pointer hover:underline"
+            >
+              {isCategoryOpen ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronRight className="w-3.5 h-3.5" />}
               <Filter className="w-3.5 h-3.5" />
               <span>カテゴリー</span>
-            </label>
+            </button>
 
             {/* Select All / Clear All Categories Buttons */}
             <div className="flex items-center gap-2 text-[10px]">
@@ -214,46 +239,47 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({
             </div>
           </div>
 
-          {/* Vertical Checkboxes */}
-          <div className="space-y-1 max-h-48 overflow-y-auto pr-1 border border-zinc-300 dark:border-zinc-700 p-2 bg-zinc-50 dark:bg-zinc-800/50">
-            {availableTypes.length === 0 ? (
-              <div className="text-xs text-zinc-500 py-2">カテゴリーがありません</div>
-            ) : (
-              availableTypes.map((typeObj) => {
-                const isChecked = filterState.selectedTypes.includes(typeObj.name);
-                return (
-                  <label
-                    key={typeObj.name}
-                    onClick={() => handleToggleCategory(typeObj.name)}
-                    className={`flex items-center justify-between p-1 text-[11px] font-mono cursor-pointer transition-colors border ${
-                      isChecked
-                        ? 'bg-zinc-200 dark:bg-zinc-700 border-zinc-400 dark:border-zinc-600 font-bold'
-                        : 'hover:bg-zinc-100 dark:hover:bg-zinc-800 border-transparent'
-                    }`}
-                  >
-                    <div className="flex items-center gap-1.5 overflow-hidden">
-                      {isChecked ? (
-                        <CheckSquare className="w-3.5 h-3.5 text-zinc-900 dark:text-zinc-100 shrink-0" />
-                      ) : (
-                        <Square className="w-3.5 h-3.5 text-zinc-400 dark:text-zinc-500 shrink-0" />
-                      )}
-                      <span className="truncate">{typeObj.name}</span>
-                    </div>
-                    <span className="text-[10px] text-zinc-500 dark:text-zinc-400 px-1 py-0.5 border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 shrink-0 ml-1">
-                      {typeObj.count}
-                    </span>
-                  </label>
-                );
-              })
-            )}
-          </div>
+          {isCategoryOpen && (
+            <div className="space-y-1 max-h-48 overflow-y-auto pr-1 border border-zinc-300 dark:border-zinc-700 p-2 bg-zinc-50 dark:bg-zinc-800/50">
+              {availableTypes.length === 0 ? (
+                <div className="text-xs text-zinc-500 py-2">カテゴリーがありません</div>
+              ) : (
+                availableTypes.map((typeObj) => {
+                  const isChecked = filterState.selectedTypes.includes(typeObj.name);
+                  return (
+                    <label
+                      key={typeObj.name}
+                      onClick={() => handleToggleCategory(typeObj.name)}
+                      className={`flex items-center justify-between p-1 text-[11px] font-mono cursor-pointer transition-colors border ${
+                        isChecked
+                          ? 'bg-zinc-200 dark:bg-zinc-700 border-zinc-400 dark:border-zinc-600 font-bold'
+                          : 'hover:bg-zinc-100 dark:hover:bg-zinc-800 border-transparent'
+                      }`}
+                    >
+                      <div className="flex items-center gap-1.5 overflow-hidden">
+                        {isChecked ? (
+                          <CheckSquare className="w-3.5 h-3.5 text-zinc-900 dark:text-zinc-100 shrink-0" />
+                        ) : (
+                          <Square className="w-3.5 h-3.5 text-zinc-400 dark:text-zinc-500 shrink-0" />
+                        )}
+                        <span className="truncate">{typeObj.name}</span>
+                      </div>
+                      <span className="text-[10px] text-zinc-500 dark:text-zinc-400 px-1 py-0.5 border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 shrink-0 ml-1">
+                        {typeObj.count}
+                      </span>
+                    </label>
+                  );
+                })
+              )}
+            </div>
+          )}
         </div>
 
-        {/* Distribution Status Filter */}
+        {/* 4. Distribution Status Filter (配布状況) */}
         <div className="space-y-2 border-t border-zinc-200 dark:border-zinc-800 pt-4">
           <label className="text-[11px] font-bold text-zinc-700 dark:text-zinc-300 uppercase flex items-center gap-1.5">
             <ListFilter className="w-3 h-3" />
-            <span>配布ステータス</span>
+            <span>配布状況</span>
           </label>
           <div className="grid grid-cols-3 gap-1 bg-zinc-100 dark:bg-zinc-800 p-1 border border-zinc-300 dark:border-zinc-700 text-[10px] font-mono">
             <button
@@ -289,13 +315,18 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({
           </div>
         </div>
 
-        {/* Host Filter Toggle */}
+        {/* 5. Distribution Site Filter Toggle (配布サイト - Collapsible) */}
         <div className="space-y-2 border-t border-zinc-200 dark:border-zinc-800 pt-4">
           <div className="flex items-center justify-between">
-            <label className="text-[11px] font-bold text-zinc-700 dark:text-zinc-300 uppercase flex items-center gap-1.5">
+            <button
+              type="button"
+              onClick={() => setIsSiteOpen(!isSiteOpen)}
+              className="text-[11px] font-bold text-zinc-700 dark:text-zinc-300 uppercase flex items-center gap-1.5 cursor-pointer hover:underline"
+            >
+              {isSiteOpen ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronRight className="w-3.5 h-3.5" />}
               <Globe className="w-3 h-3" />
-              <span>配布ホスト</span>
-            </label>
+              <span>配布サイト</span>
+            </button>
             <div className="flex items-center gap-2 text-[10px]">
               <button
                 onClick={
@@ -310,45 +341,47 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({
             </div>
           </div>
           
-          <div className="space-y-1 max-h-48 overflow-y-auto pr-1 border border-zinc-300 dark:border-zinc-700 p-2 bg-zinc-50 dark:bg-zinc-800/50">
-            {availableHosts.length === 0 ? (
-              <div className="text-xs text-zinc-500 py-2">ホストがありません</div>
-            ) : (
-              availableHosts.map((hostObj) => {
-                const isChecked = (filterState.selectedHosts || []).includes(hostObj.name);
-                return (
-                  <label
-                    key={hostObj.name}
-                    onClick={() => handleToggleHost(hostObj.name)}
-                    className={`flex items-center justify-between p-1 text-[11px] font-mono cursor-pointer transition-colors border ${
-                      isChecked
-                        ? 'bg-zinc-200 dark:bg-zinc-700 border-zinc-400 dark:border-zinc-600 font-bold'
-                        : 'hover:bg-zinc-100 dark:hover:bg-zinc-800 border-transparent'
-                    }`}
-                  >
-                    <div className="flex items-center gap-1.5 overflow-hidden">
-                      {isChecked ? (
-                        <CheckSquare className="w-3.5 h-3.5 text-zinc-900 dark:text-zinc-100 shrink-0" />
-                      ) : (
-                        <Square className="w-3.5 h-3.5 text-zinc-400 dark:text-zinc-500 shrink-0" />
-                      )}
-                      <span className="truncate">{hostObj.name}</span>
-                    </div>
-                    <span className="text-[10px] text-zinc-500 dark:text-zinc-400 px-1 py-0.5 border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 shrink-0 ml-1">
-                      {hostObj.count}
-                    </span>
-                  </label>
-                );
-              })
-            )}
-          </div>
+          {isSiteOpen && (
+            <div className="space-y-1 max-h-48 overflow-y-auto pr-1 border border-zinc-300 dark:border-zinc-700 p-2 bg-zinc-50 dark:bg-zinc-800/50">
+              {availableHosts.length === 0 ? (
+                <div className="text-xs text-zinc-500 py-2">サイトがありません</div>
+              ) : (
+                availableHosts.map((hostObj) => {
+                  const isChecked = (filterState.selectedHosts || []).includes(hostObj.name);
+                  return (
+                    <label
+                      key={hostObj.name}
+                      onClick={() => handleToggleHost(hostObj.name)}
+                      className={`flex items-center justify-between p-1 text-[11px] font-mono cursor-pointer transition-colors border ${
+                        isChecked
+                          ? 'bg-zinc-200 dark:bg-zinc-700 border-zinc-400 dark:border-zinc-600 font-bold'
+                          : 'hover:bg-zinc-100 dark:hover:bg-zinc-800 border-transparent'
+                      }`}
+                    >
+                      <div className="flex items-center gap-1.5 overflow-hidden">
+                        {isChecked ? (
+                          <CheckSquare className="w-3.5 h-3.5 text-zinc-900 dark:text-zinc-100 shrink-0" />
+                        ) : (
+                          <Square className="w-3.5 h-3.5 text-zinc-400 dark:text-zinc-500 shrink-0" />
+                        )}
+                        <span className="truncate">{hostObj.name}</span>
+                      </div>
+                      <span className="text-[10px] text-zinc-500 dark:text-zinc-400 px-1 py-0.5 border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 shrink-0 ml-1">
+                        {hostObj.count}
+                      </span>
+                    </label>
+                  );
+                })
+              )}
+            </div>
+          )}
         </div>
 
-        {/* External Source Filter Toggles (Manjubox unlisted) */}
+        {/* 6. External Source Filter Toggles (自動取得) */}
         <div className="space-y-2 border-t border-zinc-200 dark:border-zinc-800 pt-4">
           <label className="text-[11px] font-bold text-zinc-700 dark:text-zinc-300 uppercase flex items-center gap-1.5">
             <Globe className="w-3 h-3" />
-            <span>Manjubox未掲載 (自動取得)</span>
+            <span>自動取得 (Manjubox未掲載)</span>
           </label>
           
           <div className="space-y-2">
@@ -453,35 +486,7 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({
           </p>
         </div>
 
-        {/* Sort Dropdown & Order */}
-        <div className="space-y-2 border-t border-zinc-200 dark:border-zinc-800 pt-4">
-          <label className="text-[11px] font-bold text-zinc-700 dark:text-zinc-300 uppercase flex items-center gap-1.5">
-            <ArrowUpDown className="w-3 h-3" />
-            <span>並び替え</span>
-          </label>
-          <div className="grid grid-cols-12 gap-2">
-            <select
-              value={filterState.sortBy}
-              onChange={(e) => onFilterChange({ sortBy: e.target.value as any, currentPage: 1 })}
-              className="col-span-8 p-1.5 bg-zinc-50 dark:bg-zinc-800 border border-zinc-900 dark:border-zinc-200 text-xs font-mono cursor-pointer"
-            >
-              <option value="updatedAt">更新日順</option>
-              <option value="publishedAt">公開日順</option>
-              <option value="name">プラグイン名順</option>
-              <option value="author">作者名順</option>
-              <option value="type">カテゴリー順</option>
-              <option value="price">価格順</option>
-            </select>
-            <button
-              onClick={() => onFilterChange({ sortOrder: filterState.sortOrder === 'asc' ? 'desc' : 'asc', currentPage: 1 })}
-              className="col-span-4 p-1.5 bg-zinc-100 dark:bg-zinc-800 border border-zinc-900 dark:border-zinc-200 text-[10px] font-bold hover:bg-zinc-900 hover:text-white dark:hover:bg-zinc-100 dark:hover:text-zinc-900 transition-colors cursor-pointer text-center"
-            >
-              {filterState.sortOrder === 'asc' ? '昇順' : '降順'}
-            </button>
-          </div>
-        </div>
-
-        {/* Page Size Selection */}
+        {/* 7. Page Size Selection (表示件数) */}
         <div className="space-y-2 border-t border-zinc-200 dark:border-zinc-800 pt-4">
           <label className="text-[11px] font-bold text-zinc-700 dark:text-zinc-300 uppercase flex items-center gap-1.5">
             <SlidersHorizontal className="w-3 h-3" />
@@ -504,11 +509,25 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({
           </div>
         </div>
 
-        {/* Batch Download Behavior Selection */}
+        {/* 8. Quick Batch Actions (一括選択) */}
+        <div className="space-y-2 border-t border-zinc-200 dark:border-zinc-800 pt-4">
+          <div className="text-[11px] font-bold text-zinc-700 dark:text-zinc-300 uppercase">
+            一括選択
+          </div>
+          <button
+            onClick={onSelectAllVisible}
+            className="w-full py-2 px-3 bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 text-[11px] font-bold border border-zinc-900 dark:border-zinc-100 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer flex items-center justify-center gap-2"
+          >
+            {isAllVisibleSelected ? <CheckSquare className="w-4 h-4" /> : <Square className="w-4 h-4" />}
+            <span>{isAllVisibleSelected ? '現在のページの選択解除' : '現在のページを全選択'}</span>
+          </button>
+        </div>
+
+        {/* 9. Batch Download Behavior Selection (一括ダウンロード時動作) */}
         <div className="space-y-2 border-t border-zinc-200 dark:border-zinc-800 pt-4">
           <label className="text-[11px] font-bold text-zinc-700 dark:text-zinc-300 uppercase flex items-center gap-1.5">
             <Download className="w-3 h-3" />
-            <span>一括ダウンロード時の動作</span>
+            <span>一括ダウンロード時動作</span>
           </label>
           <p className="text-[10px] text-zinc-500 dark:text-zinc-400 leading-tight">
             zipでymmeやzipを一括ダウンロードするかymmeやzipのリポジトリ個別dlするか

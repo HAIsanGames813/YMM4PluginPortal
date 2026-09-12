@@ -876,8 +876,31 @@ export default function App() {
                 </div>
               </div>
 
+              {/* Sort Control between display count/page size and pagination controls */}
+              <div className="flex items-center gap-2">
+                <span className="text-zinc-500 dark:text-zinc-400 font-bold">並び替え:</span>
+                <select
+                  value={filterState.sortBy}
+                  onChange={(e) => setFilterState((prev) => ({ ...prev, sortBy: e.target.value as any, currentPage: 1 }))}
+                  className="p-1 bg-zinc-50 dark:bg-zinc-800 border border-zinc-900 dark:border-zinc-200 text-xs font-mono cursor-pointer"
+                >
+                  <option value="updatedAt">更新日順</option>
+                  <option value="publishedAt">公開日順</option>
+                  <option value="name">プラグイン名順</option>
+                  <option value="author">作者名順</option>
+                  <option value="type">カテゴリー順</option>
+                  <option value="price">価格順</option>
+                </select>
+                <button
+                  onClick={() => setFilterState((prev) => ({ ...prev, sortOrder: prev.sortOrder === 'asc' ? 'desc' : 'asc', currentPage: 1 }))}
+                  className="p-1 bg-zinc-100 dark:bg-zinc-800 border border-zinc-900 dark:border-zinc-200 text-[10px] font-bold hover:bg-zinc-900 hover:text-white dark:hover:bg-zinc-100 dark:hover:text-zinc-900 transition-colors cursor-pointer px-2"
+                >
+                  {filterState.sortOrder === 'asc' ? '昇順' : '降順'}
+                </button>
+              </div>
+
               {filterState.pageSize !== 'all' && totalPages > 1 && (
-                <div className="ml-auto">
+                <div>
                   <PaginationControls
                     currentPage={currentPageSafe}
                     totalPages={totalPages}
